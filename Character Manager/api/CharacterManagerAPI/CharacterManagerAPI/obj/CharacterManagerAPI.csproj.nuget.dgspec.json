@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\brent\\Documents\\Projects\\CharacterManager\\Character Manager\\api\\CharacterManagerAPI\\CharacterManagerAPI\\CharacterManagerAPI.csproj": {}
+    "C:\\Users\\Brent.Searl\\Documents\\Projects\\CharacterManager\\Character Manager\\api\\CharacterManagerAPI\\CharacterManagerAPI\\CharacterManagerAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\brent\\Documents\\Projects\\CharacterManager\\Character Manager\\api\\CharacterManagerAPI\\CharacterManagerAPI\\CharacterManagerAPI.csproj": {
+    "C:\\Users\\Brent.Searl\\Documents\\Projects\\CharacterManager\\Character Manager\\api\\CharacterManagerAPI\\CharacterManagerAPI\\CharacterManagerAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brent\\Documents\\Projects\\CharacterManager\\Character Manager\\api\\CharacterManagerAPI\\CharacterManagerAPI\\CharacterManagerAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Brent.Searl\\Documents\\Projects\\CharacterManager\\Character Manager\\api\\CharacterManagerAPI\\CharacterManagerAPI\\CharacterManagerAPI.csproj",
         "projectName": "CharacterManagerAPI",
-        "projectPath": "C:\\Users\\brent\\Documents\\Projects\\CharacterManager\\Character Manager\\api\\CharacterManagerAPI\\CharacterManagerAPI\\CharacterManagerAPI.csproj",
-        "packagesPath": "C:\\Users\\brent\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brent\\Documents\\Projects\\CharacterManager\\Character Manager\\api\\CharacterManagerAPI\\CharacterManagerAPI\\obj\\",
+        "projectPath": "C:\\Users\\Brent.Searl\\Documents\\Projects\\CharacterManager\\Character Manager\\api\\CharacterManagerAPI\\CharacterManagerAPI\\CharacterManagerAPI.csproj",
+        "packagesPath": "C:\\Users\\Brent.Searl\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Brent.Searl\\Documents\\Projects\\CharacterManager\\Character Manager\\api\\CharacterManagerAPI\\CharacterManagerAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\brent\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Brent.Searl\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +40,26 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -55,7 +71,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -67,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
