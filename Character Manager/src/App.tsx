@@ -1,19 +1,19 @@
 import { Outlet, ReactLocation, Router } from '@tanstack/react-location'
 import { ReactLocationDevtools } from 'react-location-devtools'
-import { HomePage } from './pages/Home'
+import { CharactersPage } from './pages/Characters'
+import HomePage from './pages/Home'
 
-type LocationGenerics = {
 
-}
 
 export function App() {
-	const location = new ReactLocation<LocationGenerics>()
+	const location = new ReactLocation()
 	return (
 		<Router location={location} routes={[
-			{ path: '/', element: <HomePage /> }
+			{ path: '/', element: <HomePage /> },
+			{ path: 'characters', element: <CharactersPage /> },
+
 		]}>
 			<Outlet />
-			<ReactLocationDevtools initialIsOpen={false} />
 		</Router>
 	)
 }

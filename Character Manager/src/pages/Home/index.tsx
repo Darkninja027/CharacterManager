@@ -1,7 +1,9 @@
-export function HomePage() {
+import React from "react"
+
+export default function HomePage() {
     return (
-        <div>
-            Home
+        <div className="w-full h-12 bg-black">
+            johbn
         </div>
     )
 }
