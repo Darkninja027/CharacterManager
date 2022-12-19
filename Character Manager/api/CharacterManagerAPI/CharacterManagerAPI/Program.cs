@@ -13,6 +13,10 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddDbContext<CMContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CharacterManager")));
+builder.Services.AddCors(policy => policy.AddPolicy("CorsPolicy", build =>
+{
+    build.WithOrigins("http://localhost:5173", "http://127.0.0.1:5173").AllowAnyMethod().AllowAnyHeader();
+}));
 
 var app = builder.Build();
 
@@ -22,6 +26,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 

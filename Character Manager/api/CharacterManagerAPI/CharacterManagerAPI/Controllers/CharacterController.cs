@@ -1,4 +1,5 @@
 ﻿using CharacterManagerAPI.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,6 @@ namespace CharacterManagerAPI.Controllers
         {
             _context = context;
         }
-
         [HttpGet]
         public async Task<ActionResult<List<Character>>> GetCharacters()
         {

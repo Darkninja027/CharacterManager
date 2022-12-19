@@ -6,6 +6,7 @@ export default function HomePage() {
     const { isLoading, data } = useGetAllCharacters()
     return (
         <div>
+            {JSON.stringify(data)}
         </div>
     )
 }
