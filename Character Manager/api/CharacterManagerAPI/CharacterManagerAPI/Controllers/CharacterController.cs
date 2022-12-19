@@ -6,6 +6,7 @@ namespace CharacterManagerAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class CharacterController : ControllerBase
     {
         private CMContext _context;

@@ -6,7 +6,14 @@ import './index.css'
 
 function Main() {
   const queryClient = useMemo(() => {
-    return new QueryClient()
+    return new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 1000 * 60,
+          refetchInterval: 1000 * 60
+        }
+      }
+    })
   }, [])
 
   return (

@@ -7,8 +7,14 @@ export default function useGetAllCharacters() {
 
 async function getAllCharacters() {
     const resp = await fetch("http://localhost:4680/api/Character", {
-        mode: "no-cors"
+        method: "GET",
+        headers: {
+
+        }
     })
-    return await resp.json()
+
+    console.log(resp, resp.text())
+    const data = await resp.json()
+    return data
 
 }
