@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './app'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import App from './App'
 import './index.css'
 
 function Main() {
+  const queryClient = useMemo(() => {
+    return new QueryClient()
+  }, [])
+
   return (
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   )
 }
 
