@@ -22,4 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.dll
+*.exe
+*.pdb
+*.config
+*.v2
 *.
+bin/
+obj/
