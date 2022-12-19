@@ -11,7 +11,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 builder.Services.AddDbContext<CMContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CharacterManager")));
 builder.Services.AddCors(policy => policy.AddPolicy("CorsPolicy", build =>
 {
@@ -27,7 +26,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+//enable migrations on project startup
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<CMContext>();
+    db.Database.Migrate();
+}
 
 app.UseCors("CorsPolicy");
 
