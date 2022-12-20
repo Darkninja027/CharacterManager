@@ -19,7 +19,8 @@ namespace CharacterManagerAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Character>>> GetCharacters()
         {
-            return Ok(await _context.Characters.ToListAsync());
+            var characters = await _context.Characters.Include(x => x.Languages).ToListAsync();
+            return Ok(characters);
 
         }
 
@@ -53,6 +54,7 @@ namespace CharacterManagerAPI.Controllers
             }
             character.Name = updatedCharacter.Name;
             character.Level = updatedCharacter.Level;
+            character.Languages = updatedCharacter.Languages;
 
             await _context.SaveChangesAsync();
             return Ok();

@@ -1,4 +1,7 @@
-﻿namespace CharacterManagerAPI.Models
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
+
+namespace CharacterManagerAPI.Models
 {
     public enum LanguagesEnum
     {
@@ -54,8 +57,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public ICollection<Character> Characters { get; set; }
+        public IEnumerable<Character>? Characters { get; set; } = new List<Character>();
 
     }
 }

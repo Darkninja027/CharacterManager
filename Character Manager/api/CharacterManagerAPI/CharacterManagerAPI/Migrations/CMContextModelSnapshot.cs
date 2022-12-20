@@ -33,7 +33,7 @@ namespace CharacterManagerAPI.Migrations
 
                     b.HasIndex("LanguagesId");
 
-                    b.ToTable("CharacterLanguages");
+                    b.ToTable("CharacterLanguages", (string)null);
                 });
 
             modelBuilder.Entity("CharacterManagerAPI.Models.Character", b =>
@@ -53,7 +53,7 @@ namespace CharacterManagerAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Characters");
+                    b.ToTable("Characters", (string)null);
                 });
 
             modelBuilder.Entity("CharacterManagerAPI.Models.Languages", b =>
@@ -70,7 +70,7 @@ namespace CharacterManagerAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Languages");
+                    b.ToTable("Languages", (string)null);
                 });
 
             modelBuilder.Entity("CharacterLanguages", b =>
