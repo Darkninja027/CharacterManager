@@ -4,6 +4,7 @@ import { CharactersPage } from './pages/Characters'
 import ClassesPage from './pages/Classes'
 import HomePage from './pages/Home'
 import ItemsPage from './pages/Items'
+import SyncPage from './pages/Sync'
 import Navigation from './util/Navigation'
 
 
@@ -13,6 +14,7 @@ export default function App() {
 	const layout = { element: <Navigation /> }
 	const routes = elementsToRoutes([
 		<Route path='/' element={<Navigate to={"home"} replace={true} />} />,
+		<Route path="sync" element={<SyncPage />} />,
 		<Route path='home' {...layout}>
 			<Route path='/' element={<HomePage />} />
 		</Route>,
