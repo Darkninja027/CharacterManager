@@ -15,8 +15,6 @@ namespace CharacterManagerAPI.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        //public ICollection<Character> Characters { get; set; } = new List<Character>(); 
         public int Speed { get; set; }
         public SizeEnum Size { get; set; } = SizeEnum.Medium;
         public int Strength { get; set; } = 0;
@@ -28,6 +26,7 @@ namespace CharacterManagerAPI.Models
         public LanguagesEnum DefaultLanguage { get; set; } = LanguagesEnum.Common;
         public int KnownLanguages { get; set; } = 1;
         public int KnownFeats { get; set; } = 0;
+        public ICollection<RaceTraits>? RaceTraits { get; set; }
 
     }
 }

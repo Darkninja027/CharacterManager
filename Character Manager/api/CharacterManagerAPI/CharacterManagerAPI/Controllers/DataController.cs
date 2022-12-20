@@ -22,7 +22,14 @@ namespace CharacterManagerAPI.Controllers
         [HttpPost("SeedRaces")]
         public async Task<ActionResult<List<Race>>> SeedRaces()
         {
-            Races.SeedHumans(_context);
+            if(await _context.Races.AnyAsync() == false)
+            {
+                Races.SeedHumans(_context);
+                return Ok();
+            }
+
+            return BadRequest();
+
             //_context.Database.ExecuteSqlRaw("DBCC CHECKIDENT (Characters, RESEED, 0)");
             //_context.Database.ExecuteSqlRaw("insert into characters values ('Bont', 3)");
             //_context.SaveChangesAsync();
@@ -30,7 +37,7 @@ namespace CharacterManagerAPI.Controllers
             //{
             //    return BadRequest();
             //}
-            return Ok();
+
         }
     }
 }
