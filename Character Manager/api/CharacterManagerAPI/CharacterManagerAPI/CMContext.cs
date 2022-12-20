@@ -12,6 +12,8 @@ namespace CharacterManagerAPI
 
         public DbSet<Character> Characters { get; set; }
 
+        public DbSet<Languages> Languages { get; set; }
+
         
     }
 }
