@@ -6,6 +6,8 @@ namespace CharacterManagerAPI.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public ICollection<Character> Characters { get; set; } = new List<Character>(); 
         public int Speed { get; set; }
         public int Strength { get; set; } = 0;
         public int Dexterity { get; set; } = 0;
