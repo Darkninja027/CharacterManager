@@ -1,10 +1,15 @@
-import usePopulateRaces from "../../util/Hooks/Sync/PopulateRaces"
+import { useClearRaces, usePopulateRaces } from "../../util/Hooks/Sync/Races"
 
 export default function SyncPage() {
     const populateData = usePopulateRaces();
+    const clearRaces = useClearRaces();
 
     return (
-        <button onClick={() => populateData.mutate()}>Sync Races</button>
+        <div className="flex gap-5 p-5">
+
+            <button className="p-3 bg-gray-400 rounded-lg" onClick={() => populateData.mutate()}>Sync Races</button>
+            <button className="p-3 bg-gray-400 rounded-lg" onClick={() => clearRaces.mutate()}>Clear Races</button>
+        </div>
     )
 }
 
