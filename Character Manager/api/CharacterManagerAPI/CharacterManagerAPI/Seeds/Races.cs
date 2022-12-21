@@ -60,8 +60,43 @@ namespace CharacterManagerAPI.Seeds
                     KnownLanguages = 2,
                     KnownFeats = 0,
                     RaceTraits = null,
-                    DragonAncestryId = 1,
+                    //DragonAncestryId = 1,
                 },
+                //todo proficiencies
+                new Race()
+                {
+                    Name="Dwarf",
+                    Speed=25,
+                    Size = SizeEnum.Medium,
+                    Strength = 0,
+                    Dexterity = 0,
+                    Constitution = 2,
+                    Intelligence = 0,
+                    Wisdom = 0,
+                    Charisma = 0,
+                    DefaultLanguage= LanguagesEnum.Common,
+                    KnownLanguages= 2,
+                    RaceTraits = new List<RaceTraits>()
+                    {
+                        new RaceTraits()
+                        {
+                            Name = "Darkvision",
+                            Description = "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray."
+                        },
+                        new RaceTraits()
+                        {
+                            Name = "Dwarven Resilience",
+                            Description = "You have advantage on saving throws against poison, and you have resistance against poison damage"
+                        },
+                        new RaceTraits()
+                        {
+                            Name = "Stonecunning",
+                            Description = "Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus."
+                        }
+                    },
+                    
+                    
+                }
             });
             context.SaveChanges();
         }

@@ -55,5 +55,6 @@ namespace CharacterManagerAPI.Models
         public int? DragonAncestryId { get; set; }
 
 
+
     }
 }

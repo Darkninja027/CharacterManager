@@ -35,9 +35,11 @@ namespace CharacterManagerAPI.Controllers
         public async Task<ActionResult> ClearRaces()
         {
             _context.Database.ExecuteSqlRaw("DELETE FROM DragonAncestries");
+            _context.Database.ExecuteSqlRaw("DELETE FROM RaceTraits");
             _context.Database.ExecuteSqlRaw("DELETE FROM Races");
             _context.Database.ExecuteSqlRaw("DBCC CHECKIDENT (Races, RESEED, 0)");
             _context.Database.ExecuteSqlRaw("DBCC CHECKIDENT (DragonAncestries, RESEED, 0)");
+            _context.Database.ExecuteSqlRaw("DBCC CHECKIDENT (RaceTraits, RESEED, 0)");
             _context.SaveChanges();
             return Ok();
         }
