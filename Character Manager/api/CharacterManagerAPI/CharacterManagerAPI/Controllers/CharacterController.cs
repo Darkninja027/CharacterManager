@@ -19,7 +19,11 @@ namespace CharacterManagerAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Character>>> GetCharacters()
         {
-            var characters = await _context.Characters.Include(x => x.Languages).Include(x => x.Race).ToListAsync();
+            var characters = await _context.Characters
+                .Include(x => x.Languages)
+                .Include(x => x.Race)
+                    .ThenInclude(x => x.DragonAncestry)
+                .ToListAsync();
             return Ok(characters);
 
         }

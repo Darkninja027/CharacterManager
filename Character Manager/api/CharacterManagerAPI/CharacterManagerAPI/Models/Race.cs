@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CharacterManagerAPI.Models
 { 
@@ -48,7 +49,10 @@ namespace CharacterManagerAPI.Models
         public int KnownLanguages { get; set; } = 1;
         public int KnownFeats { get; set; } = 0;
         public ICollection<RaceTraits>? RaceTraits { get; set; }
+        [ForeignKey("DragonAncestryId")]
         public DragonAncestry? DragonAncestry { get; set; } = null;
+        [ForeignKey("DragonAncestry")]
+        public int? DragonAncestryId { get; set; }
 
 
     }

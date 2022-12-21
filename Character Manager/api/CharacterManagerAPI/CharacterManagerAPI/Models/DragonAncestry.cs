@@ -8,9 +8,9 @@
         Brass,
         Bronze,
         Copper,
+        Crystal,
         Emerald,
         Gold,
-        Crystal,
         Green,
         Red,
         Sapphire,
@@ -65,6 +65,7 @@
             DragonEnum.White => "30 foot line. 5 feet wide.",
             DragonEnum.Green => "30 foot line. 5 feet wide.",
         };
+        
 
 
         public string BreathSave{ get; set; } = "Dexterity saving throw (DC = 8 + your Constitution modifier + your proficiency bonus).";
