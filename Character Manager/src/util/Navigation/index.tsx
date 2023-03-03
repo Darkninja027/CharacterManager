@@ -3,7 +3,7 @@ import NavigationLink from "../../components/NavigationLink";
 
 export default function Navigation() {
     return (
-        <>
+        <aside>
             <header>
                 <h1>D&D Character manager</h1>
                 <nav className="flex gap-5">
@@ -13,8 +13,7 @@ export default function Navigation() {
                     <NavigationLink to="/items" label="Magic Items" />
                 </nav>
             </header>
-            <Outlet />
-        </>
+        </aside>
 
     )
 }
