@@ -33,7 +33,7 @@ export default function App() {
 	) as QRoute[]
 	return (
 		<Router location={location} routes={routes}>
-			<div className='flex'>
+			<div className='flex bg-slate-100'>
 				<Navigation />
 				<Outlet />
 			</div>
