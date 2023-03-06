@@ -11,10 +11,10 @@ namespace CharacterManagerAPI
         }
 
         public DbSet<Character> Characters { get; set; }
-
         public DbSet<Languages> Languages { get; set; }
-
         public DbSet<Race> Races { get; set; }
+        public DbSet<RaceTraits> RaceTraits { get; set; }
+        public DbSet<DragonAncestry> DragonAncestries { get; set; }
 
         
     }

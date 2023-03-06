@@ -11,20 +11,19 @@ import Navigation from './util/Navigation'
 
 export default function App() {
 	const location = new ReactLocation()
-	const layout = { element: <Navigation /> }
 	const routes = elementsToRoutes([
 		<Route path='/' element={<Navigate to={"home"} replace={true} />} />,
 		<Route path="sync" element={<SyncPage />} />,
-		<Route path='home' {...layout}>
+		<Route path='home'>
 			<Route path='/' element={<HomePage />} />
 		</Route>,
-		<Route path='characters'  {...layout}>
+		<Route path='characters'>
 			<Route path='/' element={<CharactersPage />} />
 		</Route>,
-		<Route path='classes'  {...layout}>
+		<Route path='classes'>
 			<Route path='/' element={<ClassesPage />} />
 		</Route>,
-		<Route path='items'  {...layout}>
+		<Route path='items'>
 			<Route path='/' element={<ItemsPage />} />
 		</Route>,
 		<Route path='*' element={<Navigate to="/home" />} />
@@ -34,7 +33,10 @@ export default function App() {
 	) as QRoute[]
 	return (
 		<Router location={location} routes={routes}>
-			<Outlet />
+			<div className='flex bg-slate-100'>
+				<Navigation />
+				<Outlet />
+			</div>
 		</Router>
 	)
 }

@@ -4,6 +4,7 @@ using CharacterManagerAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CharacterManagerAPI.Migrations
 {
     [DbContext(typeof(CMContext))]
-    partial class CMContextModelSnapshot : ModelSnapshot
+    [Migration("20221220201916_RaceTraits")]
+    partial class RaceTraits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,46 +65,6 @@ namespace CharacterManagerAPI.Migrations
                     b.ToTable("Characters");
                 });
 
-            modelBuilder.Entity("CharacterManagerAPI.Models.DragonAncestry", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BreathSave")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Dragon")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Level1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Level11")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Level17")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Level5")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DragonAncestries");
-                });
-
             modelBuilder.Entity("CharacterManagerAPI.Models.Languages", b =>
                 {
                     b.Property<int>("Id")
@@ -139,9 +102,6 @@ namespace CharacterManagerAPI.Migrations
                     b.Property<int>("Dexterity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DragonAncestryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Intelligence")
                         .HasColumnType("int");
 
@@ -164,15 +124,10 @@ namespace CharacterManagerAPI.Migrations
                     b.Property<int>("Strength")
                         .HasColumnType("int");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
                     b.Property<int>("Wisdom")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DragonAncestryId");
 
                     b.ToTable("Races");
                 });
@@ -225,15 +180,6 @@ namespace CharacterManagerAPI.Migrations
                         .HasForeignKey("RaceId");
 
                     b.Navigation("Race");
-                });
-
-            modelBuilder.Entity("CharacterManagerAPI.Models.Race", b =>
-                {
-                    b.HasOne("CharacterManagerAPI.Models.DragonAncestry", "DragonAncestry")
-                        .WithMany()
-                        .HasForeignKey("DragonAncestryId");
-
-                    b.Navigation("DragonAncestry");
                 });
 
             modelBuilder.Entity("CharacterManagerAPI.Models.RaceTraits", b =>
