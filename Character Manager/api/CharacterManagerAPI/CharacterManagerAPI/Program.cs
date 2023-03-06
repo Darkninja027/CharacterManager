@@ -1,4 +1,5 @@
 using CharacterManagerAPI;
+using CharacterManagerAPI.Graphql.Schema;
 using CharacterManagerAPI.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -25,7 +26,9 @@ builder.Services.AddCors(policy => policy.AddPolicy("CorsPolicy", build =>
     build.WithOrigins("http://localhost:5173", "http://127.0.0.1:5173").AllowAnyMethod().AllowAnyHeader();
 }));
 builder.Services.AddGraphQLServer()
-    .AddQueryType<Query>();
+    .AddQueryType<Query>()
+    .AddMutationType(m => m.Name("Mutations"))
+        .AddTypeExtension<ItemMutations>();
 
 
 
