@@ -35,7 +35,7 @@ namespace CharacterManagerAPI.Models
     public class Race
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public int Speed { get; set; }
         public CreatureTypeEnum Type { get; set; }
         public SizeEnum Size { get; set; } = SizeEnum.Medium;
@@ -49,6 +49,7 @@ namespace CharacterManagerAPI.Models
         public int KnownLanguages { get; set; } = 1;
         public int KnownFeats { get; set; } = 0;
         public ICollection<RaceTraits>? RaceTraits { get; set; }
+
         [ForeignKey("DragonAncestryId")]
         public DragonAncestry? DragonAncestry { get; set; } = null;
         [ForeignKey("DragonAncestry")]
