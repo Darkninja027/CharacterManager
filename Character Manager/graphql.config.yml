@@ -1,0 +1,19 @@
+schema: "http://localhost:4680/graphql"
+generates:
+  src/common/graphql/types.ts:
+    plugins:
+      - "typescript"
+  src/:
+    documents: "src/**/*.graphql"
+    plugins:
+      - "typescript-operations"
+      - "typescript-react-query"
+    preset: near-operation-file
+    presetConfig:
+        extension: .generated.ts
+        baseTypesPath: "~@types"
+    config:
+      fetcher: "@httpClient#httpClient"
+      
+
+
