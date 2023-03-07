@@ -7,7 +7,7 @@ export function httpClient<TData, TVariables>(query: string, variables?: TVariab
     }
 ) => Promise<TData> {
     return async (opts): Promise<TData> => {
-        const res = await fetch("/graphql" as string, {
+        const res = await fetch("http://localhost:4680/graphql" as string, {
             method: "POST",
             redirect: 'manual',
             ...({ "headers": { "Content-Type": "application/json" } }),
