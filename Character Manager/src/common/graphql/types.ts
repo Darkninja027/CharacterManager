@@ -44,5 +44,4 @@ export type MutationsUpdateItemArgs = {
 export type Query = {
   __typename?: 'Query';
   items: Array<Item>;
-  test: Scalars['String'];
 };

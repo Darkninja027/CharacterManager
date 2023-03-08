@@ -4,3 +4,9 @@ query GetItems{
         name
     }
 }
+
+mutation createItem($item: ItemInput!){
+    createItem(item: $item){
+        id
+    }
+}

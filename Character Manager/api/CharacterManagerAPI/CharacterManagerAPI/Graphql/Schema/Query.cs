@@ -11,7 +11,6 @@ namespace CharacterManagerAPI.Schema
         {
             _context = context;
         }
-        public string test => "fuck";
         public IEnumerable<Item> GetItems()
         {
             using (CMContext db = _context.CreateDbContext())
