@@ -15,7 +15,7 @@ namespace CharacterManagerAPI
         public DbSet<Race> Races { get; set; }
         public DbSet<RaceTraits> RaceTraits { get; set; }
         public DbSet<DragonAncestry> DragonAncestries { get; set; }
-        public DbSet<Item> Items { get; set; }
+        public DbSet<MagicItem> MagicItems { get; set; }
 
         
     }

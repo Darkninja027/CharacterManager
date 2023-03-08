@@ -5,40 +5,40 @@ using Microsoft.EntityFrameworkCore;
 namespace CharacterManagerAPI.Graphql.Schema
 {
     [ExtendObjectType("Mutations")]
-    public class ItemMutations
+    public class MagicItemMutations
     {
         private IDbContextFactory<CMContext> _context;
-        public ItemMutations(IDbContextFactory<CMContext> context)
+        public MagicItemMutations(IDbContextFactory<CMContext> context)
         {
             _context = context;
         }
 
-        public Item CreateItem(ItemInput item)
+        public MagicItem CreateItem(MagicItemInput item)
         {
             using (CMContext db = _context.CreateDbContext())
             {
-                Item test = db.Items.FirstOrDefault(x => x.Name == item.Name);
+                MagicItem test = db.MagicItems.FirstOrDefault(x => x.Name == item.Name);
                 if (test != null)
                 {
                     throw new Exception($"An item with the name {item.Name} already exists");
                 }
 
-                Item newItem = new Item
+                MagicItem newItem = new MagicItem
                 {
                     Name = item.Name,
                     Description = item.Description
                 };
-                db.Items.Add(newItem);
+                db.MagicItems.Add(newItem);
                 db.SaveChanges();
                 return newItem;
             }
         }
 
-        public Item UpdateItem(int id, ItemInput item)
+        public MagicItem UpdateItem(int id, MagicItemInput item)
         {
             using (CMContext db = _context.CreateDbContext())
             {
-                Item test = db.Items.FirstOrDefault(x => x.Id == id);
+                MagicItem test = db.MagicItems.FirstOrDefault(x => x.Id == id);
                 if (test == null)
                 {
                     throw new Exception("This item does not exist");
@@ -47,9 +47,20 @@ namespace CharacterManagerAPI.Graphql.Schema
                 test.Name = item.Name;
                 test.Description = item.Description;
 
-                db.Items.Update(test);
+                db.MagicItems.Update(test);
                 db.SaveChanges();
                 return test;
+            }
+        }
+
+        public bool DeleteAllItems()
+        {
+            using(CMContext db = _context.CreateDbContext())
+            {
+                db.RemoveRange(db.MagicItems);
+                db.SaveChanges();
+                db.Database.ExecuteSqlRaw(("DBCC CHECKIDENT (Items, RESEED, 0)"));
+                return db.MagicItems.Count() == 0;
             }
         }
     }

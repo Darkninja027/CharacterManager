@@ -5,8 +5,9 @@ query GetItems{
     }
 }
 
-mutation createItem($item: ItemInput!){
+mutation createItem($item: MagicItemInput!){
     createItem(item: $item){
         id
     }
 }
+

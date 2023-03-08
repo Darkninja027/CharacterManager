@@ -1,16 +1,19 @@
-import { ItemInput, MutationsCreateItemArgs } from "@types";
+import { MagicItemInput } from "@types";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useCreateItemMutation, useGetItemsQuery } from "./itemquery.generated"
+import { useCreateItemMutation, useGetItemsQuery } from "./items.generated";
 
 export default function ItemsPage() {
 
     const { isLoading, data: { items } = {} } = useGetItemsQuery();
     const itemMutation = useCreateItemMutation();
 
-    const { register, handleSubmit } = useForm<ItemInput>()
+    const { register, handleSubmit } = useForm<MagicItemInput>()
 
-    const onSubmit: SubmitHandler<ItemInput> = (data) => {
+    const onSubmit: SubmitHandler<MagicItemInput> = (data) => {
         itemMutation.mutate({ item: data });
+    }
+    if (isLoading) {
+        <p>Loading...</p>
     }
     return (
         <div className="grow m-5">

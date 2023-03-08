@@ -5,14 +5,14 @@ import { httpClient } from '@httpClient';
 export type GetItemsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type GetItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'Item', id: number, name: string }> };
+export type GetItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'MagicItem', id: number, name: string }> };
 
 export type CreateItemMutationVariables = Types.Exact<{
-  item: Types.ItemInput;
+  item: Types.MagicItemInput;
 }>;
 
 
-export type CreateItemMutation = { __typename?: 'Mutations', createItem: { __typename?: 'Item', id: number } };
+export type CreateItemMutation = { __typename?: 'Mutations', createItem: { __typename?: 'MagicItem', id: number } };
 
 
 export const GetItemsDocument = `
@@ -36,7 +36,7 @@ export const useGetItemsQuery = <
       options
     );
 export const CreateItemDocument = `
-    mutation createItem($item: ItemInput!) {
+    mutation createItem($item: MagicItemInput!) {
   createItem(item: $item) {
     id
   }

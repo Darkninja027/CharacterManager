@@ -12,36 +12,67 @@ export type Scalars = {
   Float: number;
 };
 
-export type Item = {
-  __typename?: 'Item';
+export type MagicItem = {
+  __typename?: 'MagicItem';
+  category: MagicItemCategory;
   description: Scalars['String'];
   id: Scalars['Int'];
   name: Scalars['String'];
+  property1: Scalars['String'];
+  property2: Scalars['String'];
+  property3: Scalars['String'];
+  rarity: MagicItemRarity;
 };
 
-export type ItemInput = {
+export enum MagicItemCategory {
+  Armor = 'ARMOR',
+  Potion = 'POTION',
+  Ring = 'RING',
+  Rod = 'ROD',
+  Scroll = 'SCROLL',
+  Staff = 'STAFF',
+  Wand = 'WAND',
+  Weapon = 'WEAPON',
+  WonderousItem = 'WONDEROUS_ITEM'
+}
+
+export type MagicItemInput = {
+  category: MagicItemCategory;
   description: Scalars['String'];
   name: Scalars['String'];
+  property1?: InputMaybe<Scalars['String']>;
+  property2?: InputMaybe<Scalars['String']>;
+  property3?: InputMaybe<Scalars['String']>;
+  rarity: MagicItemRarity;
 };
+
+export enum MagicItemRarity {
+  Common = 'COMMON',
+  Legendary = 'LEGENDARY',
+  Rare = 'RARE',
+  Uncommon = 'UNCOMMON',
+  VeryRare = 'VERY_RARE'
+}
 
 export type Mutations = {
   __typename?: 'Mutations';
-  createItem: Item;
-  updateItem: Item;
+  createItem: MagicItem;
+  deleteAllItems: Scalars['Boolean'];
+  updateItem: MagicItem;
 };
 
 
 export type MutationsCreateItemArgs = {
-  item: ItemInput;
+  item: MagicItemInput;
 };
 
 
 export type MutationsUpdateItemArgs = {
   id: Scalars['Int'];
-  item: ItemInput;
+  item: MagicItemInput;
 };
 
 export type Query = {
   __typename?: 'Query';
-  items: Array<Item>;
+  items: Array<MagicItem>;
 };

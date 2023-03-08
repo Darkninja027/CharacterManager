@@ -28,7 +28,7 @@ builder.Services.AddCors(policy => policy.AddPolicy("CorsPolicy", build =>
 builder.Services.AddGraphQLServer()
     .AddQueryType<Query>()
     .AddMutationType(m => m.Name("Mutations"))
-        .AddTypeExtension<ItemMutations>();
+        .AddTypeExtension<MagicItemMutations>();
 
 
 

@@ -11,11 +11,11 @@ namespace CharacterManagerAPI.Schema
         {
             _context = context;
         }
-        public IEnumerable<Item> GetItems()
+        public IEnumerable<MagicItem> GetItems()
         {
             using (CMContext db = _context.CreateDbContext())
             {
-                var Items = db.Items.ToList();
+                var Items = db.MagicItems.ToList();
                 return Items;
             }
         }
