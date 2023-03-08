@@ -34,7 +34,7 @@ namespace CharacterManagerAPI.Migrations
 
                     b.HasIndex("LanguagesId");
 
-                    b.ToTable("CharacterLanguages");
+                    b.ToTable("CharacterLanguages", (string)null);
                 });
 
             modelBuilder.Entity("CharacterManagerAPI.Models.Character", b =>
@@ -59,7 +59,7 @@ namespace CharacterManagerAPI.Migrations
 
                     b.HasIndex("RaceId");
 
-                    b.ToTable("Characters");
+                    b.ToTable("Characters", (string)null);
                 });
 
             modelBuilder.Entity("CharacterManagerAPI.Models.DragonAncestry", b =>
@@ -99,7 +99,7 @@ namespace CharacterManagerAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DragonAncestries");
+                    b.ToTable("DragonAncestries", (string)null);
                 });
 
             modelBuilder.Entity("CharacterManagerAPI.Models.Languages", b =>
@@ -116,7 +116,7 @@ namespace CharacterManagerAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Languages");
+                    b.ToTable("Languages", (string)null);
                 });
 
             modelBuilder.Entity("CharacterManagerAPI.Models.MagicItem", b =>
@@ -155,7 +155,7 @@ namespace CharacterManagerAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MagicItems");
+                    b.ToTable("MagicItems", (string)null);
                 });
 
             modelBuilder.Entity("CharacterManagerAPI.Models.Race", b =>
@@ -213,7 +213,7 @@ namespace CharacterManagerAPI.Migrations
 
                     b.HasIndex("DragonAncestryId");
 
-                    b.ToTable("Races");
+                    b.ToTable("Races", (string)null);
                 });
 
             modelBuilder.Entity("CharacterManagerAPI.Models.RaceTraits", b =>
@@ -239,7 +239,7 @@ namespace CharacterManagerAPI.Migrations
 
                     b.HasIndex("RaceId");
 
-                    b.ToTable("RaceTraits");
+                    b.ToTable("RaceTraits", (string)null);
                 });
 
             modelBuilder.Entity("CharacterLanguages", b =>

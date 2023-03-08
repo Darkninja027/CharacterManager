@@ -37,13 +37,13 @@ export enum MagicItemCategory {
 }
 
 export type MagicItemInput = {
-  category: MagicItemCategory;
+  category?: InputMaybe<MagicItemCategory>;
   description: Scalars['String'];
   name: Scalars['String'];
   property1?: InputMaybe<Scalars['String']>;
   property2?: InputMaybe<Scalars['String']>;
   property3?: InputMaybe<Scalars['String']>;
-  rarity: MagicItemRarity;
+  rarity?: InputMaybe<MagicItemRarity>;
 };
 
 export enum MagicItemRarity {
