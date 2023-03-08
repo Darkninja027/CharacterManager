@@ -29,8 +29,8 @@
         public string Description { get; set; }
         public MagicItemRarity Rarity { get; set; }
         public MagicItemCategory Category { get; set; }
-        public string Property1 { get; set; }
-        public string Property2 { get; set; }
-        public string Property3 { get; set; }
+        public string? Property1 { get; set; }
+        public string? Property2 { get; set; }
+        public string? Property3 { get; set; }
     }
 }

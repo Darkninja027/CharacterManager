@@ -13,28 +13,42 @@ namespace CharacterManagerAPI.Graphql.Schema
             _context = context;
         }
 
-        public MagicItem CreateItem(MagicItemInput item)
+        public MagicItem CreateMagicItem(MagicItemInput magicItem)
         {
             using (CMContext db = _context.CreateDbContext())
             {
-                MagicItem test = db.MagicItems.FirstOrDefault(x => x.Name == item.Name);
-                if (test != null)
+                try
                 {
-                    throw new Exception($"An item with the name {item.Name} already exists");
-                }
+                    MagicItem existingMagicItem = db.MagicItems.FirstOrDefault(x => x.Name == magicItem.Name);
+                    if (existingMagicItem != null)
+                    {
+                        throw new Exception($"An item with the name {magicItem.Name} already exists");
+                    }
 
-                MagicItem newItem = new MagicItem
+
+                    MagicItem newItem = new MagicItem
+                    {
+                        Name = magicItem.Name,
+                        Description = magicItem.Description,
+                        Rarity = magicItem.Rarity,
+                        Category = magicItem.Category,
+                        Property1 = magicItem.Property1,
+                        Property2 = magicItem.Property2,
+                        Property3 = magicItem.Property3,
+                    };
+
+                    db.MagicItems.Add(newItem);
+                    db.SaveChanges();
+                    return newItem;
+                }
+                catch(Exception ex)
                 {
-                    Name = item.Name,
-                    Description = item.Description
-                };
-                db.MagicItems.Add(newItem);
-                db.SaveChanges();
-                return newItem;
+                    throw new Exception(ex.Message);
+                }
             }
         }
 
-        public MagicItem UpdateItem(int id, MagicItemInput item)
+        public MagicItem UpdateMagicItem(int id, MagicItemInput item)
         {
             using (CMContext db = _context.CreateDbContext())
             {
@@ -59,7 +73,7 @@ namespace CharacterManagerAPI.Graphql.Schema
             {
                 db.RemoveRange(db.MagicItems);
                 db.SaveChanges();
-                db.Database.ExecuteSqlRaw(("DBCC CHECKIDENT (Items, RESEED, 0)"));
+                db.Database.ExecuteSqlRaw(("DBCC CHECKIDENT (MagicItems, RESEED, 0)"));
                 return db.MagicItems.Count() == 0;
             }
         }

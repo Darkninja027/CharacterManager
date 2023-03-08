@@ -7,12 +7,12 @@ export type GetItemsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 export type GetItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'MagicItem', id: number, name: string }> };
 
-export type CreateItemMutationVariables = Types.Exact<{
-  item: Types.MagicItemInput;
+export type CreateMagicItemMutationVariables = Types.Exact<{
+  magicItem: Types.MagicItemInput;
 }>;
 
 
-export type CreateItemMutation = { __typename?: 'Mutations', createItem: { __typename?: 'MagicItem', id: number } };
+export type CreateMagicItemMutation = { __typename?: 'Mutations', createMagicItem: { __typename?: 'MagicItem', id: number } };
 
 
 export const GetItemsDocument = `
@@ -35,19 +35,19 @@ export const useGetItemsQuery = <
       httpClient<GetItemsQuery, GetItemsQueryVariables>(GetItemsDocument, variables),
       options
     );
-export const CreateItemDocument = `
-    mutation createItem($item: MagicItemInput!) {
-  createItem(item: $item) {
+export const CreateMagicItemDocument = `
+    mutation createMagicItem($magicItem: MagicItemInput!) {
+  createMagicItem(magicItem: $magicItem) {
     id
   }
 }
     `;
-export const useCreateItemMutation = <
+export const useCreateMagicItemMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<CreateItemMutation, TError, CreateItemMutationVariables, TContext>) =>
-    useMutation<CreateItemMutation, TError, CreateItemMutationVariables, TContext>(
-      ['createItem'],
-      (variables?: CreateItemMutationVariables) => httpClient<CreateItemMutation, CreateItemMutationVariables>(CreateItemDocument, variables)(),
+    >(options?: UseMutationOptions<CreateMagicItemMutation, TError, CreateMagicItemMutationVariables, TContext>) =>
+    useMutation<CreateMagicItemMutation, TError, CreateMagicItemMutationVariables, TContext>(
+      ['createMagicItem'],
+      (variables?: CreateMagicItemMutationVariables) => httpClient<CreateMagicItemMutation, CreateMagicItemMutationVariables>(CreateMagicItemDocument, variables)(),
       options
     );

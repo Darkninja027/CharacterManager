@@ -1,16 +1,18 @@
-import { MagicItemInput } from "@types";
+import { MagicItemCategory, MagicItemInput, MagicItemRarity } from "@types";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useCreateItemMutation, useGetItemsQuery } from "./items.generated";
+import { useCreateMagicItemMutation, useGetItemsQuery } from "./items.generated";
 
 export default function ItemsPage() {
 
     const { isLoading, data: { items } = {} } = useGetItemsQuery();
-    const itemMutation = useCreateItemMutation();
+    const itemMutation = useCreateMagicItemMutation();
 
     const { register, handleSubmit } = useForm<MagicItemInput>()
 
     const onSubmit: SubmitHandler<MagicItemInput> = (data) => {
-        itemMutation.mutate({ item: data });
+        data.rarity = MagicItemRarity.Common
+        data.category = MagicItemCategory.WonderousItem
+        itemMutation.mutate({ magicItem: data });
     }
     if (isLoading) {
         <p>Loading...</p>

@@ -18,9 +18,9 @@ export type MagicItem = {
   description: Scalars['String'];
   id: Scalars['Int'];
   name: Scalars['String'];
-  property1: Scalars['String'];
-  property2: Scalars['String'];
-  property3: Scalars['String'];
+  property1?: Maybe<Scalars['String']>;
+  property2?: Maybe<Scalars['String']>;
+  property3?: Maybe<Scalars['String']>;
   rarity: MagicItemRarity;
 };
 
@@ -37,13 +37,13 @@ export enum MagicItemCategory {
 }
 
 export type MagicItemInput = {
-  category?: InputMaybe<MagicItemCategory>;
+  category: MagicItemCategory;
   description: Scalars['String'];
   name: Scalars['String'];
   property1?: InputMaybe<Scalars['String']>;
   property2?: InputMaybe<Scalars['String']>;
   property3?: InputMaybe<Scalars['String']>;
-  rarity?: InputMaybe<MagicItemRarity>;
+  rarity: MagicItemRarity;
 };
 
 export enum MagicItemRarity {
@@ -56,18 +56,18 @@ export enum MagicItemRarity {
 
 export type Mutations = {
   __typename?: 'Mutations';
-  createItem: MagicItem;
+  createMagicItem: MagicItem;
   deleteAllItems: Scalars['Boolean'];
-  updateItem: MagicItem;
+  updateMagicItem: MagicItem;
 };
 
 
-export type MutationsCreateItemArgs = {
-  item: MagicItemInput;
+export type MutationsCreateMagicItemArgs = {
+  magicItem: MagicItemInput;
 };
 
 
-export type MutationsUpdateItemArgs = {
+export type MutationsUpdateMagicItemArgs = {
   id: Scalars['Int'];
   item: MagicItemInput;
 };
