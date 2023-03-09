@@ -11,6 +11,7 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
             <div className="flex gap-2">
                 <p>{item.name}</p>
                 <p>'{enumStringConversion(item.category)}'</p>
+                <p>'{enumStringConversion(item.rarity)}'</p>
             </div>}>
             <p>Description: {item.description}</p>
             <p>Property 1: {item.property1}</p>
