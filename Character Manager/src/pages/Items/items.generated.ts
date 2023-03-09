@@ -5,7 +5,7 @@ import { httpClient } from '@httpClient';
 export type GetItemsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type GetItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'MagicItem', id: number, name: string }> };
+export type GetItemsQuery = { __typename?: 'Query', items: Array<{ __typename?: 'MagicItem', id: number, name: string, description: string, category: Types.MagicItemCategory, rarity: Types.MagicItemRarity, property1?: string | null, property2?: string | null, property3?: string | null }> };
 
 export type CreateMagicItemMutationVariables = Types.Exact<{
   magicItem: Types.MagicItemInput;
@@ -20,6 +20,12 @@ export const GetItemsDocument = `
   items {
     id
     name
+    description
+    category
+    rarity
+    property1
+    property2
+    property3
   }
 }
     `;

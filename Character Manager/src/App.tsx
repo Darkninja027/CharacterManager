@@ -35,7 +35,9 @@ export default function App() {
 		<Router location={location} routes={routes}>
 			<div className='flex bg-slate-100'>
 				<Navigation />
-				<Outlet />
+				<main className="grow m-5">
+					<Outlet />
+				</main>
 			</div>
 		</Router>
 	)
