@@ -5,6 +5,7 @@ import Form from "../../components/Form";
 import Button from "../../components/formInputs/Button";
 import Input from "../../components/formInputs/Input";
 import Radio from "../../components/formInputs/Radio";
+import TextArea from "../../components/formInputs/TextArea";
 import MagicItemCard from "../../components/magicItemCard";
 
 import { useCreateMagicItemMutation, useGetItemsQuery } from "./items.generated";
@@ -20,6 +21,7 @@ export default function ItemsPage() {
     const [showForm, setShowForm] = useState<boolean>(false)
     const methods = useForm<MagicItemInput>()
     const onSubmit: SubmitHandler<MagicItemInput> = (data) => {
+        console.log(data)
         itemMutation.mutate({ magicItem: data });
     }
 
@@ -58,17 +60,14 @@ export default function ItemsPage() {
                     {rarities.map(rarity => (
                         <Radio key={rarity} methods={methods} name="rarity" value={rarity} />
                     ))}
-
+                    <TextArea methods={methods} name="property1" label="Property 1" />
                     <Button label="Add Magic Item" />
                 </Form>
             )}
             <div className="grid grid-cols-4 gap-3 items-start flex-wrap">
-
-                {items?.map((item) => {
-                    return (
-                        <MagicItemCard key={item.id} item={item} />
-                    )
-                })}
+                {items?.map((item) => (
+                    <MagicItemCard key={item.id} item={item} />
+                ))}
             </div>
         </>
     )
