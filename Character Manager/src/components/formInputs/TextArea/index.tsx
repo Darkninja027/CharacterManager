@@ -10,9 +10,9 @@ type TextAreaProps<T extends FieldValues> = DetailedHTMLProps<TextareaHTMLAttrib
 
 export default function TextArea<T extends FieldValues>({ label, methods, name, cols = 30, rows = 10, required }: TextAreaProps<T>) {
     return (
-        <label className="flex flex-col">
+        <label className="flex flex-col w-72 h-24">
             {label ?? <span>{label} {required ?? <span>*</span>}</span>}
-            <textarea {...methods.register(name, { required })} className="resize-none" cols={cols} rows={rows}></textarea>
+            <textarea {...methods.register(name, { required })} className="resize-none p-2" cols={cols} rows={rows}></textarea>
         </label>
     )
 }

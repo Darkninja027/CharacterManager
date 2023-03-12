@@ -50,21 +50,38 @@ export default function ItemsPage() {
             </div>
             {showForm && (
                 <Form methods={methods} onSubmit={onSubmit}>
-                    <Input methods={methods} name="name" label="Name" required />
-                    <Input methods={methods} name="description" label="Description" required />
+                    <div className="flex gap-3">
+                        <div className="flex flex-col gap-3">
+                            <div className="flex gap-3">
+                                <Input methods={methods} name="name" label="Name" required />
+                                <Input methods={methods} name="description" label="Description" required />
+                            </div>
 
-                    {categories.map(category => (
-                        <Radio key={category} methods={methods} name="category" value={category} />
-                    ))}
-
-                    {rarities.map(rarity => (
-                        <Radio key={rarity} methods={methods} name="rarity" value={rarity} />
-                    ))}
-                    <TextArea methods={methods} name="property1" label="Property 1" />
-                    <Button label="Add Magic Item" />
+                            <div className="flex gap-3">
+                                <span>
+                                    <label>Item Category</label>
+                                    {categories.map(category => (
+                                        <Radio key={category} methods={methods} name="category" value={category} />
+                                    ))}
+                                </span>
+                                <span>
+                                    <label>Item Rarity</label>
+                                    {rarities.map(rarity => (
+                                        <Radio key={rarity} methods={methods} name="rarity" value={rarity} />
+                                    ))}
+                                </span>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <TextArea methods={methods} name="property1" label="Property 1" />
+                            <TextArea methods={methods} name="property2" label="Property 2" />
+                            <TextArea methods={methods} name="property3" label="Property 3" />
+                        </div>
+                    </div>
+                    <Button className="mt-3" label="Add Magic Item" />
                 </Form>
             )}
-            <div className="grid grid-cols-4 gap-3 items-start flex-wrap">
+            <div className="grid grid-cols-4 gap-3 items-start flex-wrap mt-10">
                 {items?.map((item) => (
                     <MagicItemCard key={item.id} item={item} />
                 ))}
