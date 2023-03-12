@@ -67,6 +67,21 @@ namespace CharacterManagerAPI.Graphql.Schema
             }
         }
 
+        public bool DeleteMagicItem(int Id)
+        {
+            using(CMContext db = _context.CreateDbContext())
+            {
+                MagicItem item = db.MagicItems.FirstOrDefault(x => x.Id == Id);
+                if (item == null)
+                {
+                    throw new GraphQLException(new Error("The magic item your are attempting to delete does not exist"));
+                }
+                db.MagicItems.Remove(item);
+                db.SaveChanges();
+                return db.MagicItems.FirstOrDefault(x => x.Id == Id) != null;
+            }
+        }
+
         public bool DeleteAllItems()
         {
             using(CMContext db = _context.CreateDbContext())

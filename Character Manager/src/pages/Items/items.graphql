@@ -17,3 +17,7 @@ mutation createMagicItem($magicItem: MagicItemInput!){
     }
 }
 
+mutation deleteMagicItem($id: Int!){
+    deleteMagicItem(id: $id)
+}
+

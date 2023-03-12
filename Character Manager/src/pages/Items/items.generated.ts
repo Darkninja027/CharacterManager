@@ -14,6 +14,13 @@ export type CreateMagicItemMutationVariables = Types.Exact<{
 
 export type CreateMagicItemMutation = { __typename?: 'Mutations', createMagicItem: { __typename?: 'MagicItem', id: number } };
 
+export type DeleteMagicItemMutationVariables = Types.Exact<{
+  id: Types.Scalars['Int'];
+}>;
+
+
+export type DeleteMagicItemMutation = { __typename?: 'Mutations', deleteMagicItem: boolean };
+
 
 export const GetItemsDocument = `
     query GetItems {
@@ -55,5 +62,19 @@ export const useCreateMagicItemMutation = <
     useMutation<CreateMagicItemMutation, TError, CreateMagicItemMutationVariables, TContext>(
       ['createMagicItem'],
       (variables?: CreateMagicItemMutationVariables) => httpClient<CreateMagicItemMutation, CreateMagicItemMutationVariables>(CreateMagicItemDocument, variables)(),
+      options
+    );
+export const DeleteMagicItemDocument = `
+    mutation deleteMagicItem($id: Int!) {
+  deleteMagicItem(id: $id)
+}
+    `;
+export const useDeleteMagicItemMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<DeleteMagicItemMutation, TError, DeleteMagicItemMutationVariables, TContext>) =>
+    useMutation<DeleteMagicItemMutation, TError, DeleteMagicItemMutationVariables, TContext>(
+      ['deleteMagicItem'],
+      (variables?: DeleteMagicItemMutationVariables) => httpClient<DeleteMagicItemMutation, DeleteMagicItemMutationVariables>(DeleteMagicItemDocument, variables)(),
       options
     );

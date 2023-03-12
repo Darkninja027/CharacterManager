@@ -58,12 +58,18 @@ export type Mutations = {
   __typename?: 'Mutations';
   createMagicItem: MagicItem;
   deleteAllItems: Scalars['Boolean'];
+  deleteMagicItem: Scalars['Boolean'];
   updateMagicItem: MagicItem;
 };
 
 
 export type MutationsCreateMagicItemArgs = {
   magicItem: MagicItemInput;
+};
+
+
+export type MutationsDeleteMagicItemArgs = {
+  id: Scalars['Int'];
 };
 
 

@@ -24,7 +24,6 @@ export default function ItemsPage() {
         console.log(data)
         itemMutation.mutate({ magicItem: data });
     }
-
     const categories = Object.values(MagicItemCategory)
     const rarities = [
         MagicItemRarity.Common,
@@ -75,7 +74,7 @@ export default function ItemsPage() {
                         <div className="flex flex-col gap-3">
                             <TextArea methods={methods} name="property1" label="Property 1" />
                             <TextArea methods={methods} name="property2" label="Property 2" />
-                            <TextArea methods={methods} name="property3" label="Property 3" />
+                            {<TextArea methods={methods} name="property3" label="Property 3" />}
                         </div>
                     </div>
                     <Button className="mt-3" label="Add Magic Item" />
