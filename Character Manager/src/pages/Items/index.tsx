@@ -1,12 +1,14 @@
 import { MagicItemCategory, MagicItemInput, MagicItemRarity } from "@types";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Tooltip } from "react-tooltip";
 import Form from "../../components/Form";
 import Button from "../../components/formInputs/Button";
 import Input from "../../components/formInputs/Input";
 import Radio from "../../components/formInputs/Radio";
 import TextArea from "../../components/formInputs/TextArea";
 import MagicItemCard from "../../components/magicItemCard";
+
 
 import { useCreateMagicItemMutation, useGetItemsQuery } from "./items.generated";
 

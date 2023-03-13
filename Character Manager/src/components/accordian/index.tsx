@@ -15,8 +15,8 @@ export default function Accordian({ heading, children }: AccordianProps) {
                 setOpen(!open)
             }}>
                 <div className="flex justify-between hover:cursor-pointer">
-                    <h1>{heading}</h1>
-                    <p>{!open ? "^" : "v"}</p>
+                    <h1 className="w-full ">{heading}</h1>
+                    <p className="mx-2">{!open ? "^" : "v"}</p>
                 </div>
             </summary>
             <div className="mx-2 my-3">
