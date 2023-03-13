@@ -1,6 +1,6 @@
 import { MagicItem, MagicItemCategory, MagicItemInput } from "@types";
 import { Tooltip } from "react-tooltip";
-import { DeleteIcon, ScrollIcon, WeaponIcon } from "../../common/icons/SvgList";
+import { ArmorIcon, DeleteIcon, PotionIcon, RingIcon, RodIcon, ScrollIcon, StaffIcon, WandIcon, WeaponIcon, WonderousItemIcon } from "../../common/icons/SvgList";
 import { enumStringConversion } from "../../common/util/enumStringConversion";
 import { useDeleteMagicItemMutation } from "../../pages/Items/items.generated";
 import Accordian from "../accordian";
@@ -13,19 +13,20 @@ interface MagicItemCardProps {
 
 type props = { category: MagicItemCategory, id: number }
 function GetIcon({ category, id }: props) {
-    console.log(category)
-    var icon = <></>
-    switch (category) {
-        case MagicItemCategory.Scroll:
-            icon = <div id={`categoryIcon${id}`} className="p-1 w-8 h-8 bg-[#d9bda5] rounded-full"><ScrollIcon /></div>
-            break;
-        case MagicItemCategory.Weapon:
-            icon = <div id={`categoryIcon${id}`} className="p-1.5 w-8 h-8 bg-[#919191] rounded-full"><WeaponIcon /></div>
-            break;
-        default:
-            <></>
-    }
-    return icon
+    const styles = "p-1.5 w-8 h-8 bg-[#d9bda5] rounded-full"
+    return (
+        <div id={`categoryIcon${id}`} className={styles}>
+            {category == MagicItemCategory.Armor && <ArmorIcon />}
+            {category == MagicItemCategory.Potion && <PotionIcon />}
+            {category == MagicItemCategory.Ring && <RingIcon />}
+            {category == MagicItemCategory.Rod && <RodIcon />}
+            {category == MagicItemCategory.Scroll && <ScrollIcon />}
+            {category == MagicItemCategory.Staff && <StaffIcon />}
+            {category == MagicItemCategory.Wand && <WandIcon />}
+            {category == MagicItemCategory.Weapon && <WeaponIcon />}
+            {category == MagicItemCategory.WonderousItem && <WonderousItemIcon />}
+        </div>
+    )
 }
 
 

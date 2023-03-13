@@ -16,7 +16,7 @@ export default function RarityBadge({ rarity, size }: BadgeProps) {
     const classes = classNames(
         BADGE_SIZE[size ?? "SMALL"],
         {
-            "bg-white text-black": rarity == MagicItemRarity.Common,
+            "bg-white": rarity == MagicItemRarity.Common,
             "bg-[#1eff00]": rarity == MagicItemRarity.Uncommon,
             "bg-[#0070dd]": rarity == MagicItemRarity.Rare,
             "bg-[#a335ee]": rarity == MagicItemRarity.VeryRare,
