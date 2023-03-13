@@ -1,6 +1,7 @@
+import { useNavigate } from "@tanstack/react-location";
 import { MagicItem, MagicItemCategory, MagicItemInput } from "@types";
 import { Tooltip } from "react-tooltip";
-import { ArmorIcon, DeleteIcon, PotionIcon, RingIcon, RodIcon, ScrollIcon, StaffIcon, WandIcon, WeaponIcon, WonderousItemIcon } from "../../common/icons/SvgList";
+import { ArmorIcon, DeleteIcon, EditIcon, PotionIcon, RingIcon, RodIcon, ScrollIcon, StaffIcon, WandIcon, WeaponIcon, WonderousItemIcon } from "../../common/icons/SvgList";
 import { enumStringConversion } from "../../common/util/enumStringConversion";
 import { useDeleteMagicItemMutation } from "../../pages/Items/items.generated";
 import Accordian from "../accordian";
@@ -32,7 +33,7 @@ function GetIcon({ category, id }: IconProps) {
 
 export default function MagicItemCard({ item }: MagicItemCardProps) {
     const deleteMagicItem = useDeleteMagicItemMutation()
-
+    const navigate = useNavigate()
     return (
         <Accordian heading={
             <div className="flex justify-between gap-2 items-center">
@@ -42,14 +43,24 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
                     <GetIcon category={item.category} id={item.id} />
                 </div>
 
-                <button id="deleteButton" className="h-92" onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    deleteMagicItem.mutate({ id: item.id })
-                }}>
-                    <DeleteIcon />
-                </button>
+                <div className="flex gap-5">
+                    <button id={`editButton${item.id}`} className="h-92" onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        navigate({ to: `${item.id}` })
+                    }}>
+                        <EditIcon />
+                    </button>
+                    <button id="deleteButton" className="h-92" onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        deleteMagicItem.mutate({ id: item.id })
+                    }}>
+                        <DeleteIcon />
+                    </button>
+                </div>
                 <Tooltip anchorSelect="#deleteButton" content="Delete Magic Item" place="bottom" noArrow />
+                <Tooltip anchorSelect={`#editButton${item.id}`} content={`Edit ${item.name}`} place="bottom" noArrow />
                 <Tooltip anchorSelect={`#categoryIcon${item.id}`} content={enumStringConversion(item.category)} place="bottom" noArrow />
             </div>}>
             <p>Description: {item.description}</p>

@@ -4,6 +4,7 @@ namespace CharacterManagerAPI.Graphql.InputTypes
 {
     public class MagicItemInput
     {
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public MagicItemRarity Rarity { get; set; } = MagicItemRarity.Common;

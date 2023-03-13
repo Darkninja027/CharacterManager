@@ -19,5 +19,18 @@ namespace CharacterManagerAPI.Schema
                 return Items;
             }
         }
+
+        public MagicItem GetMagicItem(int id)
+        {
+            using (CMContext db = _context.CreateDbContext())
+            {
+                MagicItem magicItem = db.MagicItems.FirstOrDefault(x => x.Id == id);
+                if (magicItem == null)
+                {
+                    throw new GraphQLException(new Error("The magic item does not exist"));
+                }
+                return magicItem;
+            }
+        }
     }
 }

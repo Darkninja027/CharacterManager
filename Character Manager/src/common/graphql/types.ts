@@ -39,6 +39,7 @@ export enum MagicItemCategory {
 export type MagicItemInput = {
   category: MagicItemCategory;
   description: Scalars['String'];
+  id?: InputMaybe<Scalars['Int']>;
   name: Scalars['String'];
   property1?: InputMaybe<Scalars['String']>;
   property2?: InputMaybe<Scalars['String']>;
@@ -74,11 +75,16 @@ export type MutationsDeleteMagicItemArgs = {
 
 
 export type MutationsUpdateMagicItemArgs = {
-  id: Scalars['Int'];
   item: MagicItemInput;
 };
 
 export type Query = {
   __typename?: 'Query';
   items: Array<MagicItem>;
+  magicItem: MagicItem;
+};
+
+
+export type QueryMagicItemArgs = {
+  id: Scalars['Int'];
 };

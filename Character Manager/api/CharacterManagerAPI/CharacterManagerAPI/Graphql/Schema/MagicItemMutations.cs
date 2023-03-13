@@ -1,6 +1,8 @@
 ﻿using CharacterManagerAPI.Graphql.InputTypes;
 using CharacterManagerAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
+using System.Linq.Expressions;
 
 namespace CharacterManagerAPI.Graphql.Schema
 {
@@ -48,18 +50,25 @@ namespace CharacterManagerAPI.Graphql.Schema
             }
         }
 
-        public MagicItem UpdateMagicItem(int id, MagicItemInput item)
+       
+
+        public MagicItem UpdateMagicItem(MagicItemInput item)
         {
             using (CMContext db = _context.CreateDbContext())
             {
-                MagicItem test = db.MagicItems.FirstOrDefault(x => x.Id == id);
+                MagicItem test = db.MagicItems.FirstOrDefault(x => x.Id == item.Id);
                 if (test == null)
                 {
-                    throw new Exception("This item does not exist");
+                    throw new GraphQLException(new Error("This item does not exist"));
                 }
 
                 test.Name = item.Name;
                 test.Description = item.Description;
+                test.Rarity = item.Rarity;
+                test.Category = item.Category;
+                test.Property1 = item.Property1;
+                test.Property2 = item.Property2;
+                test.Property3 = item.Property3;
 
                 db.MagicItems.Update(test);
                 db.SaveChanges();

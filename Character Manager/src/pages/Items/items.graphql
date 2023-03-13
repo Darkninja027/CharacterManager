@@ -11,8 +11,27 @@ query GetItems{
     }
 }
 
+query GetMagicItems($id: Int!){
+    magicItem(id: $id){
+        id
+        name
+        description
+        category
+        rarity
+        property1
+        property2
+        property3
+    }
+}
+
 mutation createMagicItem($magicItem: MagicItemInput!){
     createMagicItem(magicItem: $magicItem){
+        id
+    }
+}
+
+mutation editMagicItem($magicItem: MagicItemInput!){
+    updateMagicItem(item: $magicItem){
         id
     }
 }
