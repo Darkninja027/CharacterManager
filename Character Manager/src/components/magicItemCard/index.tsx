@@ -5,7 +5,7 @@ import { enumStringConversion } from "../../common/util/enumStringConversion";
 import { useDeleteMagicItemMutation } from "../../pages/Items/items.generated";
 import Accordian from "../accordian";
 
-import 'react-tooltip/dist/react-tooltip.css'
+
 import RarityBadge from "../Badges/RarityBadge";
 interface MagicItemCardProps {
     item: MagicItem

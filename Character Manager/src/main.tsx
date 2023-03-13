@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client'
 // import { QueryClient, QueryClientProvider } from 'react-query'
 import App from './App'
 import './index.css'
+import 'react-tooltip/dist/react-tooltip.css'
 
 function Main() {
   const queryClient = useMemo(() => {
@@ -11,7 +12,6 @@ function Main() {
       defaultOptions: {
         mutations: {
           onSettled: () => {
-            //invalidate all caches when a mutation is run - could invalidate specific caches, but it's hard to know which ones have changed          
             queryClient.invalidateQueries({
               predicate: query => query.queryKey[0] !== 'user'
             });
