@@ -11,8 +11,8 @@ interface MagicItemCardProps {
     item: MagicItem
 }
 
-type props = { category: MagicItemCategory, id: number }
-function GetIcon({ category, id }: props) {
+type IconProps = { category: MagicItemCategory, id: number }
+function GetIcon({ category, id }: IconProps) {
     const styles = "p-1.5 w-8 h-8 bg-[#d9bda5] rounded-full"
     return (
         <div id={`categoryIcon${id}`} className={styles}>
