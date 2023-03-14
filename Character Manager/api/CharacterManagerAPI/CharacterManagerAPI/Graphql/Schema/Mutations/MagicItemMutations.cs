@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using System.Linq.Expressions;
 
-namespace CharacterManagerAPI.Graphql.Schema
+namespace CharacterManagerAPI.Graphql.Schema.Mutations
 {
     [ExtendObjectType("Mutations")]
     public class MagicItemMutations
@@ -43,37 +43,37 @@ namespace CharacterManagerAPI.Graphql.Schema
                     db.SaveChanges();
                     return newItem;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw new Exception(ex.Message);
                 }
             }
         }
 
-       
 
-        public MagicItem UpdateMagicItem(MagicItemInput item)
+
+        public MagicItem UpdateMagicItem(MagicItemInput magicItem)
         {
             using (CMContext db = _context.CreateDbContext())
             {
-                MagicItem test = db.MagicItems.FirstOrDefault(x => x.Id == item.Id);
+                MagicItem test = db.MagicItems.FirstOrDefault(x => x.Id == magicItem.Id);
                 if (test == null)
                 {
                     throw new GraphQLException(new Error("This item does not exist"));
                 }
 
-                if(item.Name != test.Name && db.MagicItems.FirstOrDefault(i => i.Name == item.Name) != null)
+                if (magicItem.Name != test.Name && db.MagicItems.FirstOrDefault(i => i.Name == magicItem.Name) != null)
                 {
                     throw new GraphQLException(new Error("An item with this name already exists"));
                 }
 
-                test.Name = item.Name;
-                test.Description = item.Description;
-                test.Rarity = item.Rarity;
-                test.Category = item.Category;
-                test.Property1 = item.Property1;
-                test.Property2 = item.Property2;
-                test.Property3 = item.Property3;
+                test.Name = magicItem.Name;
+                test.Description = magicItem.Description;
+                test.Rarity = magicItem.Rarity;
+                test.Category = magicItem.Category;
+                test.Property1 = magicItem.Property1;
+                test.Property2 = magicItem.Property2;
+                test.Property3 = magicItem.Property3;
 
                 db.MagicItems.Update(test);
                 db.SaveChanges();
@@ -83,7 +83,7 @@ namespace CharacterManagerAPI.Graphql.Schema
 
         public bool DeleteMagicItem(int Id)
         {
-            using(CMContext db = _context.CreateDbContext())
+            using (CMContext db = _context.CreateDbContext())
             {
                 MagicItem item = db.MagicItems.FirstOrDefault(x => x.Id == Id);
                 if (item == null)
@@ -98,11 +98,11 @@ namespace CharacterManagerAPI.Graphql.Schema
 
         public bool DeleteAllItems()
         {
-            using(CMContext db = _context.CreateDbContext())
+            using (CMContext db = _context.CreateDbContext())
             {
                 db.RemoveRange(db.MagicItems);
                 db.SaveChanges();
-                db.Database.ExecuteSqlRaw(("DBCC CHECKIDENT (MagicItems, RESEED, 0)"));
+                db.Database.ExecuteSqlRaw("DBCC CHECKIDENT (MagicItems, RESEED, 0)");
                 return db.MagicItems.Count() == 0;
             }
         }

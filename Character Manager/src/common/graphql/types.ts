@@ -75,13 +75,13 @@ export type MutationsDeleteMagicItemArgs = {
 
 
 export type MutationsUpdateMagicItemArgs = {
-  item: MagicItemInput;
+  magicItem: MagicItemInput;
 };
 
 export type Query = {
   __typename?: 'Query';
-  items: Array<MagicItem>;
   magicItem: MagicItem;
+  magicItems: Array<MagicItem>;
 };
 
 

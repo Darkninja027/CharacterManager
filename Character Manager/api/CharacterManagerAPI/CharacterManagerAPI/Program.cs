@@ -1,6 +1,6 @@
 using CharacterManagerAPI;
-using CharacterManagerAPI.Graphql.Schema;
-using CharacterManagerAPI.Schema;
+using CharacterManagerAPI.Graphql.Schema.Mutations;
+using CharacterManagerAPI.Graphql.Schema.Queries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -26,7 +26,8 @@ builder.Services.AddCors(policy => policy.AddPolicy("CorsPolicy", build =>
     build.WithOrigins("http://localhost:5173", "http://127.0.0.1:5173").AllowAnyMethod().AllowAnyHeader();
 }));
 builder.Services.AddGraphQLServer()
-    .AddQueryType<Query>()
+    .AddQueryType(q => q.Name("Query"))
+        .AddTypeExtension<MagicItemQueries>()
     .AddMutationType(m => m.Name("Mutations"))
         .AddTypeExtension<MagicItemMutations>();
 

@@ -7,7 +7,7 @@ import { useGetItemsQuery } from "./items.generated";
 
 export default function ItemsPage() {
 
-    const { isLoading, data: { items } = {} } = useGetItemsQuery();
+    const { isLoading, data: { magicItems } = {} } = useGetItemsQuery();
     const [showForm, setShowForm] = useState<boolean>(false)
 
     if (isLoading) {
@@ -30,13 +30,13 @@ export default function ItemsPage() {
             )}
 
             <div className="grid grid-cols-4 gap-3 items-start flex-wrap mt-10">
-                {items && items?.length < 1 && (
+                {magicItems && magicItems?.length < 1 && (
                     <div className="bg-red-400 w-full col-span-12 rounded-full px-5 py-3 text-red-900">
                         'No magic items found'
                     </div>
                 )}
-                {items?.map((item) => (
-                    <MagicItemCard key={item.id} item={item} />
+                {magicItems?.map((magicItem) => (
+                    <MagicItemCard key={magicItem.id} item={magicItem} />
                 ))}
             </div>
         </>

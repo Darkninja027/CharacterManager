@@ -1,17 +1,19 @@
 ﻿using CharacterManagerAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CharacterManagerAPI.Schema
+namespace CharacterManagerAPI.Graphql.Schema.Queries
 {
-    
-    public class Query
+    [ExtendObjectType("Query")]
+    public class MagicItemQueries
     {
-        private protected IDbContextFactory<CMContext> _context;
-        public Query(IDbContextFactory<CMContext> context)
+        private readonly IDbContextFactory<CMContext> _context;
+
+        public MagicItemQueries(IDbContextFactory<CMContext> context)
         {
             _context = context;
         }
-        public IEnumerable<MagicItem> GetItems()
+
+        public IEnumerable<MagicItem> GetMagicItems()
         {
             using (CMContext db = _context.CreateDbContext())
             {

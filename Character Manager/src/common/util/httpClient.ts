@@ -17,7 +17,6 @@ export function httpClient<TData, TVariables>(query: string, variables?: TVariab
                 operationName: opts?.queryKey![0]
             }),
         });
-
         if (!res.ok) {
             throw res;
         }

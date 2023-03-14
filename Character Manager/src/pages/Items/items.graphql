@@ -1,5 +1,5 @@
 query GetItems{
-    items{
+    magicItems{
         id
         name
         description

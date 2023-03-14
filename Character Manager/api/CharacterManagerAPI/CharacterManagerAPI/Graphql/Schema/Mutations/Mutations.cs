@@ -3,7 +3,7 @@ using CharacterManagerAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
-namespace CharacterManagerAPI.Graphql.Schema
+namespace CharacterManagerAPI.Graphql.Schema.Mutations
 {
     public class Mutations
     {
@@ -14,7 +14,7 @@ namespace CharacterManagerAPI.Graphql.Schema
         }
 
 
-        
+
 
     }
 }

@@ -14,12 +14,20 @@ function Main() {
             queryClient.invalidateQueries({
               predicate: query => query.queryKey[0] !== 'user'
             });
+
+          },
+          onError: (err) => {
+            console.log("query Error", err)
           },
         },
         queries: {
           staleTime: 1000 * 60,
-          refetchInterval: 1000 * 60
-        }
+          refetchInterval: 1000 * 60,
+          onError: (err) => {
+            console.log("query Error", err)
+          },
+        },
+
       }
     })
   }, [])
