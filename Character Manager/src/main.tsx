@@ -28,7 +28,7 @@ function Main() {
 					staleTime: 1000 * 60,
 					refetchInterval: 1000 * 60,
 					onError: (err: any) => {
-						console.log(err[0].message)
+						alert.show('error', `Query Error: ${err[0].message}`, Infinity)
 					},
 				},
 

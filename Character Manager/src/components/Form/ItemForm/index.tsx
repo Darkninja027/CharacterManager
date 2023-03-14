@@ -2,6 +2,7 @@ import { useNavigate } from "@tanstack/react-location";
 import { MagicItem, MagicItemCategory, MagicItemInput, MagicItemRarity } from "@types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Form from "..";
+import { useAlert } from "../../../common/util/Alerts";
 import { useCreateMagicItemMutation, useEditMagicItemMutation } from "../../../pages/Items/items.generated";
 import Button from "../../formInputs/Button";
 import Input from "../../formInputs/Input";
@@ -15,28 +16,26 @@ type ItemFormProps = {
 
 export default function ItemForm({ magicItem }: ItemFormProps) {
     const navigate = useNavigate()
+    const alert = useAlert();
     const itemMutation = useCreateMagicItemMutation({
         onSuccess: () => {
             methods.reset()
+            alert.show('success', "Magic item created")
         },
-        // onError: (error, variables, context) => {
-        //     console.log(error, variables, context)
-        // },
     });
     const updateMagicItem = useEditMagicItemMutation({
         onSuccess: () => {
             navigate({ to: ".." })
+            alert.show("success", "Magic item updated")
         }
     })
     const methods = useForm<MagicItemInput>({ defaultValues: magicItem })
     const onSubmit: SubmitHandler<MagicItemInput> = (data) => {
 
         if ("id" in data) {
-            console.log("edit")
             updateMagicItem.mutate({ magicItem: data })
         }
         else {
-            console.log("New")
             itemMutation.mutate({ magicItem: data });
         }
     }

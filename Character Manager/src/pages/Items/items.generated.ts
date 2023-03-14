@@ -106,7 +106,7 @@ export const useCreateMagicItemMutation = <
     );
 export const EditMagicItemDocument = `
     mutation editMagicItem($magicItem: MagicItemInput!) {
-  updateMagicItem(item: $magicItem) {
+  updateMagicItem(magicItem: $magicItem) {
     id
   }
 }

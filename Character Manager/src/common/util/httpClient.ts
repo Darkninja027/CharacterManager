@@ -18,14 +18,12 @@ export function httpClient<TData, TVariables>(query: string, variables?: TVariab
             }),
         });
         // if (!res.ok) {
-        //     console.log("res errors", res.json())
         //     throw res;
         // }
 
         const json = await res.json();
 
         if (json.errors) {
-            console.log("json errors")
             throw json.errors;
         }
 
