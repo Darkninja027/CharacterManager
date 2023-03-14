@@ -19,12 +19,11 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
         {
             using (CMContext db = _context.CreateDbContext())
             {
-                try
-                {
+                
                     MagicItem existingMagicItem = db.MagicItems.FirstOrDefault(x => x.Name == magicItem.Name);
                     if (existingMagicItem != null)
                     {
-                        throw new Exception($"An item with the name {magicItem.Name} already exists");
+                    throw new GraphQLException(new Error($"An item with the name {magicItem.Name} already exists"));
                     }
 
 
@@ -42,11 +41,7 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
                     db.MagicItems.Add(newItem);
                     db.SaveChanges();
                     return newItem;
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
+                
             }
         }
 

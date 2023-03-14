@@ -6,7 +6,12 @@ import './index.css'
 import 'react-tooltip/dist/react-tooltip.css'
 
 function Main() {
+
+
+
+
   const queryClient = useMemo(() => {
+
     return new QueryClient({
       defaultOptions: {
         mutations: {
@@ -16,15 +21,15 @@ function Main() {
             });
 
           },
-          onError: (err) => {
-            console.log("query Error", err)
-          },
+          onError: (err: any) => {
+            console.log(err[0].message)
+          }
         },
         queries: {
           staleTime: 1000 * 60,
           refetchInterval: 1000 * 60,
-          onError: (err) => {
-            console.log("query Error", err)
+          onError: (err: any) => {
+            console.log(err[0].message)
           },
         },
 

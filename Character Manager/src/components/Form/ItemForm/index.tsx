@@ -18,7 +18,10 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
     const itemMutation = useCreateMagicItemMutation({
         onSuccess: () => {
             methods.reset()
-        }
+        },
+        // onError: (error, variables, context) => {
+        //     console.log(error, variables, context)
+        // },
     });
     const updateMagicItem = useEditMagicItemMutation({
         onSuccess: () => {
