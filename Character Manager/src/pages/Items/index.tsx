@@ -1,17 +1,9 @@
-import { MagicItemCategory, MagicItemInput, MagicItemRarity } from "@types";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Tooltip } from "react-tooltip";
-import Form from "../../components/Form";
 import ItemForm from "../../components/Form/ItemForm";
-import Button from "../../components/formInputs/Button";
-import Input from "../../components/formInputs/Input";
-import Radio from "../../components/formInputs/Radio";
-import TextArea from "../../components/formInputs/TextArea";
 import MagicItemCard from "../../components/magicItemCard";
 
 
-import { useCreateMagicItemMutation, useGetItemsQuery } from "./items.generated";
+import { useGetItemsQuery } from "./items.generated";
 
 export default function ItemsPage() {
 
@@ -36,7 +28,13 @@ export default function ItemsPage() {
             {showForm && (
                 <ItemForm />
             )}
+
             <div className="grid grid-cols-4 gap-3 items-start flex-wrap mt-10">
+                {items && items?.length < 1 && (
+                    <div className="bg-red-400 w-full col-span-12 rounded-full px-5 py-3 text-red-900">
+                        'No magic items found'
+                    </div>
+                )}
                 {items?.map((item) => (
                     <MagicItemCard key={item.id} item={item} />
                 ))}

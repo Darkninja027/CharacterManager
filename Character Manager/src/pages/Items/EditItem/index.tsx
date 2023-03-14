@@ -6,7 +6,6 @@ export default function EditItem() {
     const params = useMatch()
     const nav = useNavigate()
     const { isLoading, data: { magicItem } = {} } = useGetMagicItemsQuery({ id: parseInt(params.params.id) })
-    console.log(magicItem, "magic item data")
     if (isLoading) {
         return (
             <p>Loading...</p>

@@ -62,6 +62,11 @@ namespace CharacterManagerAPI.Graphql.Schema
                     throw new GraphQLException(new Error("This item does not exist"));
                 }
 
+                if(item.Name != test.Name && db.MagicItems.FirstOrDefault(i => i.Name == item.Name) != null)
+                {
+                    throw new GraphQLException(new Error("An item with this name already exists"));
+                }
+
                 test.Name = item.Name;
                 test.Description = item.Description;
                 test.Rarity = item.Rarity;
