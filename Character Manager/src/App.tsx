@@ -1,5 +1,6 @@
 import { Outlet, ReactLocation, Router, Route as QRoute, Navigate } from '@tanstack/react-location'
 import { elementsToRoutes, Route } from 'react-location-elements-to-routes'
+import Alert from './common/util/Alerts'
 import { CharactersPage } from './pages/Characters'
 import ClassesPage from './pages/Classes'
 import HomePage from './pages/Home'
@@ -38,6 +39,7 @@ export default function App() {
 			<div className='flex bg-slate-100'>
 				<Navigation />
 				<main className="grow m-5">
+					<Alert />
 					<Outlet />
 				</main>
 			</div>

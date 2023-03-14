@@ -8,49 +8,47 @@ import { AlertProvider, useAlert } from './common/util/Alerts'
 
 function Main() {
 
+	const alert = useAlert();
+	const queryClient = useMemo(() => {
 
+		return new QueryClient({
+			defaultOptions: {
+				mutations: {
+					onSettled: () => {
+						queryClient.invalidateQueries({
+							predicate: query => query.queryKey[0] !== 'user'
+						});
 
-  const alert = useAlert();
-  const queryClient = useMemo(() => {
+					},
+					onError: (err: any) => {
+						alert.show('error', `Mutation Error: ${err[0].message}`, Infinity)
+					}
+				},
+				queries: {
+					staleTime: 1000 * 60,
+					refetchInterval: 1000 * 60,
+					onError: (err: any) => {
+						console.log(err[0].message)
+					},
+				},
 
-    return new QueryClient({
-      defaultOptions: {
-        mutations: {
-          onSettled: () => {
-            queryClient.invalidateQueries({
-              predicate: query => query.queryKey[0] !== 'user'
-            });
+			}
+		})
+	}, [])
 
-          },
-          onError: (err: any) => {
-            alert.show('error', "sinep", Infinity)
-          }
-        },
-        queries: {
-          staleTime: 1000 * 60,
-          refetchInterval: 1000 * 60,
-          onError: (err: any) => {
-            console.log(err[0].message)
-          },
-        },
-
-      }
-    })
-  }, [])
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  )
+	return (
+		<QueryClientProvider client={queryClient}>
+			<App />
+		</QueryClientProvider>
+	)
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
-  <React.StrictMode>
-    <AlertProvider>
-      <Main />
-    </AlertProvider>
-  </React.StrictMode>,
+	<React.StrictMode>
+		<AlertProvider>
+			<Main />
+		</AlertProvider>
+	</React.StrictMode>,
 )
