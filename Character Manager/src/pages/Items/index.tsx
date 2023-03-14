@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ItemForm from "../../components/Form/ItemForm";
-import MagicItemCard from "../../components/magicItemCard";
+import MagicItemCard from "../../components/MagicItemCard";
 
 
 import { useGetItemsQuery } from "./items.generated";

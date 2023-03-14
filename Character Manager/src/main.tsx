@@ -4,12 +4,13 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import 'react-tooltip/dist/react-tooltip.css'
+import { AlertProvider, useAlert } from './common/util/Alerts'
 
 function Main() {
 
 
 
-
+  const alert = useAlert();
   const queryClient = useMemo(() => {
 
     return new QueryClient({
@@ -22,7 +23,7 @@ function Main() {
 
           },
           onError: (err: any) => {
-            console.log(err[0].message)
+            alert.show('error', "sinep", Infinity)
           }
         },
         queries: {
@@ -48,6 +49,8 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   <React.StrictMode>
-    <Main />
+    <AlertProvider>
+      <Main />
+    </AlertProvider>
   </React.StrictMode>,
 )
