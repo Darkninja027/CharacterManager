@@ -31,7 +31,7 @@ mutation createMagicItem($magicItem: MagicItemInput!){
 }
 
 mutation editMagicItem($magicItem: MagicItemInput!){
-    updateMagicItem(item: $magicItem){
+    updateMagicItem(magicItem: $magicItem){
         id
     }
 }
