@@ -1,0 +1,6 @@
+query GetAllLanguages{
+    allLanguages{
+        id,
+        name
+    }
+}

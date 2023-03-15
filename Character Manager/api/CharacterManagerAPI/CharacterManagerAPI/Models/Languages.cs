@@ -20,7 +20,7 @@ namespace CharacterManagerAPI.Models
         Infernal = 12,
         Primordial = 13,
         Sylvan = 14,
-        Undercommmon = 15,
+        Undercommon = 15,
         Abanasinia = 16,
         Aquan = 17,
         Auran = 18,

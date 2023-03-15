@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from "react"
 import { FieldValues, Path, UseFormGetValues, UseFormReturn } from "react-hook-form"
-import { enumStringConversion } from "../../../common/util/enumStringConversion"
+import { enumStringConversion } from "../../../common/util/stringFormatting"
 
 type RadioProps<T extends FieldValues> = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
     name: Path<T>,

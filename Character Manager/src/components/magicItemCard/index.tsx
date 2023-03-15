@@ -2,7 +2,7 @@ import { useNavigate } from "@tanstack/react-location";
 import { MagicItem, MagicItemCategory } from "@types";
 import { Tooltip } from "react-tooltip";
 import { ArmorIcon, DeleteIcon, EditIcon, PotionIcon, RingIcon, RodIcon, ScrollIcon, StaffIcon, WandIcon, WeaponIcon, WonderousItemIcon } from "../../common/icons/SvgList";
-import { enumStringConversion } from "../../common/util/enumStringConversion";
+import { enumStringConversion } from "../../common/util/stringFormatting";
 import { useDeleteMagicItemMutation } from "../../pages/Items/items.generated";
 import Accordian from "../Accordian";
 

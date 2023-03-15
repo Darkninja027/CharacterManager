@@ -47,8 +47,9 @@ export function AlertProvider({ children }: { children: ReactNode }) {
 
 export function Alert({ }) {
     const alert = useAlert();
-    const classes = classNames("w-full mx-4 px-4 py-3 leading-normal rounded-lg shadow-xl flex gap-6 justify-start z-100 items-center", {
-        "bg-red-400 w-full col-span-12 rounded-full px-5 py-3 text-red-900": alert.type === 'error'
+    const classes = classNames("w-full mx-4 rounded-full px-5 py-3 leading-normal shadow-xl flex gap-6 justify-start z-100 items-center", {
+        "bg-red-400 text-red-900": alert.type === 'error',
+        "bg-green-400 text-green-900 border-green-900 border-2": alert.type === "success",
     })
     return (
         <div className="alert">

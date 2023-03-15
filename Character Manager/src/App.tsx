@@ -6,6 +6,7 @@ import ClassesPage from './pages/Classes'
 import HomePage from './pages/Home'
 import ItemsPage from './pages/Items'
 import EditItem from './pages/Items/EditItem'
+import LanguagesPage from './pages/Languages'
 import SyncPage from './pages/Sync'
 import Navigation from './util/Navigation'
 
@@ -28,6 +29,9 @@ export default function App() {
 		<Route path='items'>
 			<Route path='/' element={<ItemsPage />} />
 			<Route path=':id' element={<EditItem />} />
+		</Route>,
+		<Route path="languages">
+			<Route path="/" element={<LanguagesPage />} />
 		</Route>,
 		<Route path='*' element={<Navigate to="/home" />} />
 	]
