@@ -11,6 +11,7 @@ import { useAddLanguageMutation, useGetAllLanguagesQuery } from "./languages.gen
 
 export default function LanguagesPage() {
     const alert = useAlert()
+    // const [showElemaent, setShowElement] = useState<boolean>(false)
     const { isLoading, data: { allLanguages } = {} } = useGetAllLanguagesQuery()
     const addLanguage = useAddLanguageMutation({
         onSuccess: () => {
@@ -40,8 +41,9 @@ export default function LanguagesPage() {
             )}
             <div className="grid grid-cols-12 grid-flow-row justify-items-center gap-2">
                 {allLanguages && allLanguages.map(lang => {
+
                     return (
-                        <p className="w-full flex col-span-2 bg-slate-200 font-bold justify-center items-centerpx-2 py-1 border rounded-full">{`${pascalCamelSplit(lang.name)}`}</p>
+                        <LanguageCard language={lang} />
                     )
                 })}
 
@@ -50,5 +52,20 @@ export default function LanguagesPage() {
         </>
 
 
+    )
+}
+
+function LanguageCard(props: { language: Languages }) {
+    const [showElemaent, setShowElement] = useState<boolean>(false)
+
+    return (
+        <p
+            onMouseLeave={() => setShowElement(false)}
+            onMouseOver={() => { setShowElement(true) }}
+            key={`Language_${props.language.id}`}
+            className="w-full flex col-span-2 bg-slate-200 font-bold justify-center items-centerpx-2 py-1 border rounded-full"
+        >
+            {showElemaent ? "num" : `${pascalCamelSplit(props.language.name)}`}
+        </p>
     )
 }

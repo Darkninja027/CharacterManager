@@ -43,7 +43,7 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
                     <GetIcon category={item.category} id={item.id} />
                 </div>
 
-                <div className="flex gap-5">
+                <div className=" flex gap-5">
                     <button id={`editButton${item.id}`} className="h-92" onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
