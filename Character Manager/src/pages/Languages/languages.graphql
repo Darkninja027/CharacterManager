@@ -6,7 +6,5 @@ query GetAllLanguages{
 }
 
 mutation addLanguage($language: LanguageInput!){
-     addLanguage(language: $language){
-        id
-     }
+     addLanguage(language: $language)
 }
