@@ -71,6 +71,11 @@ export enum DragonEnum {
   White = 'WHITE'
 }
 
+export type LanguageInput = {
+  id?: InputMaybe<Scalars['Int']>;
+  name: Scalars['String'];
+};
+
 export type Languages = {
   __typename?: 'Languages';
   characters?: Maybe<Array<Character>>;
@@ -170,10 +175,16 @@ export enum MagicItemRarity {
 
 export type Mutations = {
   __typename?: 'Mutations';
+  addLanguage: Languages;
   createMagicItem: MagicItem;
   deleteAllItems: Scalars['Boolean'];
   deleteMagicItem: Scalars['Boolean'];
   updateMagicItem: MagicItem;
+};
+
+
+export type MutationsAddLanguageArgs = {
+  language: LanguageInput;
 };
 
 

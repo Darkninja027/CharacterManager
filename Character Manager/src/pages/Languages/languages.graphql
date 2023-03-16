@@ -4,3 +4,9 @@ query GetAllLanguages{
         name
     }
 }
+
+mutation addLanguage($language: LanguageInput!){
+     addLanguage(language: $language){
+        id
+     }
+}

@@ -30,7 +30,9 @@ builder.Services.AddGraphQLServer()
         .AddTypeExtension<MagicItemQueries>()
         .AddTypeExtension<LanguageQueries>()
     .AddMutationType(m => m.Name("Mutations"))
-        .AddTypeExtension<MagicItemMutations>();
+        .AddTypeExtension<MagicItemMutations>()
+        .AddTypeExtension<LanguageMutations>();
+        
 
 
 
