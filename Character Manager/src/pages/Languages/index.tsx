@@ -1,19 +1,23 @@
-import { LanguageInput, Languages } from "@types"
+import { LanguageInput, Languages, LanguagesEnum } from "@types"
+import { isLeafType } from "graphql"
 import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
+import { DeleteIcon } from "../../common/icons/SvgList"
 import { useAlert } from "../../common/util/Alerts"
 import { pascalCamelSplit } from "../../common/util/stringFormatting"
 import Form from "../../components/Form"
 import Button from "../../components/formInputs/Button"
 import Input from "../../components/formInputs/Input"
 import PageHeader from "../../components/PageHeader"
-import { useAddLanguageMutation, useGetAllLanguagesQuery } from "./languages.generated"
+import { useCreateLanguageMutation, useDeleteLanguageMutation, useGetAllLanguagesQuery } from "./languages.generated"
+
+
 
 export default function LanguagesPage() {
     const alert = useAlert()
-    // const [showElemaent, setShowElement] = useState<boolean>(false)
+
     const { isLoading, data: { allLanguages } = {} } = useGetAllLanguagesQuery()
-    const addLanguage = useAddLanguageMutation({
+    const addLanguage = useCreateLanguageMutation({
         onSuccess: () => {
             alert.show("success", "Language created")
         }
@@ -25,6 +29,12 @@ export default function LanguagesPage() {
         addLanguage.mutate({ language })
     }
     allLanguages?.sort((a: Languages, b: Languages) => a.name < b.name ? -1 : 1)
+
+    if (isLoading) {
+        return (
+            <p>Loading...</p>
+        )
+    }
     return (
         <>
             <PageHeader title="Languages" label={form ? "Cancel" : "Add Language"} onClick={(e) => {
@@ -57,6 +67,19 @@ export default function LanguagesPage() {
 
 function LanguageCard(props: { language: Languages }) {
     const [showElemaent, setShowElement] = useState<boolean>(false)
+    const deleteLanguageMutation = useDeleteLanguageMutation({
+        onSuccess: () => {
+            alert.show('success', "Language deleted")
+        }
+    })
+    const alert = useAlert();
+    function inEnum(language: string) {
+        language = pascalCamelSplit(language).replace(" ", "_").toUpperCase()
+        return Object.values(LanguagesEnum).includes(language as LanguagesEnum)
+
+    }
+
+    var isInEnum = inEnum(props.language.name) && showElemaent
 
     return (
         <p
@@ -65,7 +88,15 @@ function LanguageCard(props: { language: Languages }) {
             key={`Language_${props.language.id}`}
             className="w-full flex col-span-2 bg-slate-200 font-bold justify-center items-centerpx-2 py-1 border rounded-full"
         >
-            {showElemaent ? "num" : `${pascalCamelSplit(props.language.name)}`}
+            {showElemaent ? <span className="hover:cursor-pointer" onClick={(e) => {
+                e.preventDefault();
+                if (isInEnum) {
+                    alert.show('error', `Cannot delete default language ${props.language.name}`)
+                    return;
+                }
+                deleteLanguageMutation.mutate({ id: props.language.id })
+            }}><DeleteIcon /></span> : `${pascalCamelSplit(props.language.name)}`}
         </p>
     )
 }
+

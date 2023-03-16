@@ -5,6 +5,14 @@ query GetAllLanguages{
     }
 }
 
-mutation addLanguage($language: LanguageInput!){
-     addLanguage(language: $language)
+# mutation createLanguage($language: LanguageInput!){
+#     addLanguage
+# }
+
+mutation createLanguage($language: LanguageInput!){
+    createLanguage(language: $language) { id }
+}
+
+mutation deleteLanguage($id: Int!){
+    deleteLanguage(id: $id)
 }

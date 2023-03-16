@@ -15,11 +15,11 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
             _context = context;
         }
 
-        public Languages AddLanguage(LanguageInput language)
+        public Languages CreateLanguage(LanguageInput language)
         {
             using(CMContext db = _context.CreateDbContext())
             {
-                var exists = db.Languages.FirstOrDefault(l => l.Name == language.Name);
+                Languages exists = db.Languages.FirstOrDefault(l => l.Name == language.Name);
                 if(exists != null)
                 {
                     throw new GraphQLException(new Error($"A language with the name {language.Name} already exists"));
@@ -33,6 +33,22 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
                 db.Add(newLanguage);
                 db.SaveChanges();
                 return newLanguage;
+            }
+        }
+
+        public bool DeleteLanguage(int Id)
+        {
+            using (CMContext db = _context.CreateDbContext())
+            {
+                Languages language = db.Languages.FirstOrDefault(l => l.Id == Id);
+                if(language == null)
+                {
+                    throw new GraphQLException(new Error("The language your attempting to delete doesnt exist"));
+                }
+                db.Remove(language);
+                db.SaveChanges();
+                return db.Languages.FirstOrDefault(x => x.Id == Id) != null;
+
             }
         }
     }

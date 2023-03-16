@@ -7,12 +7,19 @@ export type GetAllLanguagesQueryVariables = Types.Exact<{ [key: string]: never; 
 
 export type GetAllLanguagesQuery = { __typename?: 'Query', allLanguages: Array<{ __typename?: 'Languages', id: number, name: string }> };
 
-export type AddLanguageMutationVariables = Types.Exact<{
+export type CreateLanguageMutationVariables = Types.Exact<{
   language: Types.LanguageInput;
 }>;
 
 
-export type AddLanguageMutation = { __typename?: 'Mutations', addLanguage: { __typename?: 'Languages', id: number } };
+export type CreateLanguageMutation = { __typename?: 'Mutations', createLanguage: { __typename?: 'Languages', id: number } };
+
+export type DeleteLanguageMutationVariables = Types.Exact<{
+  id: Types.Scalars['Int'];
+}>;
+
+
+export type DeleteLanguageMutation = { __typename?: 'Mutations', deleteLanguage: boolean };
 
 
 export const GetAllLanguagesDocument = `
@@ -35,19 +42,33 @@ export const useGetAllLanguagesQuery = <
       httpClient<GetAllLanguagesQuery, GetAllLanguagesQueryVariables>(GetAllLanguagesDocument, variables),
       options
     );
-export const AddLanguageDocument = `
-    mutation addLanguage($language: LanguageInput!) {
-  addLanguage(language: $language) {
+export const CreateLanguageDocument = `
+    mutation createLanguage($language: LanguageInput!) {
+  createLanguage(language: $language) {
     id
   }
 }
     `;
-export const useAddLanguageMutation = <
+export const useCreateLanguageMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<AddLanguageMutation, TError, AddLanguageMutationVariables, TContext>) =>
-    useMutation<AddLanguageMutation, TError, AddLanguageMutationVariables, TContext>(
-      ['addLanguage'],
-      (variables?: AddLanguageMutationVariables) => httpClient<AddLanguageMutation, AddLanguageMutationVariables>(AddLanguageDocument, variables)(),
+    >(options?: UseMutationOptions<CreateLanguageMutation, TError, CreateLanguageMutationVariables, TContext>) =>
+    useMutation<CreateLanguageMutation, TError, CreateLanguageMutationVariables, TContext>(
+      ['createLanguage'],
+      (variables?: CreateLanguageMutationVariables) => httpClient<CreateLanguageMutation, CreateLanguageMutationVariables>(CreateLanguageDocument, variables)(),
+      options
+    );
+export const DeleteLanguageDocument = `
+    mutation deleteLanguage($id: Int!) {
+  deleteLanguage(id: $id)
+}
+    `;
+export const useDeleteLanguageMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<DeleteLanguageMutation, TError, DeleteLanguageMutationVariables, TContext>) =>
+    useMutation<DeleteLanguageMutation, TError, DeleteLanguageMutationVariables, TContext>(
+      ['deleteLanguage'],
+      (variables?: DeleteLanguageMutationVariables) => httpClient<DeleteLanguageMutation, DeleteLanguageMutationVariables>(DeleteLanguageDocument, variables)(),
       options
     );

@@ -1,5 +1,5 @@
 import { Outlet } from "@tanstack/react-location";
-import NavigationLink from "../../components/NavigationLink";
+import NavigationLink from "../../../components/NavigationLink";
 
 export default function Navigation() {
     return (

@@ -8,7 +8,7 @@ import ItemsPage from './pages/Items'
 import EditItem from './pages/Items/EditItem'
 import LanguagesPage from './pages/Languages'
 import SyncPage from './pages/Sync'
-import Navigation from './util/Navigation'
+import Navigation from './common/util/Navigation'
 
 
 

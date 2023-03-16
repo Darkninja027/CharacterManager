@@ -175,21 +175,27 @@ export enum MagicItemRarity {
 
 export type Mutations = {
   __typename?: 'Mutations';
-  addLanguage: Languages;
+  createLanguage: Languages;
   createMagicItem: MagicItem;
   deleteAllItems: Scalars['Boolean'];
+  deleteLanguage: Scalars['Boolean'];
   deleteMagicItem: Scalars['Boolean'];
   updateMagicItem: MagicItem;
 };
 
 
-export type MutationsAddLanguageArgs = {
+export type MutationsCreateLanguageArgs = {
   language: LanguageInput;
 };
 
 
 export type MutationsCreateMagicItemArgs = {
   magicItem: MagicItemInput;
+};
+
+
+export type MutationsDeleteLanguageArgs = {
+  id: Scalars['Int'];
 };
 
 
