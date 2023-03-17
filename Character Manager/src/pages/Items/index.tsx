@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ItemForm from "../../components/Form/ItemForm";
 import MagicItemCard from "../../components/MagicItemCard";
+import PageHeader from "../../components/PageHeader";
 
 
 import { useGetItemsQuery } from "./items.generated";
@@ -15,16 +16,11 @@ export default function ItemsPage() {
     }
 
     return (
-
-
         <>
-            <div className="flex justify-between items-center">
-                <header className="text-2xl">Magic Items</header>
-                <button onClick={(e) => {
-                    e.preventDefault()
-                    setShowForm(!showForm)
-                }}>{!showForm ? "Add Item" : "Hide"}</button>
-            </div>
+            <PageHeader title="Magic Items" label={!showForm ? "Add Magic Item" : "Cancel"} onClick={(e) => {
+                e.preventDefault()
+                setShowForm(!showForm)
+            }} />
             {showForm && (
                 <ItemForm />
             )}

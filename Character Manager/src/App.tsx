@@ -9,6 +9,7 @@ import EditItem from './pages/Items/EditItem'
 import LanguagesPage from './pages/Languages'
 import SyncPage from './pages/Sync'
 import Navigation from './common/util/Navigation'
+import AddCharacter from './pages/Characters/AddCharacter'
 
 
 
@@ -22,6 +23,7 @@ export default function App() {
 		</Route>,
 		<Route path='characters'>
 			<Route path='/' element={<CharactersPage />} />
+			<Route path="new" element={<AddCharacter />} />
 		</Route>,
 		<Route path='classes'>
 			<Route path='/' element={<ClassesPage />} />

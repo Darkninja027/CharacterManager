@@ -2,6 +2,7 @@ import { useNavigate } from "@tanstack/react-location";
 import { MagicItem, MagicItemCategory } from "@types";
 import { Tooltip } from "react-tooltip";
 import { ArmorIcon, DeleteIcon, EditIcon, PotionIcon, RingIcon, RodIcon, ScrollIcon, StaffIcon, WandIcon, WeaponIcon, WonderousItemIcon } from "../../common/icons/SvgList";
+import { useAlert } from "../../common/util/Alerts";
 import { enumStringConversion } from "../../common/util/stringFormatting";
 import { useDeleteMagicItemMutation } from "../../pages/Items/items.generated";
 import Accordian from "../Accordian";
@@ -32,7 +33,12 @@ function GetIcon({ category, id }: IconProps) {
 
 
 export default function MagicItemCard({ item }: MagicItemCardProps) {
-    const deleteMagicItem = useDeleteMagicItemMutation()
+    const alert = useAlert()
+    const deleteMagicItem = useDeleteMagicItemMutation({
+        onSuccess: () => {
+            alert.show('success', "Magic item Deleted")
+        }
+    })
     const navigate = useNavigate()
     return (
         <Accordian heading={
