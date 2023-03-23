@@ -1,5 +1,7 @@
+import PageHeader from "../../../components/PageHeader";
+
 export default function AddCharacter() {
     return (
-        <div>Penis</div>
+        <PageHeader title="Add Character" backButton />
     )
 }

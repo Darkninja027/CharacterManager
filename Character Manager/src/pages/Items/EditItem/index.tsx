@@ -1,5 +1,6 @@
 import { useMatch, useNavigate } from "@tanstack/react-location";
 import ItemForm from "../../../components/Form/ItemForm";
+import PageHeader from "../../../components/PageHeader";
 import { useGetMagicItemsQuery } from "../items.generated";
 
 export default function EditItem() {
@@ -13,11 +14,8 @@ export default function EditItem() {
     }
     return (
         <>
-            <button onClick={(e) => {
-                e.preventDefault()
-                nav({ to: ".." })
-            }}>go back</button>
-            <h1>Edit item</h1>
+
+            <PageHeader title={`Edit ${magicItem?.name}`} backButton />
             <ItemForm magicItem={magicItem} />
         </>
     )

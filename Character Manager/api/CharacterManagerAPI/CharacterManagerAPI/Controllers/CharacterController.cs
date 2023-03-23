@@ -16,17 +16,17 @@ namespace CharacterManagerAPI.Controllers
         {
             _context = context;
         }
-        [HttpGet]
-        public async Task<ActionResult<List<Character>>> GetCharacters()
-        {
-            var characters = await _context.Characters
-                .Include(x => x.Languages)
-                .Include(x => x.Race)
-                    .ThenInclude(x => x.DragonAncestry)
-                .ToListAsync();
-            return Ok(characters);
+        //[HttpGet]
+        //public async Task<ActionResult<List<Character>>> GetCharacters()
+        //{
+        //    var characters = await _context.Characters
+        //        .Include(x => x.Languages)
+        //        .Include(x => x.Race)
+        //            .ThenInclude(x => x.DragonAncestry)
+        //        .ToListAsync();
+        //    return Ok(characters);
 
-        }
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Character>> GetCharacter(int id)

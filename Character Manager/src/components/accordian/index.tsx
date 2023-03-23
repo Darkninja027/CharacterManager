@@ -1,4 +1,5 @@
 import { ReactNode, useState } from "react"
+import { CollapseIcon, ExpandIcon } from "../../common/icons/SvgList";
 interface AccordianProps {
     heading: ReactNode | string
     children: ReactNode
@@ -14,9 +15,11 @@ export default function Accordian({ heading, children }: AccordianProps) {
                 e.preventDefault();
                 setOpen(!open)
             }}>
-                <div className="flex justify-between hover:cursor-pointer">
+                <div className="flex justify-between hover:cursor-pointer items-center">
                     <h1 className="w-full ">{heading}</h1>
-                    <p className="mx-2">{!open ? "^" : "v"}</p>
+                    <span className="mx-2 w-6 h-6">
+                        {!open ? <ExpandIcon /> : <CollapseIcon />}
+                    </span>
                 </div>
             </summary>
             <div className="mx-2 my-3">
