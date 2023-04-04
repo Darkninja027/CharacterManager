@@ -3,6 +3,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 import Form from "../../../components/Form";
 import Button from "../../../components/formInputs/Button";
 import Input from "../../../components/formInputs/Input";
+import Select from "../../../components/formInputs/Select";
 import PageHeader from "../../../components/PageHeader";
 import { useGetAllLanguagesQuery } from "../../Languages/languages.generated";
 
@@ -19,6 +20,10 @@ export default function AddCharacter() {
         control,
         name: "languages"
     })
+
+    const lanaguageList = allLanguages?.map((lang) => {
+        return { id: lang.id, name: lang.name }
+    })
     return (
         <>
             <PageHeader title="Add Character" backButton />
@@ -31,11 +36,12 @@ export default function AddCharacter() {
                         e.stopPropagation()
                         append({ id: 0, name: LanguagesEnum.Common })
                     }} />
-                    {fields.map(field => {
-                        return (
-                            <></>
-                        )
-                    })}
+                    <div className="flex flex-col gap-5">
+                        {fields.map(field => (
+                            <Select methods={methods} name="languages" label="Language" options={lanaguageList} />
+                        ))}
+                    </div>
+
                 </Form>
             </div>
         </>
