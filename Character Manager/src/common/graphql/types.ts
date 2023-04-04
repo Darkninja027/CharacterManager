@@ -21,6 +21,14 @@ export type Character = {
   race?: Maybe<Race>;
 };
 
+export type CharacterInput = {
+  id: Scalars['Int'];
+  languages: Array<LanguagesInput>;
+  level: Scalars['Int'];
+  name: Scalars['String'];
+  race?: InputMaybe<RaceInput>;
+};
+
 export enum CreatureTypeEnum {
   Aberration = 'ABERRATION',
   Beast = 'BEAST',
@@ -36,39 +44,6 @@ export enum CreatureTypeEnum {
   Ooze = 'OOZE',
   Plant = 'PLANT',
   Undead = 'UNDEAD'
-}
-
-export type DragonAncestry = {
-  __typename?: 'DragonAncestry';
-  breathSave: Scalars['String'];
-  breathType: Scalars['String'];
-  damageType: Scalars['String'];
-  dragon: DragonEnum;
-  id: Scalars['Int'];
-  level1: Scalars['String'];
-  level5: Scalars['String'];
-  level11: Scalars['String'];
-  level17: Scalars['String'];
-  name: Scalars['String'];
-  resistance: Scalars['String'];
-};
-
-export enum DragonEnum {
-  Amethyst = 'AMETHYST',
-  Black = 'BLACK',
-  Blue = 'BLUE',
-  Brass = 'BRASS',
-  Bronze = 'BRONZE',
-  Copper = 'COPPER',
-  Crystal = 'CRYSTAL',
-  Emerald = 'EMERALD',
-  Gold = 'GOLD',
-  Green = 'GREEN',
-  Red = 'RED',
-  Sapphire = 'SAPPHIRE',
-  Silver = 'SILVER',
-  Topaz = 'TOPAZ',
-  White = 'WHITE'
 }
 
 export type LanguageInput = {
@@ -130,6 +105,12 @@ export enum LanguagesEnum {
   Zemnian = 'ZEMNIAN'
 }
 
+export type LanguagesInput = {
+  characters?: InputMaybe<Array<CharacterInput>>;
+  id: Scalars['Int'];
+  name: Scalars['String'];
+};
+
 export type MagicItem = {
   __typename?: 'MagicItem';
   category: MagicItemCategory;
@@ -175,12 +156,18 @@ export enum MagicItemRarity {
 
 export type Mutations = {
   __typename?: 'Mutations';
+  createCharacter: Character;
   createLanguage: Languages;
   createMagicItem: MagicItem;
   deleteAllItems: Scalars['Boolean'];
   deleteLanguage: Scalars['Boolean'];
   deleteMagicItem: Scalars['Boolean'];
   updateMagicItem: MagicItem;
+};
+
+
+export type MutationsCreateCharacterArgs = {
+  character: PlayerCharacterInput;
 };
 
 
@@ -208,6 +195,13 @@ export type MutationsUpdateMagicItemArgs = {
   magicItem: MagicItemInput;
 };
 
+export type PlayerCharacterInput = {
+  id?: InputMaybe<Scalars['Int']>;
+  languages: Array<LanguagesInput>;
+  level: Scalars['Int'];
+  name: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   allLanguages: Array<Languages>;
@@ -226,8 +220,6 @@ export type Race = {
   constitution: Scalars['Int'];
   defaultLanguage: LanguagesEnum;
   dexterity: Scalars['Int'];
-  dragonAncestry?: Maybe<DragonAncestry>;
-  dragonAncestryId?: Maybe<Scalars['Int']>;
   id: Scalars['Int'];
   intelligence: Scalars['Int'];
   knownFeats: Scalars['Int'];
@@ -241,12 +233,37 @@ export type Race = {
   wisdom: Scalars['Int'];
 };
 
+export type RaceInput = {
+  charisma: Scalars['Int'];
+  constitution: Scalars['Int'];
+  defaultLanguage: LanguagesEnum;
+  dexterity: Scalars['Int'];
+  id: Scalars['Int'];
+  intelligence: Scalars['Int'];
+  knownFeats: Scalars['Int'];
+  knownLanguages: Scalars['Int'];
+  name: Scalars['String'];
+  raceTraits?: InputMaybe<Array<RaceTraitsInput>>;
+  size: SizeEnum;
+  speed: Scalars['Int'];
+  strength: Scalars['Int'];
+  type: CreatureTypeEnum;
+  wisdom: Scalars['Int'];
+};
+
 export type RaceTraits = {
   __typename?: 'RaceTraits';
   description: Scalars['String'];
   id: Scalars['Int'];
   name: Scalars['String'];
   race?: Maybe<Race>;
+};
+
+export type RaceTraitsInput = {
+  description: Scalars['String'];
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  race?: InputMaybe<RaceInput>;
 };
 
 export enum SizeEnum {
