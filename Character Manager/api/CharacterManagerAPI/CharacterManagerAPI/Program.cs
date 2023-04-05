@@ -33,11 +33,11 @@ builder.Services.AddGraphQLServer()
         .AddTypeExtension<CharacterMutations>()
         .AddTypeExtension<MagicItemMutations>()
         .AddTypeExtension<LanguageMutations>();
-        
-
 
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

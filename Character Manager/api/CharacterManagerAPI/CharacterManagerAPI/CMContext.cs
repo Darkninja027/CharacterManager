@@ -17,6 +17,11 @@ namespace CharacterManagerAPI
         public DbSet<DragonAncestry> DragonAncestries { get; set; }
         public DbSet<MagicItem> MagicItems { get; set; }
 
-        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Character>()
+                .HasMany(e => e.Languages)
+                .WithMany(e => e.Characters);
+        }
     }
 }

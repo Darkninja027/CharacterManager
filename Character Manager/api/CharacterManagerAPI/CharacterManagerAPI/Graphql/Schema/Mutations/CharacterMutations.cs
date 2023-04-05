@@ -40,8 +40,9 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
                 };
 
                 db.Characters.Add(newCharacter);
-                //newCharacter.Languages = new List<Languages>();
-                foreach(var lang in character.Languages)
+                db.SaveChanges();
+                newCharacter.Languages = new List<Languages>();
+                foreach (var lang in character.Languages)
                 {
                     var language = db.Languages.Where(x => x.Id == lang.Id).FirstOrDefault();
                     newCharacter.Languages.Add(language);
