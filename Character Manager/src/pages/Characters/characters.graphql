@@ -3,3 +3,18 @@ mutation createCharacter($character: PlayerCharacterInput!){
         id
     }
 }
+
+query getAllCHaracters{
+    allCharacters{
+        id
+        name
+        level
+        languages{
+            id
+            name
+        }
+        race{
+            id
+        }
+    }
+}

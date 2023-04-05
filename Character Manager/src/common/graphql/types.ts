@@ -194,6 +194,7 @@ export type PlayerCharacterInput = {
 
 export type Query = {
   __typename?: 'Query';
+  allCharacters: Array<Character>;
   allLanguages: Array<Languages>;
   magicItem: MagicItem;
   magicItems: Array<MagicItem>;
