@@ -5,7 +5,6 @@ type InputProps<T extends FieldValues> = DetailedHTMLProps<InputHTMLAttributes<H
     name: string
     label: string
     styles?: string
-    type?: "text"
 
 } & (
         {
@@ -25,7 +24,7 @@ export default function Input<T extends FieldValues>({ name, label, className, t
     return (
         <label className="flex flex-col w-[200px]">
             {label && <span>{label} {required && <span>*</span>}</span>}
-            <input className="px-2 py-1 rounded-lg border border-black" {...(methods ? methods.register(name, { onChange, required }) : { value: fieldValue, onChange })} />
+            <input type={type} className="px-2 py-1 rounded-lg border border-black" {...(methods ? methods.register(name, { onChange, required }) : { value: fieldValue, onChange })} />
             {fieldState?.error && (
                 <p>Field is required</p>
             )}

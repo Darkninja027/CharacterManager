@@ -1,0 +1,5 @@
+mutation createCharacter($character: PlayerCharacterInput!){
+    createCharacter(character: $character){
+        id
+    }
+}
