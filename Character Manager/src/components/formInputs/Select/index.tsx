@@ -5,7 +5,7 @@ import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 type SelectProps<T extends FieldValues> = DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> & {
     methods: UseFormReturn<T>
     options?: ItemType[]
-    label: string
+    label?: string
     name: Path<T>
     className?: string
 }

@@ -1,5 +1,6 @@
 import { Languages, LanguagesEnum, PlayerCharacterInput } from "@types";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { DeleteIcon } from "../../../common/icons/SvgList";
 import Form from "../../../components/Form";
 import Button from "../../../components/formInputs/Button";
 import Input from "../../../components/formInputs/Input";
@@ -53,9 +54,12 @@ export default function AddCharacter() {
                     }} />
                     <div className="flex flex-col gap-5">
                         {fields.map((field, index) => (
-                            <>
-                                <Select key={field.id} methods={methods} name={`languages.${index}.id`} label="Language" options={lanaguageList} />
-                            </>
+                            <label className="flex items-center gap-3">
+                                <Select key={field.id} methods={methods} name={`languages.${index}.id`} options={lanaguageList} />
+                                <span className="hover:cursor-pointer" onClick={() => {
+                                    remove(index)
+                                }}><DeleteIcon /></span>
+                            </label>
                         ))}
                     </div>
 
