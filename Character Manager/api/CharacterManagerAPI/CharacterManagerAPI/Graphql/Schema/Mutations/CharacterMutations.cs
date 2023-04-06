@@ -20,12 +20,12 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
             using (CMContext db = _context.CreateDbContext())
             {
 
-                //ICollection<Languages> lang = new List<Languages>();
-                
-                //foreach (var language in character.Languages)
-                //{
-                //    lang.Add(db.Languages.FirstOrDefault(l => l.Id == language.Id));
-                //}
+                ICollection<Languages> lang = new List<Languages>();
+
+                foreach (var language in character.Languages)
+                {
+                    lang.Add(db.Languages.FirstOrDefault(l => l.Id == language.Id));
+                }
 
                 if (character == null)
                 {
@@ -38,6 +38,7 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
                     Milestone = character.Milestone,
                     Level = character.Level,
                     Experience = character.Experience,
+                    Languages = lang,
                     Age = character.Age,
                     Gender = character.Gender,
                     Alignment = character.Alignment,
@@ -55,13 +56,6 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
                 };
 
                 db.Characters.Add(newCharacter);
-                db.SaveChanges();
-                newCharacter.Languages = new List<Languages>();
-                foreach (var lang in character.Languages)
-                {
-                    var language = db.Languages.Where(x => x.Id == lang.Id).FirstOrDefault();
-                    newCharacter.Languages.Add(language);
-                }
                 db.SaveChanges();
                 return newCharacter;
             }
