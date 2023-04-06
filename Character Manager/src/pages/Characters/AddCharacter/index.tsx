@@ -25,7 +25,7 @@ export default function AddCharacter() {
             experience: getLevelExperience(1),
             milestone: false,
             languages: [
-                { id: 0 }
+                { id: 1 }
             ],
             alignment: AlignmentEnum.TrueNeutral
         }
@@ -60,11 +60,14 @@ export default function AddCharacter() {
 
     const OnSubmit: SubmitHandler<PlayerCharacterInput> = data => {
         data.level = Number(data.level)
+        data.age = Number(data.age)
+        data.weight = Number(data.weight)
+        data.milestone = isTruthy(data.milestone)
         data.languages.forEach(lang => {
             lang.id = +lang.id
         })
         console.log(data)
-        // createCharacterMutation.mutate({ character: data })
+        createCharacterMutation.mutate({ character: data })
     }
 
     const genders = [

@@ -35,8 +35,23 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
                 Character newCharacter = new Character
                 {
                     Name = character.Name,
-                    //Race = character.Race,
+                    Milestone = character.Milestone,
                     Level = character.Level,
+                    Experience = character.Experience,
+                    Age = character.Age,
+                    Gender = character.Gender,
+                    Alignment = character.Alignment,
+                    Size = character.Size,
+                    PersonalityTraits = character.PersonalityTraits,
+                    Ideals = character.Ideals,
+                    Bonds = character.Bonds,
+                    Flaws = character.Flaws,
+                    Weight = character.Weight,
+                    Height = character.Height,
+                    Hair = character.Hair,
+                    Eyes = character.Eyes,
+                    Skin = character.Skin,
+                    //Race = character.Race,
                 };
 
                 db.Characters.Add(newCharacter);

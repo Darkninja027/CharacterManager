@@ -26,11 +26,26 @@ export enum AlignmentEnum {
 
 export type Character = {
   __typename?: 'Character';
+  age?: Maybe<Scalars['Int']>;
+  alignment?: Maybe<AlignmentEnum>;
+  bonds?: Maybe<Scalars['String']>;
+  experience?: Maybe<Scalars['Int']>;
+  eyes?: Maybe<Scalars['String']>;
+  flaws?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
+  hair?: Maybe<Scalars['String']>;
+  height?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
+  ideals?: Maybe<Scalars['String']>;
   languages: Array<Languages>;
   level: Scalars['Int'];
+  milestone: Scalars['Boolean'];
   name: Scalars['String'];
+  personalityTraits?: Maybe<Scalars['String']>;
   race?: Maybe<Race>;
+  size: SizeEnum;
+  skin?: Maybe<Scalars['String']>;
+  weight?: Maybe<Scalars['Int']>;
 };
 
 export enum CreatureTypeEnum {
