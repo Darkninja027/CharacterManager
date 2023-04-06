@@ -12,6 +12,18 @@ export type Scalars = {
   Float: number;
 };
 
+export enum AlignmentEnum {
+  ChaoticEvil = 'CHAOTIC_EVIL',
+  ChaoticGood = 'CHAOTIC_GOOD',
+  ChaoticNeutral = 'CHAOTIC_NEUTRAL',
+  LawfulEvil = 'LAWFUL_EVIL',
+  LawfulGood = 'LAWFUL_GOOD',
+  LawfulNeutral = 'LAWFUL_NEUTRAL',
+  NeutralEvil = 'NEUTRAL_EVIL',
+  NeutralGood = 'NEUTRAL_GOOD',
+  TrueNeutral = 'TRUE_NEUTRAL'
+}
+
 export type Character = {
   __typename?: 'Character';
   id: Scalars['Int'];
@@ -186,10 +198,25 @@ export type PcLanguagesInput = {
 };
 
 export type PlayerCharacterInput = {
+  age?: InputMaybe<Scalars['Int']>;
+  alignment?: InputMaybe<AlignmentEnum>;
+  bonds?: InputMaybe<Scalars['String']>;
+  experience?: InputMaybe<Scalars['Int']>;
+  eyes?: InputMaybe<Scalars['String']>;
+  flaws?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Scalars['String']>;
+  hair?: InputMaybe<Scalars['String']>;
+  height?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
+  ideals?: InputMaybe<Scalars['String']>;
   languages: Array<PcLanguagesInput>;
   level: Scalars['Int'];
+  milestone: Scalars['Boolean'];
   name: Scalars['String'];
+  personalityTraits?: InputMaybe<Scalars['String']>;
+  size: SizeEnum;
+  skin?: InputMaybe<Scalars['String']>;
+  weight?: InputMaybe<Scalars['Int']>;
 };
 
 export type Query = {
