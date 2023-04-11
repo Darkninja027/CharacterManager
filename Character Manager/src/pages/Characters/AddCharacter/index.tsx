@@ -1,4 +1,4 @@
-import { AlignmentEnum, Languages, LanguagesEnum, PlayerCharacterInput, SizeEnum } from "@types";
+import { AlignmentEnum, Languages, LanguagesEnum, PlayerCharacterInput, ProficiencyTypeEnum, SizeEnum } from "@types";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { AddIcon, ArmorIcon, DeleteIcon } from "../../../common/icons/SvgList";
@@ -29,6 +29,9 @@ export default function AddCharacter() {
             milestone: false,
             languages: [
                 { id: 1 }
+            ],
+            proficiencies: [
+                { name: "athletics", modifier: 0, type: ProficiencyTypeEnum.Skill, expertise: false }
             ],
             alignment: AlignmentEnum.TrueNeutral,
             strength: 10,
@@ -69,6 +72,11 @@ export default function AddCharacter() {
         name: "languages"
 
     })
+    const { fields: proficiencies } = useFieldArray({
+        control,
+        keyName: "ProficiencyId",
+        name: "proficiencies"
+    })
     const lanaguageList = allLanguages?.map((lang) => {
         return { id: lang.id, name: lang.name }
     })
@@ -100,7 +108,7 @@ export default function AddCharacter() {
         data.maxHealth = Number(data.maxHealth)
         data.armorClass = Number(data.armorClass)
         console.log(data)
-        createCharacterMutation.mutate({ character: data })
+        // createCharacterMutation.mutate({ character: data })
     }
 
     const genders = [
@@ -155,6 +163,21 @@ export default function AddCharacter() {
                     <Select methods={methods} name="gender" options={genders} label="Gender" />
                     <Select methods={methods} name="alignment" options={alignments} label="Alignment" />
                     <Select methods={methods} name="size" options={sizes} label="Size" />
+                    <Accordian heading={
+                        <section>
+                            <header>Proficiencies</header>
+                        </section>
+                    }>
+                        {proficiencies.map((prof, index) => {
+                            return (
+                                <>
+                                    <p>{prof.name}</p>
+                                    <Radio methods={methods} name={`proficiencies.${index}.expertise`} value="true" />
+                                    <Radio methods={methods} name={`proficiencies.${index}.expertise`} value="false" />
+                                </>
+                            )
+                        })}
+                    </Accordian>
                     <Accordian heading={<section className="flex items-center gap-3">
                         <header>Languages</header>
                         <span onClick={(e) => {

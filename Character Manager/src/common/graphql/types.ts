@@ -28,24 +28,41 @@ export type Character = {
   __typename?: 'Character';
   age?: Maybe<Scalars['Int']>;
   alignment?: Maybe<AlignmentEnum>;
+  armorClass: Scalars['Int'];
   bonds?: Maybe<Scalars['String']>;
+  charisma: Scalars['Int'];
+  charismaModifier: Scalars['Int'];
+  constitution: Scalars['Int'];
+  constitutionModifier: Scalars['Int'];
+  dexterity: Scalars['Int'];
+  dexterityModifier: Scalars['Int'];
   experience?: Maybe<Scalars['Int']>;
   eyes?: Maybe<Scalars['String']>;
   flaws?: Maybe<Scalars['String']>;
   gender?: Maybe<Scalars['String']>;
   hair?: Maybe<Scalars['String']>;
+  health: Scalars['Int'];
   height?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   ideals?: Maybe<Scalars['String']>;
+  intelligence: Scalars['Int'];
+  intelligenceModifier: Scalars['Int'];
   languages: Array<Languages>;
   level: Scalars['Int'];
+  maxHealth: Scalars['Int'];
   milestone: Scalars['Boolean'];
   name: Scalars['String'];
   personalityTraits?: Maybe<Scalars['String']>;
+  proficiencies: Array<Proficiency>;
   race?: Maybe<Race>;
   size: SizeEnum;
   skin?: Maybe<Scalars['String']>;
+  strength: Scalars['Int'];
+  strengthModifier: Scalars['Int'];
+  temporaryHealth?: Maybe<Scalars['Int']>;
   weight?: Maybe<Scalars['Int']>;
+  wisdom: Scalars['Int'];
+  wisdomModifier: Scalars['Int'];
 };
 
 export enum CreatureTypeEnum {
@@ -212,6 +229,13 @@ export type PcLanguagesInput = {
   id: Scalars['Int'];
 };
 
+export type PcProficienciesInput = {
+  expertise?: InputMaybe<Scalars['Boolean']>;
+  modifier?: InputMaybe<Scalars['Int']>;
+  name: Scalars['String'];
+  type: ProficiencyTypeEnum;
+};
+
 export type PlayerCharacterInput = {
   age?: InputMaybe<Scalars['Int']>;
   alignment?: InputMaybe<AlignmentEnum>;
@@ -240,6 +264,7 @@ export type PlayerCharacterInput = {
   milestone: Scalars['Boolean'];
   name: Scalars['String'];
   personalityTraits?: InputMaybe<Scalars['String']>;
+  proficiencies: Array<PcProficienciesInput>;
   size: SizeEnum;
   skin?: InputMaybe<Scalars['String']>;
   strength: Scalars['Int'];
@@ -249,6 +274,23 @@ export type PlayerCharacterInput = {
   wisdom: Scalars['Int'];
   wisdomModifier: Scalars['Int'];
 };
+
+export type Proficiency = {
+  __typename?: 'Proficiency';
+  character: Character;
+  expertise?: Maybe<Scalars['Boolean']>;
+  id: Scalars['Int'];
+  modifier?: Maybe<Scalars['Int']>;
+  name: Scalars['String'];
+  type: ProficiencyTypeEnum;
+};
+
+export enum ProficiencyTypeEnum {
+  Armor = 'ARMOR',
+  Skill = 'SKILL',
+  Tool = 'TOOL',
+  Weapon = 'WEAPON'
+}
 
 export type Query = {
   __typename?: 'Query';
