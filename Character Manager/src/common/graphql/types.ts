@@ -215,23 +215,39 @@ export type PcLanguagesInput = {
 export type PlayerCharacterInput = {
   age?: InputMaybe<Scalars['Int']>;
   alignment?: InputMaybe<AlignmentEnum>;
+  armorClass: Scalars['Int'];
   bonds?: InputMaybe<Scalars['String']>;
+  charisma: Scalars['Int'];
+  charismaModifier: Scalars['Int'];
+  constitution: Scalars['Int'];
+  constitutionModifier: Scalars['Int'];
+  dexterity: Scalars['Int'];
+  dexterityModifier: Scalars['Int'];
   experience?: InputMaybe<Scalars['Int']>;
   eyes?: InputMaybe<Scalars['String']>;
   flaws?: InputMaybe<Scalars['String']>;
   gender?: InputMaybe<Scalars['String']>;
   hair?: InputMaybe<Scalars['String']>;
+  health: Scalars['Int'];
   height?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   ideals?: InputMaybe<Scalars['String']>;
+  intelligence: Scalars['Int'];
+  intelligenceModifier: Scalars['Int'];
   languages: Array<PcLanguagesInput>;
   level: Scalars['Int'];
+  maxHealth: Scalars['Int'];
   milestone: Scalars['Boolean'];
   name: Scalars['String'];
   personalityTraits?: InputMaybe<Scalars['String']>;
   size: SizeEnum;
   skin?: InputMaybe<Scalars['String']>;
+  strength: Scalars['Int'];
+  strengthModifier: Scalars['Int'];
+  temporaryHealth?: InputMaybe<Scalars['Int']>;
   weight?: InputMaybe<Scalars['Int']>;
+  wisdom: Scalars['Int'];
+  wisdomModifier: Scalars['Int'];
 };
 
 export type Query = {

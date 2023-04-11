@@ -1,7 +1,7 @@
 import { AlignmentEnum, Languages, LanguagesEnum, PlayerCharacterInput, SizeEnum } from "@types";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { AddIcon, DeleteIcon } from "../../../common/icons/SvgList";
+import { AddIcon, ArmorIcon, DeleteIcon } from "../../../common/icons/SvgList";
 import { enumStringConversion } from "../../../common/util/stringFormatting";
 import Accordian from "../../../components/Accordian";
 import Form from "../../../components/Form";
@@ -22,12 +22,27 @@ export default function AddCharacter() {
     const methods = useForm<PlayerCharacterInput>({
         defaultValues: {
             level: 1,
+            maxHealth: 10,
+            health: 10,
+            armorClass: 10,
             experience: getLevelExperience(1),
             milestone: false,
             languages: [
                 { id: 1 }
             ],
-            alignment: AlignmentEnum.TrueNeutral
+            alignment: AlignmentEnum.TrueNeutral,
+            strength: 10,
+            strengthModifier: 0,
+            dexterity: 10,
+            dexterityModifier: 0,
+            constitution: 10,
+            constitutionModifier: 0,
+            intelligence: 10,
+            intelligenceModifier: 0,
+            wisdom: 10,
+            wisdomModifier: 0,
+            charisma: 10,
+            charismaModifier: 0,
         }
     })
     const alignments = Object.values(AlignmentEnum).map((align, index) => {
@@ -42,7 +57,7 @@ export default function AddCharacter() {
     const { isLoading, data: { allLanguages } = {} } = useGetAllLanguagesQuery()
 
     const { control, watch, setValue } = methods
-    const [milestone, level, experience] = watch(['milestone', 'level', 'experience'])
+    const [milestone, level, experience, maxHealth] = watch(['milestone', 'level', 'experience', 'maxHealth'])
 
     useEffect(() => {
         setValue("milestone", 'false' as any)
@@ -64,8 +79,26 @@ export default function AddCharacter() {
         data.weight = Number(data.weight)
         data.milestone = isTruthy(data.milestone)
         data.languages.forEach(lang => {
-            lang.id = +lang.id
+            lang.id = Number(lang.id)
         })
+
+        data.strength = Number(data.strength)
+        data.dexterity = Number(data.dexterity)
+        data.constitution = Number(data.constitution)
+        data.intelligence = Number(data.intelligence)
+        data.wisdom = Number(data.wisdom)
+        data.charisma = Number(data.charisma)
+
+        data.strengthModifier = Number(data.strengthModifier)
+        data.dexterityModifier = Number(data.dexterityModifier)
+        data.constitutionModifier = Number(data.constitutionModifier)
+        data.intelligenceModifier = Number(data.intelligenceModifier)
+        data.wisdomModifier = Number(data.wisdomModifier)
+        data.charismaModifier = Number(data.charismaModifier)
+
+        data.health = Number(data.health)
+        data.maxHealth = Number(data.maxHealth)
+        data.armorClass = Number(data.armorClass)
         console.log(data)
         createCharacterMutation.mutate({ character: data })
     }
@@ -82,10 +115,37 @@ export default function AddCharacter() {
                 <Form methods={methods} onSubmit={OnSubmit}>
                     <Input methods={methods} name="name" label="Name" />
                     <Input methods={methods} name="level" label="Level" type="number" max={20} min={1} onChange={(e) => {
-                        console.log(e.target.value)
                         setValue("experience", getLevelExperience(parseInt(e.target.value)))
                     }} />
+                    <Input methods={methods} name="armorClass" label="Armor Class" type="number" min={0} />
+                    <Input methods={methods} name="maxHealth" label="Max Health" type="number" min={0} />
+                    <Input methods={methods} name="health" label="Health" type="number" min={0} max={maxHealth} />
                     <Input methods={methods} name="experience" label="Experience" type="number" disabled={isTruthy(milestone)} />
+
+                    <Input methods={methods} name="strength" label="Strength" type="number" min={1} max={30} onChange={(e) => {
+                        setValue("strengthModifier", getSkillModifier(parseInt(e.target.value)))
+                    }} />
+                    <Input methods={methods} name="strengthModifier" label="" type="number" min={-5} max={10} />
+                    <Input methods={methods} name="dexterity" label="Dexterity" type="number" min={1} max={30} onChange={(e) => {
+                        setValue("dexterityModifier", getSkillModifier(parseInt(e.target.value)))
+                    }} />
+                    <Input methods={methods} name="dexterityModifier" label="" type="number" min={-5} max={10} />
+                    <Input methods={methods} name="constitution" label="Consitution" type="number" min={1} max={30} onChange={(e) => {
+                        setValue("constitutionModifier", getSkillModifier(parseInt(e.target.value)))
+                    }} />
+                    <Input methods={methods} name="constitutionModifier" label="" type="number" min={-5} max={10} />
+                    <Input methods={methods} name="intelligence" label="Intelligence" type="number" min={1} max={30} onChange={(e) => {
+                        setValue("intelligenceModifier", getSkillModifier(parseInt(e.target.value)))
+                    }} />
+                    <Input methods={methods} name="intelligenceModifier" label="" type="number" min={-5} max={10} />
+                    <Input methods={methods} name="wisdom" label="Wisdom" type="number" min={1} max={30} onChange={(e) => {
+                        setValue("wisdomModifier", getSkillModifier(parseInt(e.target.value)))
+                    }} />
+                    <Input methods={methods} name="wisdomModifier" label="" type="number" min={-5} max={10} />
+                    <Input methods={methods} name="charisma" label="Charisma" type="number" min={1} max={30} onChange={(e) => {
+                        setValue("charismaModifier", getSkillModifier(parseInt(e.target.value)))
+                    }} />
+                    <Input methods={methods} name="charismaModifier" label="" type="number" min={-5} max={10} />
                     <div>
                         <label>Milestone</label>
                         <Radio methods={methods} name="milestone" value={'true'} />
@@ -200,5 +260,58 @@ function getLevelExperience(level: number) {
 
 function isTruthy(value: unknown) {
     return value === 'true'
+}
 
+function getSkillModifier(skillValue: number) {
+    switch (skillValue) {
+        case 1:
+            return -5;
+        case 2:
+        case 3:
+            return -4;
+        case 4:
+        case 5:
+            return -3;
+        case 6:
+        case 7:
+            return -2;
+        case 8:
+        case 9:
+            return -1;
+        case 10:
+        case 11:
+            return 0;
+        case 12:
+        case 13:
+            return 1;
+        case 14:
+        case 15:
+            return 2;
+        case 16:
+        case 17:
+            return 3;
+        case 18:
+        case 19:
+            return 4;
+        case 20:
+        case 21:
+            return 5;
+        case 22:
+        case 23:
+            return 6;
+        case 24:
+        case 25:
+            return 7;
+        case 26:
+        case 27:
+            return 8;
+        case 28:
+        case 29:
+            return 9;
+        case 30:
+            return 10;
+        default:
+            return 0
+
+    }
 }
