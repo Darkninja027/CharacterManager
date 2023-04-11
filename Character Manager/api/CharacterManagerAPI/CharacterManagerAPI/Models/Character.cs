@@ -24,6 +24,7 @@ namespace CharacterManagerAPI.Models
         public int WisdomModifier { get; set; }
         public int Charisma { get; set; }
         public int CharismaModifier { get; set; }
+        public ICollection<Proficiency> Proficiencies { get; set; }
         public Race? Race { get; set; }
         public ICollection<Languages> Languages { get; set; }
         public bool Milestone { get; set; }

@@ -60,5 +60,13 @@ namespace CharacterManagerAPI.Graphql.InputTypes
         public int Id { get; set; }
     }
 
+    public class PCProficiencies
+    {
+        public string Name { get; set; }
+        public ProficiencyTypeEnum Type { get; set; }
+        public int? Modifier { get; set; }
+        public bool? Expertise { get; set; }
+    }
+
 
 }
