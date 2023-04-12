@@ -1,14 +1,18 @@
-import { AlignmentEnum, Languages, LanguagesEnum, PlayerCharacterInput, ProficiencyTypeEnum, SizeEnum } from "@types";
+import { AlignmentEnum, Languages, LanguagesEnum, PlayerCharacterInput, SizeEnum } from "@types";
 import { useEffect, useState } from "react";
-import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { Path, PathValue, SubmitHandler, useFieldArray, useForm, UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { Tooltip } from "react-tooltip";
 import { AddIcon, ArmorIcon, DeleteIcon } from "../../../common/icons/SvgList";
-import { enumStringConversion } from "../../../common/util/stringFormatting";
+import { formatString, pascalCamelSplit } from "../../../common/util/stringFormatting";
 import Accordian from "../../../components/Accordian";
 import Form from "../../../components/Form";
 import Button from "../../../components/formInputs/Button";
+import Checkbox from "../../../components/formInputs/Checkbox";
 import Input from "../../../components/formInputs/Input";
 import Radio from "../../../components/formInputs/Radio";
 import Select from "../../../components/formInputs/Select";
+import Skills from "../../../components/formInputs/Skill";
+import Skill from "../../../components/formInputs/Skill";
 import TextArea from "../../../components/formInputs/TextArea";
 import PageHeader from "../../../components/PageHeader";
 import { useGetAllLanguagesQuery } from "../../Languages/languages.generated";
@@ -30,8 +34,25 @@ export default function AddCharacter() {
             languages: [
                 { id: 1 }
             ],
-            proficiencies: [
-                { name: "athletics", modifier: 0, type: ProficiencyTypeEnum.Skill, expertise: false }
+            skills: [
+                { name: "acrobatics", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
+                { name: "animalHandling", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
+                { name: "arcana", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
+                { name: "athletics", modifier: 0, attribute: "strength", expertise: false, proficient: false },
+                { name: "deception", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
+                { name: "history", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
+                { name: "insight", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
+                { name: "intimidation", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
+                { name: "investigation", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
+                { name: "medicine", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
+                { name: "nature", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
+                { name: "perception", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
+                { name: "performance", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
+                { name: "persuasion", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
+                { name: "religion", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
+                { name: "sleightOfHand", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
+                { name: "stealth", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
+                { name: "survival", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
             ],
             alignment: AlignmentEnum.TrueNeutral,
             strength: 10,
@@ -49,21 +70,24 @@ export default function AddCharacter() {
         }
     })
     const alignments = Object.values(AlignmentEnum).map((align, index) => {
-        return { id: align, name: enumStringConversion(align) }
+        return { id: align, name: formatString(align) }
     })
 
     const sizes = Object.values(SizeEnum).reverse().map((size, index) => {
-        return { id: size, name: enumStringConversion(size) }
+        return { id: size, name: formatString(size) }
     })
 
+    const proficiencyBonus = 2
     const createCharacterMutation = useCreateCharacterMutation()
     const { isLoading, data: { allLanguages } = {} } = useGetAllLanguagesQuery()
 
-    const { control, watch, setValue } = methods
+    const { control, watch, setValue, getValues } = methods
     const [milestone, level, experience, maxHealth] = watch(['milestone', 'level', 'experience', 'maxHealth'])
 
     useEffect(() => {
-        setValue("milestone", 'false' as any)
+        if (true) {
+            setValue("milestone", 'false' as any)
+        }
     }, [])
 
     const { fields, append, remove, update } = useFieldArray({
@@ -72,10 +96,10 @@ export default function AddCharacter() {
         name: "languages"
 
     })
-    const { fields: proficiencies } = useFieldArray({
+    const { fields: skills } = useFieldArray({
         control,
-        keyName: "ProficiencyId",
-        name: "proficiencies"
+        keyName: "skillId",
+        name: "skills"
     })
     const lanaguageList = allLanguages?.map((lang) => {
         return { id: lang.id, name: lang.name }
@@ -165,16 +189,12 @@ export default function AddCharacter() {
                     <Select methods={methods} name="size" options={sizes} label="Size" />
                     <Accordian heading={
                         <section>
-                            <header>Proficiencies</header>
+                            <header>Skills</header>
                         </section>
                     }>
-                        {proficiencies.map((prof, index) => {
+                        {skills.map((skill, index) => {
                             return (
-                                <>
-                                    <p>{prof.name}</p>
-                                    <Radio methods={methods} name={`proficiencies.${index}.expertise`} value="true" />
-                                    <Radio methods={methods} name={`proficiencies.${index}.expertise`} value="false" />
-                                </>
+                                <Skills methods={methods} index={index} />
                             )
                         })}
                     </Accordian>
@@ -338,3 +358,4 @@ function getSkillModifier(skillValue: number) {
 
     }
 }
+

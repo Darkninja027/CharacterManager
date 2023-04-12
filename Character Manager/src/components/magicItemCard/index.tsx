@@ -3,7 +3,7 @@ import { MagicItem, MagicItemCategory } from "@types";
 import { Tooltip } from "react-tooltip";
 import { ArmorIcon, DeleteIcon, EditIcon, PotionIcon, RingIcon, RodIcon, ScrollIcon, StaffIcon, WandIcon, WeaponIcon, WonderousItemIcon } from "../../common/icons/SvgList";
 import { useAlert } from "../../common/util/Alerts";
-import { enumStringConversion } from "../../common/util/stringFormatting";
+import { formatString } from "../../common/util/stringFormatting";
 import { useDeleteMagicItemMutation } from "../../pages/Items/items.generated";
 import Accordian from "../Accordian";
 
@@ -67,7 +67,7 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
                 </div>
                 <Tooltip anchorSelect="#deleteButton" content="Delete Magic Item" place="bottom" noArrow />
                 <Tooltip anchorSelect={`#editButton${item.id}`} content={`Edit ${item.name}`} place="bottom" noArrow />
-                <Tooltip anchorSelect={`#categoryIcon${item.id}`} content={enumStringConversion(item.category)} place="bottom" noArrow />
+                <Tooltip anchorSelect={`#categoryIcon${item.id}`} content={formatString(item.category)} place="bottom" noArrow />
             </div>}>
             <p>Description: {item.description}</p>
             {item.property1 && <p>Property 1: {item.property1}</p>}

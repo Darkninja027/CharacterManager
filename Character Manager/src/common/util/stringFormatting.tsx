@@ -1,5 +1,5 @@
-export function enumStringConversion(enumValue: string) {
-    return enumValue.replace('_', " ")
+export function formatString(value: string) {
+    return value.replace('_', " ")
         .toLowerCase()
         .split(" ")
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))

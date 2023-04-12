@@ -53,9 +53,9 @@ export type Character = {
   milestone: Scalars['Boolean'];
   name: Scalars['String'];
   personalityTraits?: Maybe<Scalars['String']>;
-  proficiencies: Array<Proficiency>;
   race?: Maybe<Race>;
   size: SizeEnum;
+  skills: Array<Skill>;
   skin?: Maybe<Scalars['String']>;
   strength: Scalars['Int'];
   strengthModifier: Scalars['Int'];
@@ -229,11 +229,12 @@ export type PcLanguagesInput = {
   id: Scalars['Int'];
 };
 
-export type PcProficienciesInput = {
-  expertise?: InputMaybe<Scalars['Boolean']>;
-  modifier?: InputMaybe<Scalars['Int']>;
+export type PcSkillsInput = {
+  attribute: Scalars['String'];
+  expertise: Scalars['Boolean'];
+  modifier: Scalars['Int'];
   name: Scalars['String'];
-  type: ProficiencyTypeEnum;
+  proficient: Scalars['Boolean'];
 };
 
 export type PlayerCharacterInput = {
@@ -264,8 +265,8 @@ export type PlayerCharacterInput = {
   milestone: Scalars['Boolean'];
   name: Scalars['String'];
   personalityTraits?: InputMaybe<Scalars['String']>;
-  proficiencies: Array<PcProficienciesInput>;
   size: SizeEnum;
+  skills: Array<PcSkillsInput>;
   skin?: InputMaybe<Scalars['String']>;
   strength: Scalars['Int'];
   strengthModifier: Scalars['Int'];
@@ -274,23 +275,6 @@ export type PlayerCharacterInput = {
   wisdom: Scalars['Int'];
   wisdomModifier: Scalars['Int'];
 };
-
-export type Proficiency = {
-  __typename?: 'Proficiency';
-  character: Character;
-  expertise?: Maybe<Scalars['Boolean']>;
-  id: Scalars['Int'];
-  modifier?: Maybe<Scalars['Int']>;
-  name: Scalars['String'];
-  type: ProficiencyTypeEnum;
-};
-
-export enum ProficiencyTypeEnum {
-  Armor = 'ARMOR',
-  Skill = 'SKILL',
-  Tool = 'TOOL',
-  Weapon = 'WEAPON'
-}
 
 export type Query = {
   __typename?: 'Query';
@@ -340,3 +324,14 @@ export enum SizeEnum {
   Small = 'SMALL',
   Tiny = 'TINY'
 }
+
+export type Skill = {
+  __typename?: 'Skill';
+  attribute: Scalars['String'];
+  character: Character;
+  expertise: Scalars['Boolean'];
+  id: Scalars['Int'];
+  modifier: Scalars['Int'];
+  name: Scalars['String'];
+  proficient: Scalars['Boolean'];
+};

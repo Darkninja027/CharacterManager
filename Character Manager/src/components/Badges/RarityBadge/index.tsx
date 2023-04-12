@@ -1,6 +1,6 @@
 import { MagicItemRarity } from "@types";
 import classNames from "classnames";
-import { enumStringConversion } from "../../../common/util/stringFormatting";
+import { formatString } from "../../../common/util/stringFormatting";
 interface BadgeProps {
     rarity: MagicItemRarity
     size?: keyof typeof BADGE_SIZE
@@ -26,7 +26,7 @@ export default function RarityBadge({ rarity, size }: BadgeProps) {
 
     return (
         <span className={classes}>
-            {enumStringConversion(rarity)}
+            {formatString(rarity)}
         </span>
     )
 }

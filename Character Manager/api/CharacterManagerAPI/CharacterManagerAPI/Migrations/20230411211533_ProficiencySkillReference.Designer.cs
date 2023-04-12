@@ -4,6 +4,7 @@ using CharacterManagerAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CharacterManagerAPI.Migrations
 {
     [DbContext(typeof(CMContext))]
-    partial class CMContextModelSnapshot : ModelSnapshot
+    [Migration("20230411211533_ProficiencySkillReference")]
+    partial class ProficiencySkillReference
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,6 +251,40 @@ namespace CharacterManagerAPI.Migrations
                     b.ToTable("MagicItems");
                 });
 
+            modelBuilder.Entity("CharacterManagerAPI.Models.Proficiency", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("Expertise")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("Modifier")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Skill")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CharacterId");
+
+                    b.ToTable("Proficiencies");
+                });
+
             modelBuilder.Entity("CharacterManagerAPI.Models.Race", b =>
                 {
                     b.Property<int>("Id")
@@ -327,41 +364,6 @@ namespace CharacterManagerAPI.Migrations
                     b.ToTable("RaceTraits");
                 });
 
-            modelBuilder.Entity("CharacterManagerAPI.Models.Skill", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Attribute")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CharacterId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Expertise")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Modifier")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Proficient")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CharacterId");
-
-                    b.ToTable("Skills");
-                });
-
             modelBuilder.Entity("CharacterLanguages", b =>
                 {
                     b.HasOne("CharacterManagerAPI.Models.Character", null)
@@ -386,6 +388,17 @@ namespace CharacterManagerAPI.Migrations
                     b.Navigation("Race");
                 });
 
+            modelBuilder.Entity("CharacterManagerAPI.Models.Proficiency", b =>
+                {
+                    b.HasOne("CharacterManagerAPI.Models.Character", "Character")
+                        .WithMany("Proficiencies")
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Character");
+                });
+
             modelBuilder.Entity("CharacterManagerAPI.Models.RaceTraits", b =>
                 {
                     b.HasOne("CharacterManagerAPI.Models.Race", "Race")
@@ -395,20 +408,9 @@ namespace CharacterManagerAPI.Migrations
                     b.Navigation("Race");
                 });
 
-            modelBuilder.Entity("CharacterManagerAPI.Models.Skill", b =>
-                {
-                    b.HasOne("CharacterManagerAPI.Models.Character", "Character")
-                        .WithMany("Skills")
-                        .HasForeignKey("CharacterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Character");
-                });
-
             modelBuilder.Entity("CharacterManagerAPI.Models.Character", b =>
                 {
-                    b.Navigation("Skills");
+                    b.Navigation("Proficiencies");
                 });
 
             modelBuilder.Entity("CharacterManagerAPI.Models.Race", b =>

@@ -35,7 +35,7 @@ namespace CharacterManagerAPI.Graphql.InputTypes
         public int WisdomModifier { get; set; }
         public int Charisma { get; set; }
         public int CharismaModifier { get; set; }
-        public ICollection<PCProficiencies> Proficiencies { get; set; }
+        public ICollection<PCSkills> Skills { get; set; }
         //public Race Race { get; set; }
         public ICollection<PCLanguages> Languages { get; set; }
 
@@ -61,12 +61,13 @@ namespace CharacterManagerAPI.Graphql.InputTypes
         public int Id { get; set; }
     }
 
-    public class PCProficiencies
+    public class PCSkills
     {
         public string Name { get; set; }
-        public ProficiencyTypeEnum Type { get; set; }
-        public int? Modifier { get; set; }
-        public bool? Expertise { get; set; }
+        public string Attribute { get; set; }
+        public bool Proficient { get; set; }
+        public int Modifier { get; set; }
+        public bool Expertise { get; set; }
     }
 
 

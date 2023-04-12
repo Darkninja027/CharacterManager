@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { DetailedHTMLProps, InputHTMLAttributes } from "react"
 import { FieldValues, Path, UseFormReturn } from "react-hook-form"
 
@@ -5,6 +6,7 @@ type InputProps<T extends FieldValues> = DetailedHTMLProps<InputHTMLAttributes<H
     name: string
     label: string
     styles?: string
+    className?: string
 
 } & (
         {
@@ -21,10 +23,11 @@ type InputProps<T extends FieldValues> = DetailedHTMLProps<InputHTMLAttributes<H
 export default function Input<T extends FieldValues>({ name, label, className, type, methods, value, onChange, required, disabled, defaultValue, min, max, ...props }: InputProps<T>) {
     const fieldState = methods ? methods.getFieldState(name) : null
     const fieldValue = methods ? methods.watch(name) : value
+    const classes = classNames("px-2 py-1 rounded-lg border border-black", className)
     return (
         <label className="flex flex-col">
             {label && <span>{label} {required && <span>*</span>}</span>}
-            <input type={type} className="px-2 py-1 rounded-lg border border-black" {...(methods ? methods.register(name, { onChange, required }) : { value: fieldValue, onChange })} disabled={disabled} defaultValue={defaultValue} min={min} max={max} />
+            <input type={type} className={classes} {...(methods ? methods.register(name, { onChange, required }) : { value: fieldValue, onChange })} disabled={disabled} defaultValue={defaultValue} min={min} max={max} />
             {fieldState?.error && (
                 <p>Field is required</p>
             )}

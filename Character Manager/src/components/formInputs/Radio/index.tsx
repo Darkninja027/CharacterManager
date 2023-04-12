@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from "react"
 import { FieldValues, Path, UseFormGetValues, UseFormReturn } from "react-hook-form"
-import { enumStringConversion } from "../../../common/util/stringFormatting"
+import { formatString } from "../../../common/util/stringFormatting"
 
 type RadioProps<T extends FieldValues> = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
     name: Path<T>,
@@ -14,7 +14,7 @@ export default function Radio<T extends FieldValues>({ name, value, methods, req
         <div className="flex items-center gap-2">
 
             <input className="" {...methods.register(name, { onChange, required })} type="radio" value={value} />
-            <label>{enumStringConversion(value as string)}</label>
+            <label>{formatString(value as string)}</label>
 
         </div>
     )
