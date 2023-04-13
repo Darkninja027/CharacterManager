@@ -4,6 +4,10 @@ mutation createCharacter($character: PlayerCharacterInput!){
     }
 }
 
+mutation deleteCharacter($Id: Int!){
+    deleteCharacter(id: $Id)
+}
+
 query getAllCHaracters{
     allCharacters{
         id

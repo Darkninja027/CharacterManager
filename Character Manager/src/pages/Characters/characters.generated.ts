@@ -9,6 +9,13 @@ export type CreateCharacterMutationVariables = Types.Exact<{
 
 export type CreateCharacterMutation = { __typename?: 'Mutations', createCharacter: { __typename?: 'Character', id: number } };
 
+export type DeleteCharacterMutationVariables = Types.Exact<{
+  Id: Types.Scalars['Int'];
+}>;
+
+
+export type DeleteCharacterMutation = { __typename?: 'Mutations', deleteCharacter: boolean };
+
 export type GetAllCHaractersQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
@@ -29,6 +36,20 @@ export const useCreateCharacterMutation = <
     useMutation<CreateCharacterMutation, TError, CreateCharacterMutationVariables, TContext>(
       ['createCharacter'],
       (variables?: CreateCharacterMutationVariables) => httpClient<CreateCharacterMutation, CreateCharacterMutationVariables>(CreateCharacterDocument, variables)(),
+      options
+    );
+export const DeleteCharacterDocument = `
+    mutation deleteCharacter($Id: Int!) {
+  deleteCharacter(id: $Id)
+}
+    `;
+export const useDeleteCharacterMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<DeleteCharacterMutation, TError, DeleteCharacterMutationVariables, TContext>) =>
+    useMutation<DeleteCharacterMutation, TError, DeleteCharacterMutationVariables, TContext>(
+      ['deleteCharacter'],
+      (variables?: DeleteCharacterMutationVariables) => httpClient<DeleteCharacterMutation, DeleteCharacterMutationVariables>(DeleteCharacterDocument, variables)(),
       options
     );
 export const GetAllCHaractersDocument = `

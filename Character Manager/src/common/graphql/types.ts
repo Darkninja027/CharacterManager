@@ -191,6 +191,7 @@ export type Mutations = {
   createLanguage: Languages;
   createMagicItem: MagicItem;
   deleteAllItems: Scalars['Boolean'];
+  deleteCharacter: Scalars['Boolean'];
   deleteLanguage: Scalars['Boolean'];
   deleteMagicItem: Scalars['Boolean'];
   updateMagicItem: MagicItem;
@@ -209,6 +210,11 @@ export type MutationsCreateLanguageArgs = {
 
 export type MutationsCreateMagicItemArgs = {
   magicItem: MagicItemInput;
+};
+
+
+export type MutationsDeleteCharacterArgs = {
+  id: Scalars['Int'];
 };
 
 

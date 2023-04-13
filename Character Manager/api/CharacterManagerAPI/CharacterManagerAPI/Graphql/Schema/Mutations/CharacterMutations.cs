@@ -105,6 +105,23 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
 
 
         }
+
+        public bool DeleteCharacter(int Id)
+        {
+            using(CMContext db = _context.CreateDbContext())
+            {
+                Character character = db.Characters.FirstOrDefault(c => c.Id == Id);
+
+                if(character == null)
+                {
+                    throw new GraphQLException(new Error("DeleteCharacter: Attemped to delete a character that does not exist"));
+                }
+
+                db.Characters.Remove(character);
+                db.SaveChanges();
+                return db.Characters.FirstOrDefault(x => x.Id == Id) == null;
+            }
+        }
         
     }
 }
