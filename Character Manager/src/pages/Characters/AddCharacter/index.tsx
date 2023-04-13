@@ -1,18 +1,16 @@
-import { AlignmentEnum, Languages, LanguagesEnum, PlayerCharacterInput, SizeEnum } from "@types";
-import { useEffect, useState } from "react";
-import { Path, PathValue, SubmitHandler, useFieldArray, useForm, UseFormGetValues, UseFormSetValue } from "react-hook-form";
-import { Tooltip } from "react-tooltip";
-import { AddIcon, ArmorIcon, DeleteIcon } from "../../../common/icons/SvgList";
-import { formatString, pascalCamelSplit } from "../../../common/util/stringFormatting";
+import { AlignmentEnum, PlayerCharacterInput, SizeEnum } from "@types";
+import { useEffect } from "react";
+import { FieldValues, SubmitHandler, useFieldArray, useForm, UseFormReturn } from "react-hook-form";
+import { AddIcon, DeleteIcon } from "../../../common/icons/SvgList";
+import { getSkillModifier, getLevelExperience, setSkillModifier, updateModifiers } from "../../../common/util/characterUtil";
+import { formatString } from "../../../common/util/stringFormatting";
 import Accordian from "../../../components/Accordian";
 import Form from "../../../components/Form";
 import Button from "../../../components/formInputs/Button";
-import Checkbox from "../../../components/formInputs/Checkbox";
 import Input from "../../../components/formInputs/Input";
 import Radio from "../../../components/formInputs/Radio";
 import Select from "../../../components/formInputs/Select";
 import Skills from "../../../components/formInputs/Skill";
-import Skill from "../../../components/formInputs/Skill";
 import TextArea from "../../../components/formInputs/TextArea";
 import PageHeader from "../../../components/PageHeader";
 import { useGetAllLanguagesQuery } from "../../Languages/languages.generated";
@@ -26,6 +24,7 @@ export default function AddCharacter() {
     const methods = useForm<PlayerCharacterInput>({
         defaultValues: {
             level: 1,
+            proficiencyBonus: 2,
             maxHealth: 10,
             health: 10,
             armorClass: 10,
@@ -53,6 +52,12 @@ export default function AddCharacter() {
                 { name: "sleightOfHand", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
                 { name: "stealth", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
                 { name: "survival", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
+                { name: "strengthSavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
+                { name: "dexteritySavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
+                { name: "constitutionSavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
+                { name: "intelligenceSavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
+                { name: "wisdomSavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
+                { name: "charismaSavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
             ],
             alignment: AlignmentEnum.TrueNeutral,
             strength: 10,
@@ -77,20 +82,25 @@ export default function AddCharacter() {
         return { id: size, name: formatString(size) }
     })
 
-    const proficiencyBonus = 2
     const createCharacterMutation = useCreateCharacterMutation()
     const { isLoading, data: { allLanguages } = {} } = useGetAllLanguagesQuery()
 
     const { control, watch, setValue, getValues } = methods
     const [milestone, level, experience, maxHealth] = watch(['milestone', 'level', 'experience', 'maxHealth'])
+    const modifierWatch = watch(["strength"])
 
     useEffect(() => {
-        if (true) {
-            setValue("milestone", 'false' as any)
-        }
+        setValue("milestone", 'false' as any)
     }, [])
 
-    const { fields, append, remove, update } = useFieldArray({
+    useEffect(() => {
+        const subscription = watch(() => {
+            updateModifiers(methods)
+        });
+        return () => subscription.unsubscribe();
+    }, [modifierWatch]);
+
+    useFieldArray({
         control,
         keyName: "languagesId",
         name: "languages"
@@ -145,14 +155,14 @@ export default function AddCharacter() {
             <PageHeader title="Add Character" backButton />
             <div>
                 <Form methods={methods} onSubmit={OnSubmit}>
-                    <Input methods={methods} name="name" label="Name" />
+                    {/* <Input methods={methods} name="name" label="Name" />
                     <Input methods={methods} name="level" label="Level" type="number" max={20} min={1} onChange={(e) => {
                         setValue("experience", getLevelExperience(parseInt(e.target.value)))
-                    }} />
-                    <Input methods={methods} name="armorClass" label="Armor Class" type="number" min={0} />
+                    }} /> */}
+                    {/* <Input methods={methods} name="armorClass" label="Armor Class" type="number" min={0} />
                     <Input methods={methods} name="maxHealth" label="Max Health" type="number" min={0} />
                     <Input methods={methods} name="health" label="Health" type="number" min={0} max={maxHealth} />
-                    <Input methods={methods} name="experience" label="Experience" type="number" disabled={isTruthy(milestone)} />
+                    <Input methods={methods} name="experience" label="Experience" type="number" disabled={isTruthy(milestone)} /> */}
 
                     <Input methods={methods} name="strength" label="Strength" type="number" min={1} max={30} onChange={(e) => {
                         setValue("strengthModifier", getSkillModifier(parseInt(e.target.value)))
@@ -178,15 +188,18 @@ export default function AddCharacter() {
                         setValue("charismaModifier", getSkillModifier(parseInt(e.target.value)))
                     }} />
                     <Input methods={methods} name="charismaModifier" label="" type="number" min={-5} max={10} />
-                    <div>
+                    {/* <div>
                         <label>Milestone</label>
                         <Radio methods={methods} name="milestone" value={'true'} />
                         <Radio methods={methods} name="milestone" value={'false'} />
-                    </div>
-                    <Input methods={methods} name="age" label="Age" type="number" />
+                    </div> */}
+                    {/* <Input methods={methods} name="age" label="Age" type="number" />
                     <Select methods={methods} name="gender" options={genders} label="Gender" />
                     <Select methods={methods} name="alignment" options={alignments} label="Alignment" />
-                    <Select methods={methods} name="size" options={sizes} label="Size" />
+                    <Select methods={methods} name="size" options={sizes} label="Size" /> */}
+                    <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" onChange={(e) => {
+                        // updateModifiers(methods, Number(e.target.value))
+                    }} />
                     <Accordian heading={
                         <section>
                             <header>Skills</header>
@@ -198,7 +211,7 @@ export default function AddCharacter() {
                             )
                         })}
                     </Accordian>
-                    <Accordian heading={<section className="flex items-center gap-3">
+                    {/* <Accordian heading={<section className="flex items-center gap-3">
                         <header>Languages</header>
                         <span onClick={(e) => {
                             e.preventDefault()
@@ -225,7 +238,7 @@ export default function AddCharacter() {
                     <Input methods={methods} name="height" label="Height" />
                     <Input methods={methods} name="hair" label="Hair" />
                     <Input methods={methods} name="eyes" label="Eyes" />
-                    <Input methods={methods} name="skin" label="skin" />
+                    <Input methods={methods} name="skin" label="skin" /> */}
 
                     <Button label="Submit" />
 
@@ -235,127 +248,9 @@ export default function AddCharacter() {
     )
 }
 
-enum LevelExp {
-    Level1 = 0,
-    Level2 = 300,
-    Level3 = 900,
-    Level4 = 2700,
-    Level5 = 6500,
-    Level6 = 14000,
-    Level7 = 23000,
-    Level8 = 34000,
-    Level9 = 48000,
-    Level10 = 64000,
-    Level11 = 85000,
-    Level12 = 100000,
-    Level13 = 120000,
-    Level14 = 140000,
-    Level15 = 165000,
-    Level16 = 195000,
-    Level17 = 225000,
-    Level18 = 265000,
-    Level19 = 305000,
-    Level20 = 355000
-}
-
-function getLevelExperience(level: number) {
-    if (level == 1)
-        return LevelExp.Level1
-    if (level == 2)
-        return LevelExp.Level2
-    if (level == 3)
-        return LevelExp.Level3
-    if (level == 4)
-        return LevelExp.Level4
-    if (level == 5)
-        return LevelExp.Level5
-    if (level == 6)
-        return LevelExp.Level6
-    if (level == 7)
-        return LevelExp.Level7
-    if (level == 8)
-        return LevelExp.Level8
-    if (level == 9)
-        return LevelExp.Level9
-    if (level == 10)
-        return LevelExp.Level10
-    if (level == 11)
-        return LevelExp.Level11
-    if (level == 12)
-        return LevelExp.Level12
-    if (level == 13)
-        return LevelExp.Level13
-    if (level == 14)
-        return LevelExp.Level14
-    if (level == 15)
-        return LevelExp.Level15
-    if (level == 16)
-        return LevelExp.Level16
-    if (level == 17)
-        return LevelExp.Level17
-    if (level == 18)
-        return LevelExp.Level18
-    if (level == 19)
-        return LevelExp.Level19
-    if (level == 20)
-        return LevelExp.Level20
-}
-
 function isTruthy(value: unknown) {
     return value === 'true'
 }
 
-function getSkillModifier(skillValue: number) {
-    switch (skillValue) {
-        case 1:
-            return -5;
-        case 2:
-        case 3:
-            return -4;
-        case 4:
-        case 5:
-            return -3;
-        case 6:
-        case 7:
-            return -2;
-        case 8:
-        case 9:
-            return -1;
-        case 10:
-        case 11:
-            return 0;
-        case 12:
-        case 13:
-            return 1;
-        case 14:
-        case 15:
-            return 2;
-        case 16:
-        case 17:
-            return 3;
-        case 18:
-        case 19:
-            return 4;
-        case 20:
-        case 21:
-            return 5;
-        case 22:
-        case 23:
-            return 6;
-        case 24:
-        case 25:
-            return 7;
-        case 26:
-        case 27:
-            return 8;
-        case 28:
-        case 29:
-            return 9;
-        case 30:
-            return 10;
-        default:
-            return 0
 
-    }
-}
 

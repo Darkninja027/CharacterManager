@@ -22,6 +22,7 @@ namespace CharacterManagerAPI.Graphql.InputTypes
         public int Health { get; set; }
         public int ArmorClass { get; set; }
         public int? TemporaryHealth { get; set; }
+        public int ProficiencyBonus { get; set; }
         public int Level { get; set; }
         public int Strength { get; set; }
         public int StrengthModifier { get; set; }

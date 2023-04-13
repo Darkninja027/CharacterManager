@@ -12,6 +12,7 @@ namespace CharacterManagerAPI.Models
         public int Health { get; set; }
         public int ArmorClass { get; set; }
         public int? TemporaryHealth { get; set; }
+        public int ProficiencyBonus { get; set; }
         public int Strength { get; set; }
         public int StrengthModifier { get; set; }
         public int Dexterity { get; set; }

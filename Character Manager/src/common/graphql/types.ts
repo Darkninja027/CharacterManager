@@ -53,6 +53,7 @@ export type Character = {
   milestone: Scalars['Boolean'];
   name: Scalars['String'];
   personalityTraits?: Maybe<Scalars['String']>;
+  proficiencyBonus: Scalars['Int'];
   race?: Maybe<Race>;
   size: SizeEnum;
   skills: Array<Skill>;
@@ -265,6 +266,7 @@ export type PlayerCharacterInput = {
   milestone: Scalars['Boolean'];
   name: Scalars['String'];
   personalityTraits?: InputMaybe<Scalars['String']>;
+  proficiencyBonus: Scalars['Int'];
   size: SizeEnum;
   skills: Array<PcSkillsInput>;
   skin?: InputMaybe<Scalars['String']>;

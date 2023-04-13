@@ -5,7 +5,7 @@ import { useGetAllCHaractersQuery } from "./characters.generated"
 export function CharactersPage() {
     const navigate = useNavigate()
     const { isLoading, data: { allCharacters } = {} } = useGetAllCHaractersQuery()
-    console.log(allCharacters)
+    // console.log(allCharacters)
     if (isLoading) {
         return <p>Loading...</p>
     }

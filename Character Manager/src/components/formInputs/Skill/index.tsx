@@ -1,6 +1,8 @@
 import { PlayerCharacterInput } from "@types"
-import { FieldValues, Path, PathValue, UseFormGetValues, UseFormReturn, UseFormSetValue } from "react-hook-form"
+import { ChangeEvent, useEffect } from "react"
+import { FieldValues, Path, PathValue, UseFormGetValues, UseFormReturn, UseFormSetValue, useWatch } from "react-hook-form"
 import { Tooltip } from "react-tooltip"
+import { setSkillModifier, updateModifiers } from "../../../common/util/characterUtil"
 import { formatString, pascalCamelSplit } from "../../../common/util/stringFormatting"
 import Checkbox from "../Checkbox"
 import Input from "../Input"
@@ -12,30 +14,20 @@ type SkillProps<T extends FieldValues> = {
 
 export default function Skills({ methods, index }: SkillProps<PlayerCharacterInput>) {
     var skillName = methods.getValues(`skills.${index}.name`)
-    const { getValues, setValue } = methods
-    const prof = 2
     return (
         <label className="flex items-center">
             <div className="flex items-center w-48">
-                <Checkbox id={`proficient${index}`} methods={methods} name={`skills.${index}.proficient`} onChange={(e) => {
-                    if (e.target.checked) {
-                        setSkillModifier(setValue, getValues, `skills.${index}.modifier`, e.target.checked, prof, false)
-                    }
-                    else {
-                        setSkillModifier(setValue, getValues, `skills.${index}.modifier`, e.target.checked, prof, getValues(`skills.${index}.expertise`))
-                        setValue(`skills.${index}.expertise`, false)
+                <Checkbox id={`proficient${index}`} methods={methods} name={`skills.${index}.proficient`} onClick={(e: any) => {
+                    if (!e.target.checked) {
+                        methods.setValue(`skills.${index}.expertise`, false)
                     }
                 }} />
-                <Checkbox id={`expertise${index}`} methods={methods} name={`skills.${index}.expertise`} onChange={(e) => {
+                {!skillName.includes("SavingThrow") && <Checkbox id={`expertise${index}`} methods={methods} name={`skills.${index}.expertise`} onClick={(e: any) => {
                     if (e.target.checked) {
-                        setValue(`skills.${index}.proficient`, true)
-                        setSkillModifier(setValue, getValues, `skills.${index}.modifier`, e.target.checked, prof, true)
+                        methods.setValue(`skills.${index}.proficient`, true)
                     }
-                    else {
-                        setSkillModifier(setValue, getValues, `skills.${index}.modifier`, e.target.checked, prof, false)
-                    }
-                }} />
-                <p>{formatString(pascalCamelSplit(skillName))}</p>
+                }} />}
+                <p>{formatString(pascalCamelSplit(skillName).replace("Saving Throw", ""))}</p>
             </div>
             <Input className="w-10" methods={methods} name={`skills.${index}.modifier`} label="" />
             <Tooltip anchorSelect={`#expertise${index}`} content="Expertise" />
@@ -44,13 +36,3 @@ export default function Skills({ methods, index }: SkillProps<PlayerCharacterInp
     )
 }
 
-function setSkillModifier<T extends FieldValues>(setValue: UseFormSetValue<T>, getValues: UseFormGetValues<T>, name: Path<T>, checked: boolean, bonus: PathValue<T, Path<T>>, expertise: boolean) {
-    bonus = (expertise ? bonus as number * 2 : bonus) as PathValue<T, Path<T>>
-    if (checked) {
-        setValue(name, bonus)
-    }
-    else {
-        bonus = getValues(name) as number - (bonus as number) as PathValue<T, Path<T>>
-        setValue(name, bonus)
-    }
-}
