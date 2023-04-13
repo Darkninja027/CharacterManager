@@ -37,6 +37,7 @@ namespace CharacterManagerAPI.Graphql.InputTypes
         public int Charisma { get; set; }
         public int CharismaModifier { get; set; }
         public ICollection<PCSkills> Skills { get; set; }
+        public ICollection<PCSkills> SavingThrows { get; set; }
         //public Race Race { get; set; }
         public ICollection<PCLanguages> Languages { get; set; }
 

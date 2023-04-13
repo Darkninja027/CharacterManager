@@ -22,12 +22,12 @@ export default function Skills({ methods, index }: SkillProps<PlayerCharacterInp
                         methods.setValue(`skills.${index}.expertise`, false)
                     }
                 }} />
-                {!skillName.includes("SavingThrow") && <Checkbox id={`expertise${index}`} methods={methods} name={`skills.${index}.expertise`} onClick={(e: any) => {
+                <Checkbox id={`expertise${index}`} methods={methods} name={`skills.${index}.expertise`} onClick={(e: any) => {
                     if (e.target.checked) {
                         methods.setValue(`skills.${index}.proficient`, true)
                     }
-                }} />}
-                <p>{formatString(pascalCamelSplit(skillName).replace("Saving Throw", ""))}</p>
+                }} />
+                <p>{formatString(pascalCamelSplit(skillName))}</p>
             </div>
             <Input className="w-10" methods={methods} name={`skills.${index}.modifier`} label="" />
             <Tooltip anchorSelect={`#expertise${index}`} content="Expertise" />

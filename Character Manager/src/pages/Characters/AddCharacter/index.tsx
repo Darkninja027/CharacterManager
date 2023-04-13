@@ -1,17 +1,14 @@
 import { AlignmentEnum, PlayerCharacterInput, SizeEnum } from "@types";
 import { useEffect } from "react";
-import { FieldValues, SubmitHandler, useFieldArray, useForm, UseFormReturn } from "react-hook-form";
-import { AddIcon, DeleteIcon } from "../../../common/icons/SvgList";
-import { getSkillModifier, getLevelExperience, setSkillModifier, updateModifiers } from "../../../common/util/characterUtil";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { characterDefaultValues, getSkillModifier, updateModifiers } from "../../../common/util/characterUtil";
 import { formatString } from "../../../common/util/stringFormatting";
 import Accordian from "../../../components/Accordian";
 import Form from "../../../components/Form";
 import Button from "../../../components/formInputs/Button";
 import Input from "../../../components/formInputs/Input";
-import Radio from "../../../components/formInputs/Radio";
-import Select from "../../../components/formInputs/Select";
+import SavingThrows from "../../../components/formInputs/SavingThrow";
 import Skills from "../../../components/formInputs/Skill";
-import TextArea from "../../../components/formInputs/TextArea";
 import PageHeader from "../../../components/PageHeader";
 import { useGetAllLanguagesQuery } from "../../Languages/languages.generated";
 import { useCreateCharacterMutation } from "../characters.generated";
@@ -22,57 +19,7 @@ import { useCreateCharacterMutation } from "../characters.generated";
 export default function AddCharacter() {
 
     const methods = useForm<PlayerCharacterInput>({
-        defaultValues: {
-            level: 1,
-            proficiencyBonus: 2,
-            maxHealth: 10,
-            health: 10,
-            armorClass: 10,
-            experience: getLevelExperience(1),
-            milestone: false,
-            languages: [
-                { id: 1 }
-            ],
-            skills: [
-                { name: "acrobatics", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
-                { name: "animalHandling", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
-                { name: "arcana", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
-                { name: "athletics", modifier: 0, attribute: "strength", expertise: false, proficient: false },
-                { name: "deception", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
-                { name: "history", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
-                { name: "insight", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
-                { name: "intimidation", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
-                { name: "investigation", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
-                { name: "medicine", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
-                { name: "nature", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
-                { name: "perception", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
-                { name: "performance", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
-                { name: "persuasion", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
-                { name: "religion", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
-                { name: "sleightOfHand", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
-                { name: "stealth", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
-                { name: "survival", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
-                { name: "strengthSavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
-                { name: "dexteritySavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
-                { name: "constitutionSavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
-                { name: "intelligenceSavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
-                { name: "wisdomSavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
-                { name: "charismaSavingThrow", modifier: 0, attribute: "wisdom", proficient: false },
-            ],
-            alignment: AlignmentEnum.TrueNeutral,
-            strength: 10,
-            strengthModifier: 0,
-            dexterity: 10,
-            dexterityModifier: 0,
-            constitution: 10,
-            constitutionModifier: 0,
-            intelligence: 10,
-            intelligenceModifier: 0,
-            wisdom: 10,
-            wisdomModifier: 0,
-            charisma: 10,
-            charismaModifier: 0,
-        }
+        defaultValues: characterDefaultValues
     })
     const alignments = Object.values(AlignmentEnum).map((align, index) => {
         return { id: align, name: formatString(align) }
@@ -111,6 +58,11 @@ export default function AddCharacter() {
         keyName: "skillId",
         name: "skills"
     })
+    const { fields: savingThrows } = useFieldArray({
+        control,
+        keyName: "savingThrowId",
+        name: "savingThrows"
+    })
     const lanaguageList = allLanguages?.map((lang) => {
         return { id: lang.id, name: lang.name }
     })
@@ -118,6 +70,7 @@ export default function AddCharacter() {
     const OnSubmit: SubmitHandler<PlayerCharacterInput> = data => {
         data.level = Number(data.level)
         data.age = Number(data.age)
+        data.proficiencyBonus = Number(data.proficiencyBonus)
         data.weight = Number(data.weight)
         data.milestone = isTruthy(data.milestone)
         data.languages.forEach(lang => {
@@ -142,7 +95,7 @@ export default function AddCharacter() {
         data.maxHealth = Number(data.maxHealth)
         data.armorClass = Number(data.armorClass)
         console.log(data)
-        // createCharacterMutation.mutate({ character: data })
+        createCharacterMutation.mutate({ character: data })
     }
 
     const genders = [
@@ -155,11 +108,11 @@ export default function AddCharacter() {
             <PageHeader title="Add Character" backButton />
             <div>
                 <Form methods={methods} onSubmit={OnSubmit}>
-                    {/* <Input methods={methods} name="name" label="Name" />
-                    <Input methods={methods} name="level" label="Level" type="number" max={20} min={1} onChange={(e) => {
+                    <Input methods={methods} name="name" label="Name" />
+                    {/* <Input methods={methods} name="level" label="Level" type="number" max={20} min={1} onChange={(e) => {
                         setValue("experience", getLevelExperience(parseInt(e.target.value)))
-                    }} /> */}
-                    {/* <Input methods={methods} name="armorClass" label="Armor Class" type="number" min={0} />
+                    }} />
+                    <Input methods={methods} name="armorClass" label="Armor Class" type="number" min={0} />
                     <Input methods={methods} name="maxHealth" label="Max Health" type="number" min={0} />
                     <Input methods={methods} name="health" label="Health" type="number" min={0} max={maxHealth} />
                     <Input methods={methods} name="experience" label="Experience" type="number" disabled={isTruthy(milestone)} /> */}
@@ -197,19 +150,28 @@ export default function AddCharacter() {
                     <Select methods={methods} name="gender" options={genders} label="Gender" />
                     <Select methods={methods} name="alignment" options={alignments} label="Alignment" />
                     <Select methods={methods} name="size" options={sizes} label="Size" /> */}
-                    <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" onChange={(e) => {
-                        // updateModifiers(methods, Number(e.target.value))
-                    }} />
+                    <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" />
                     <Accordian heading={
                         <section>
                             <header>Skills</header>
                         </section>
                     }>
-                        {skills.map((skill, index) => {
-                            return (
-                                <Skills methods={methods} index={index} />
-                            )
-                        })}
+                        <div className="flex gap-3">
+                            <section>
+                                {skills.map((skill, index) => {
+                                    return (
+                                        <Skills methods={methods} index={index} />
+                                    )
+                                })}
+                            </section>
+                            <section>
+                                {savingThrows.map((skill, index) => {
+                                    return (
+                                        <SavingThrows methods={methods} index={index} />
+                                    )
+                                })}
+                            </section>
+                        </div>
                     </Accordian>
                     {/* <Accordian heading={<section className="flex items-center gap-3">
                         <header>Languages</header>

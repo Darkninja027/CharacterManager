@@ -21,6 +21,31 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
             {
 
                 ICollection<Languages> lang = new List<Languages>();
+                ICollection <Skill> skills = new List<Skill>();
+
+                foreach(var skill in character.Skills)
+                {
+                    skills.Add(new Skill
+                    {
+                        Name = skill.Name,
+                        Attribute = skill.Attribute,
+                        Proficient = skill.Proficient,
+                        Expertise = skill.Expertise,
+                        Modifier = skill.Modifier,
+                    });
+                }
+
+                foreach(var save in character.SavingThrows)
+                {
+                    skills.Add(new Skill
+                    {
+                        Name = save.Name,
+                        Attribute = save.Attribute,
+                        Proficient = save.Proficient,
+                        Expertise = save.Expertise,
+                        Modifier = save.Modifier,
+                    });
+                }
 
                 foreach (var language in character.Languages)
                 {
@@ -41,6 +66,7 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
                     MaxHealth = character.MaxHealth,
                     ArmorClass = character.ArmorClass,
                     TemporaryHealth = character.TemporaryHealth,
+                    ProficiencyBonus = character.ProficiencyBonus,
                     Strength = character.Strength,
                     StrengthModifier = character.StrengthModifier,
                     Dexterity = character.Dexterity,
@@ -68,6 +94,7 @@ namespace CharacterManagerAPI.Graphql.Schema.Mutations
                     Hair = character.Hair,
                     Eyes = character.Eyes,
                     Skin = character.Skin,
+                    Skills = skills
                     //Race = character.Race,
                 };
 

@@ -1,5 +1,6 @@
-import { PlayerCharacterInput } from "@types"
+import { AlignmentEnum, PlayerCharacterInput, SizeEnum } from "@types"
 import { FieldValues, Path, PathValue, UseFormGetValues, UseFormReturn, UseFormSetValue } from "react-hook-form"
+import SavingThrows from "../../components/formInputs/SavingThrow"
 
 enum LevelExp {
     Level1 = 0,
@@ -22,6 +23,63 @@ enum LevelExp {
     Level18 = 265000,
     Level19 = 305000,
     Level20 = 355000
+}
+
+export const characterDefaultValues: PlayerCharacterInput = {
+    level: 1,
+    name: "",
+    proficiencyBonus: 2,
+    maxHealth: 10,
+    health: 10,
+    armorClass: 10,
+    experience: getLevelExperience(1),
+    milestone: false,
+    languages: [
+        { id: 1 }
+    ],
+    skills: [
+        { name: "acrobatics", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
+        { name: "animalHandling", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
+        { name: "arcana", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
+        { name: "athletics", modifier: 0, attribute: "strength", expertise: false, proficient: false },
+        { name: "deception", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
+        { name: "history", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
+        { name: "insight", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
+        { name: "intimidation", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
+        { name: "investigation", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
+        { name: "medicine", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
+        { name: "nature", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
+        { name: "perception", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
+        { name: "performance", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
+        { name: "persuasion", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
+        { name: "religion", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
+        { name: "sleightOfHand", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
+        { name: "stealth", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
+        { name: "survival", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
+
+    ],
+    savingThrows: [
+        { name: "strengthSavingThrow", modifier: 0, attribute: "strength", expertise: false, proficient: false },
+        { name: "dexteritySavingThrow", modifier: 0, attribute: "dexterity", expertise: false, proficient: false },
+        { name: "constitutionSavingThrow", modifier: 0, attribute: "constitution", expertise: false, proficient: false },
+        { name: "intelligenceSavingThrow", modifier: 0, attribute: "intelligence", expertise: false, proficient: false },
+        { name: "wisdomSavingThrow", modifier: 0, attribute: "wisdom", expertise: false, proficient: false },
+        { name: "charismaSavingThrow", modifier: 0, attribute: "charisma", expertise: false, proficient: false },
+    ],
+    alignment: AlignmentEnum.TrueNeutral,
+    size: SizeEnum.Medium,
+    strength: 10,
+    strengthModifier: 0,
+    dexterity: 10,
+    dexterityModifier: 0,
+    constitution: 10,
+    constitutionModifier: 0,
+    intelligence: 10,
+    intelligenceModifier: 0,
+    wisdom: 10,
+    wisdomModifier: 0,
+    charisma: 10,
+    charismaModifier: 0,
 }
 
 export function getLevelExperience(level: number) {
@@ -134,7 +192,7 @@ export function setSkillModifier<T extends FieldValues>(setValue: UseFormSetValu
 
 export function updateModifiers(methods: UseFormReturn<PlayerCharacterInput>) {
     const { getValues, setValue } = methods
-    const skills = getValues("skills")
+    const [skills, saves] = getValues(["skills", "savingThrows"])
     const proficiencyBonus = getValues("proficiencyBonus")
     skills.map((skill, index) => {
         var modifier = 0
@@ -148,6 +206,17 @@ export function updateModifiers(methods: UseFormReturn<PlayerCharacterInput>) {
         var oldValue = getValues(`skills.${index}.modifier`);
         if (oldValue !== modifier) {
             setValue(`skills.${index}.modifier`, modifier)
+        }
+    })
+    saves.map((save, index) => {
+        var modifier = 0
+        modifier += Number(getAttributeModifier(methods, save.attribute))
+        if (save.proficient) {
+            modifier += Number(proficiencyBonus)
+        }
+        var oldValue = getValues(`savingThrows.${index}.modifier`);
+        if (oldValue !== modifier) {
+            setValue(`savingThrows.${index}.modifier`, modifier)
         }
     })
 }
