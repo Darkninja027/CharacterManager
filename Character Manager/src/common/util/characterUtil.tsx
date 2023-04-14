@@ -1,6 +1,7 @@
 import { AlignmentEnum, PlayerCharacterInput, SizeEnum } from "@types"
 import { FieldValues, Path, PathValue, UseFormGetValues, UseFormReturn, UseFormSetValue } from "react-hook-form"
 import SavingThrows from "../../components/formInputs/SavingThrow"
+import { formatString } from "./stringFormatting"
 
 enum LevelExp {
     Level1 = 0,
@@ -240,4 +241,8 @@ export function getAttributeModifier(methods: UseFormReturn<PlayerCharacterInput
     if (attribute === 'charisma') {
         return methods.getValues("charismaModifier")
     }
+}
+
+export function displayAttribute(attribute: string) {
+    return formatString(attribute).slice(0, 3)
 }

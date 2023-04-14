@@ -1,12 +1,13 @@
 import { AlignmentEnum, PlayerCharacterInput, SizeEnum } from "@types";
 import { useEffect } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { characterDefaultValues, getSkillModifier, updateModifiers } from "../../../common/util/characterUtil";
+import { characterDefaultValues, getSkillModifier, updateModifiers, getLevelExperience } from "../../../common/util/characterUtil";
 import { formatString } from "../../../common/util/stringFormatting";
 import Accordian from "../../../components/Accordian";
 import Form from "../../../components/Form";
 import Button from "../../../components/formInputs/Button";
 import Input from "../../../components/formInputs/Input";
+import Radio from "../../../components/formInputs/Radio";
 import SavingThrows from "../../../components/formInputs/SavingThrow";
 import Skills from "../../../components/formInputs/Skill";
 import PageHeader from "../../../components/PageHeader";
@@ -108,71 +109,104 @@ export default function AddCharacter() {
             <PageHeader title="Add Character" backButton />
             <div>
                 <Form methods={methods} onSubmit={OnSubmit}>
-                    <Input methods={methods} name="name" label="Name" />
-                    {/* <Input methods={methods} name="level" label="Level" type="number" max={20} min={1} onChange={(e) => {
-                        setValue("experience", getLevelExperience(parseInt(e.target.value)))
-                    }} />
-                    <Input methods={methods} name="armorClass" label="Armor Class" type="number" min={0} />
-                    <Input methods={methods} name="maxHealth" label="Max Health" type="number" min={0} />
-                    <Input methods={methods} name="health" label="Health" type="number" min={0} max={maxHealth} />
-                    <Input methods={methods} name="experience" label="Experience" type="number" disabled={isTruthy(milestone)} /> */}
+                    <div className="flex w-full grow items-center gap-3">
 
-                    <Input methods={methods} name="strength" label="Strength" type="number" min={1} max={30} onChange={(e) => {
-                        setValue("strengthModifier", getSkillModifier(parseInt(e.target.value)))
-                    }} />
-                    <Input methods={methods} name="strengthModifier" label="" type="number" min={-5} max={10} />
-                    <Input methods={methods} name="dexterity" label="Dexterity" type="number" min={1} max={30} onChange={(e) => {
-                        setValue("dexterityModifier", getSkillModifier(parseInt(e.target.value)))
-                    }} />
-                    <Input methods={methods} name="dexterityModifier" label="" type="number" min={-5} max={10} />
-                    <Input methods={methods} name="constitution" label="Consitution" type="number" min={1} max={30} onChange={(e) => {
-                        setValue("constitutionModifier", getSkillModifier(parseInt(e.target.value)))
-                    }} />
-                    <Input methods={methods} name="constitutionModifier" label="" type="number" min={-5} max={10} />
-                    <Input methods={methods} name="intelligence" label="Intelligence" type="number" min={1} max={30} onChange={(e) => {
-                        setValue("intelligenceModifier", getSkillModifier(parseInt(e.target.value)))
-                    }} />
-                    <Input methods={methods} name="intelligenceModifier" label="" type="number" min={-5} max={10} />
-                    <Input methods={methods} name="wisdom" label="Wisdom" type="number" min={1} max={30} onChange={(e) => {
-                        setValue("wisdomModifier", getSkillModifier(parseInt(e.target.value)))
-                    }} />
-                    <Input methods={methods} name="wisdomModifier" label="" type="number" min={-5} max={10} />
-                    <Input methods={methods} name="charisma" label="Charisma" type="number" min={1} max={30} onChange={(e) => {
-                        setValue("charismaModifier", getSkillModifier(parseInt(e.target.value)))
-                    }} />
-                    <Input methods={methods} name="charismaModifier" label="" type="number" min={-5} max={10} />
-                    {/* <div>
-                        <label>Milestone</label>
-                        <Radio methods={methods} name="milestone" value={'true'} />
-                        <Radio methods={methods} name="milestone" value={'false'} />
-                    </div> */}
-                    {/* <Input methods={methods} name="age" label="Age" type="number" />
-                    <Select methods={methods} name="gender" options={genders} label="Gender" />
-                    <Select methods={methods} name="alignment" options={alignments} label="Alignment" />
-                    <Select methods={methods} name="size" options={sizes} label="Size" /> */}
-                    <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" />
-                    <Accordian heading={
-                        <section>
-                            <header>Skills</header>
-                        </section>
-                    }>
-                        <div className="flex gap-3">
+                        <Input className="h-12 grow" methods={methods} name="name" label="Character Name" />
+                        <div className="w-9/12 grid grid-cols-3 grid-rows-2 gap-3 bg-gray-300 p-2 rounded-lg">
+                            <Input methods={methods} name="level" label="Level" type="number" max={20} min={1} onChange={(e) => {
+                                setValue("experience", getLevelExperience(parseInt(e.target.value)))
+                            }} />
                             <section>
-                                {skills.map((skill, index) => {
-                                    return (
-                                        <Skills methods={methods} index={index} />
-                                    )
-                                })}
+
+                                <label>Milestone</label>
+                                <div className="flex gap-5 items-center bg-white h-min p-1 border-black border rounded-lg">
+                                    <Radio methods={methods} name="milestone" value={'true'} />
+                                    <Radio methods={methods} name="milestone" value={'false'} />
+                                </div>
                             </section>
-                            <section>
+                            <p><Input methods={methods} name="experience" label="Experience" type="number" disabled={isTruthy(milestone)} /></p>
+                            <p>Race</p>
+                            <p>Background</p>
+                            <p>Player</p>
+
+                        </div>
+                    </div>
+                    {/* <Input methods={methods} name="armorClass" label="Armor Class" type="number" min={0} />
+                    <Input methods={methods} name="maxHealth" label="Max Health" type="number" min={0} />
+                    <Input methods={methods} name="health" label="Health" type="number" min={0} max={maxHealth} /> */}
+                    <div className="flex gap-3">
+                        <div className="w-1/12 flex flex-col justify-between items-center bg-gray-300 p-2 rounded-lg">
+                            <section className="flex flex-col items-center w-min">
+                                <p>Strength</p>
+                                <Input className="w-16 h-16" methods={methods} name="strength" label="" type="number" min={1} max={30} onChange={(e) => {
+                                    setValue("strengthModifier", getSkillModifier(parseInt(e.target.value)))
+                                }} />
+                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="strengthModifier" label="" type="number" min={-5} max={10} />
+
+                            </section>
+                            <section className="flex flex-col items-center w-min">
+                                <p>Dexterity</p>
+                                <Input className="w-16 h-16" methods={methods} name="dexterity" label="" type="number" min={1} max={30} onChange={(e) => {
+                                    setValue("dexterityModifier", getSkillModifier(parseInt(e.target.value)))
+                                }} />
+                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="dexterityModifier" label="" type="number" min={-5} max={10} />
+                            </section>
+                            <section className="flex flex-col items-center w-min">
+                                <p>Constitution</p>
+                                <Input className="w-16 h-16" methods={methods} name="constitution" label="" type="number" min={1} max={30} onChange={(e) => {
+                                    setValue("constitutionModifier", getSkillModifier(parseInt(e.target.value)))
+                                }} />
+                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="constitutionModifier" label="" type="number" min={-5} max={10} />
+                            </section>
+                            <section className="flex flex-col items-center w-min">
+                                <p>Intelligence</p>
+                                <Input className="w-16 h-16" methods={methods} name="intelligence" label="" type="number" min={1} max={30} onChange={(e) => {
+                                    setValue("intelligenceModifier", getSkillModifier(parseInt(e.target.value)))
+                                }} />
+                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="intelligenceModifier" label="" type="number" min={-5} max={10} />
+                            </section>
+                            <section className="flex flex-col items-center w-min">
+                                <p>Wisdom</p>
+                                <Input className="w-16 h-16" methods={methods} name="wisdom" label="" type="number" min={1} max={30} onChange={(e) => {
+                                    setValue("wisdomModifier", getSkillModifier(parseInt(e.target.value)))
+                                }} />
+                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="wisdomModifier" label="" type="number" min={-5} max={10} />
+
+                            </section>
+                            <section className="flex flex-col items-center w-min">
+                                <p>Charisma</p>
+                                <Input className="w-16 h-16" methods={methods} name="charisma" label="" type="number" min={1} max={30} onChange={(e) => {
+                                    setValue("charismaModifier", getSkillModifier(parseInt(e.target.value)))
+                                }} />
+                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="charismaModifier" label="" type="number" min={-5} max={10} />
+                            </section>
+                        </div>
+                        <div className="flex flex-col w-2/12 gap-3 ">
+                            <div className="bg-gray-300  rounded-lg p-2">
+                                <p>Saving Throw</p>
                                 {savingThrows.map((skill, index) => {
                                     return (
                                         <SavingThrows methods={methods} index={index} />
                                     )
                                 })}
-                            </section>
+                            </div>
+                            <div className="bg-gray-300 rounded-lg p-2">
+                                <p>Skills</p>
+                                {skills.map((skill, index) => {
+                                    return (
+                                        <Skills methods={methods} index={index} />
+                                    )
+                                })}
+                            </div>
                         </div>
-                    </Accordian>
+                    </div>
+
+
+                    {/* <Input methods={methods} name="age" label="Age" type="number" />
+                    <Select methods={methods} name="gender" options={genders} label="Gender" />
+                    <Select methods={methods} name="alignment" options={alignments} label="Alignment" />
+                    <Select methods={methods} name="size" options={sizes} label="Size" /> */}
+                    <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" />
                     {/* <Accordian heading={<section className="flex items-center gap-3">
                         <header>Languages</header>
                         <span onClick={(e) => {
@@ -205,7 +239,7 @@ export default function AddCharacter() {
                     <Button label="Submit" />
 
                 </Form>
-            </div>
+            </div >
         </>
     )
 }
