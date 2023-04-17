@@ -1,6 +1,7 @@
 import { AlignmentEnum, PlayerCharacterInput, SizeEnum } from "@types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { AddIcon, DeleteIcon } from "../../../common/icons/SvgList";
 import { characterDefaultValues, getSkillModifier, updateModifiers, getLevelExperience } from "../../../common/util/characterUtil";
 import { formatString } from "../../../common/util/stringFormatting";
 import Accordian from "../../../components/Accordian";
@@ -9,7 +10,9 @@ import Button from "../../../components/formInputs/Button";
 import Input from "../../../components/formInputs/Input";
 import Radio from "../../../components/formInputs/Radio";
 import SavingThrows from "../../../components/formInputs/SavingThrow";
+import Select from "../../../components/formInputs/Select";
 import Skills from "../../../components/formInputs/Skill";
+import TextArea from "../../../components/formInputs/TextArea";
 import PageHeader from "../../../components/PageHeader";
 import { useGetAllLanguagesQuery } from "../../Languages/languages.generated";
 import { useCreateCharacterMutation } from "../characters.generated";
@@ -22,6 +25,9 @@ export default function AddCharacter() {
     const methods = useForm<PlayerCharacterInput>({
         defaultValues: characterDefaultValues
     })
+
+    const [showInfo, setInfo] = useState<boolean>(true)
+    const [showBio, setBio] = useState<boolean>(false)
     const alignments = Object.values(AlignmentEnum).map((align, index) => {
         return { id: align, name: formatString(align) }
     })
@@ -48,7 +54,7 @@ export default function AddCharacter() {
         return () => subscription.unsubscribe();
     }, [modifierWatch]);
 
-    useFieldArray({
+    const { fields: languages, append: addLanguage, remove: removeLanguage } = useFieldArray({
         control,
         keyName: "languagesId",
         name: "languages"
@@ -112,29 +118,49 @@ export default function AddCharacter() {
                     <div className="flex w-full grow items-center gap-3">
 
                         <Input className="h-12 grow" methods={methods} name="name" label="Character Name" />
-                        <div className="w-9/12 grid grid-cols-3 grid-rows-2 gap-3 bg-gray-300 p-2 rounded-lg">
-                            <Input methods={methods} name="level" label="Level" type="number" max={20} min={1} onChange={(e) => {
-                                setValue("experience", getLevelExperience(parseInt(e.target.value)))
-                            }} />
-                            <section>
+                        <div className="w-9/12 bg-gray-300 p-2 rounded-lg">
+                            {showInfo && <div className="grid grid-cols-3 grid-rows-2 gap-3">
+                                <Input methods={methods} name="level" label="Level" type="number" max={20} min={1} onChange={(e) => {
+                                    setValue("experience", getLevelExperience(parseInt(e.target.value)))
+                                }} />
+                                <section>
 
-                                <label>Milestone</label>
-                                <div className="flex gap-5 items-center bg-white h-min p-1 border-black border rounded-lg">
-                                    <Radio methods={methods} name="milestone" value={'true'} />
-                                    <Radio methods={methods} name="milestone" value={'false'} />
-                                </div>
-                            </section>
-                            <p><Input methods={methods} name="experience" label="Experience" type="number" disabled={isTruthy(milestone)} /></p>
-                            <p>Race</p>
-                            <p>Background</p>
-                            <p>Player</p>
-
+                                    <label>Milestone</label>
+                                    <div className="flex gap-5 items-center bg-white h-min p-1 border-black border rounded-lg">
+                                        <Radio methods={methods} name="milestone" value={'true'} />
+                                        <Radio methods={methods} name="milestone" value={'false'} />
+                                    </div>
+                                </section>
+                                <p><Input methods={methods} name="experience" label="Experience" type="number" disabled={isTruthy(milestone)} /></p>
+                                <p>Race</p>
+                                <p>Subrace</p>
+                                <p>Background</p>
+                            </div>}
+                            {showBio && <div className="grid grid-cols-5 grid-rows-2 gap-3">
+                                <Input methods={methods} name="weight" label="Weight" type="number" />
+                                <Input methods={methods} name="height" label="Height" />
+                                <Input methods={methods} name="hair" label="Hair" />
+                                <Input methods={methods} name="eyes" label="Eyes" />
+                                <Input methods={methods} name="skin" label="Skin" />
+                                <Input methods={methods} name="age" label="Age" type="number" />
+                                <Select methods={methods} name="gender" options={genders} label="Gender" />
+                                <Select methods={methods} name="alignment" options={alignments} label="Alignment" />
+                                <Select methods={methods} name="size" options={sizes} label="Size" />
+                            </div>}
+                            <div className="flex gap-10">
+                                <span onClick={() => {
+                                    setInfo(!showInfo)
+                                    setBio(!showBio)
+                                }}>Info</span>
+                                <span onClick={() => {
+                                    setInfo(!showInfo)
+                                    setBio(!showBio)
+                                }}>Bio</span>
+                            </div>
                         </div>
                     </div>
-                    {/* <Input methods={methods} name="armorClass" label="Armor Class" type="number" min={0} />
-                    <Input methods={methods} name="maxHealth" label="Max Health" type="number" min={0} />
-                    <Input methods={methods} name="health" label="Health" type="number" min={0} max={maxHealth} /> */}
-                    <div className="flex gap-3">
+
+                    <div className="flex gap-3 mt-3">
                         <div className="w-1/12 flex flex-col justify-between items-center bg-gray-300 p-2 rounded-lg">
                             <section className="flex flex-col items-center w-min">
                                 <p>Strength</p>
@@ -199,28 +225,37 @@ export default function AddCharacter() {
                                 })}
                             </div>
                         </div>
+                        <div className="bg-gray-300 p-2 rounded-lg flex flex-col gap-2">
+                            <div className="flex gap-2">
+                                <Input methods={methods} name="armorClass" label="Armor Class" type="number" min={0} />
+                                <Input methods={methods} name="health" label="Health" type="number" min={0} max={maxHealth} />
+                                <Input methods={methods} name="maxHealth" label="Max Health" type="number" min={0} />
+                            </div>
+                            <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" />
+                            <div className="flex justify-between">
+                                <p>Walk Speed</p>
+                                <p>Fly Speed</p>
+                                <p>Swim Speed</p>
+                            </div>
+                        </div>
                     </div>
 
 
-                    {/* <Input methods={methods} name="age" label="Age" type="number" />
-                    <Select methods={methods} name="gender" options={genders} label="Gender" />
-                    <Select methods={methods} name="alignment" options={alignments} label="Alignment" />
-                    <Select methods={methods} name="size" options={sizes} label="Size" /> */}
-                    <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" />
-                    {/* <Accordian heading={<section className="flex items-center gap-3">
+
+                    <Accordian heading={<section className="flex items-center gap-3">
                         <header>Languages</header>
                         <span onClick={(e) => {
                             e.preventDefault()
                             e.stopPropagation()
-                            append({ id: 0 })
+                            addLanguage({ id: 0 })
                         }} className="w-6 h-6 rounded-full border border-black"><AddIcon /></span>
                     </section>}>
                         <section className="flex flex-col gap-5">
-                            {fields.map((field, index) => (
+                            {languages.map((field, index) => (
                                 <label className="flex items-center gap-3">
                                     <Select key={field.id} methods={methods} name={`languages.${index}.id`} options={lanaguageList} />
                                     <span className="hover:cursor-pointer" onClick={() => {
-                                        remove(index)
+                                        removeLanguage(index)
                                     }}><DeleteIcon /></span>
                                 </label>
                             ))}
@@ -230,11 +265,7 @@ export default function AddCharacter() {
                     <TextArea methods={methods} name="ideals" label="Ideals" />
                     <TextArea methods={methods} name="bonds" label="Bonds" />
                     <TextArea methods={methods} name="flaws" label="Flaws" />
-                    <Input methods={methods} name="weight" label="Weight" type="number" />
-                    <Input methods={methods} name="height" label="Height" />
-                    <Input methods={methods} name="hair" label="Hair" />
-                    <Input methods={methods} name="eyes" label="Eyes" />
-                    <Input methods={methods} name="skin" label="skin" /> */}
+
 
                     <Button label="Submit" />
 
