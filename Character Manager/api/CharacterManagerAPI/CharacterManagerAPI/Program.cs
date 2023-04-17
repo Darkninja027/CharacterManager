@@ -1,6 +1,7 @@
 using CharacterManagerAPI;
 using CharacterManagerAPI.Graphql.Schema.Mutations;
 using CharacterManagerAPI.Graphql.Schema.Queries;
+using CharacterManagerAPI.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using System.Data.Common;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
@@ -21,6 +23,7 @@ builder.Services.AddSwaggerGen();
 
 //builder.Services.AddDbContext<CMContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CharacterManager")));
 builder.Services.AddPooledDbContextFactory<CMContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CharacterManager")));
+builder.Services.AddDbContextPool<CMContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CharacterManager")));
 builder.Services.AddCors(policy => policy.AddPolicy("CorsPolicy", build =>
 {
     build.WithOrigins("http://localhost:5173", "http://127.0.0.1:5173").AllowAnyMethod().AllowAnyHeader();
@@ -38,8 +41,6 @@ builder.Services.AddGraphQLServer()
 
 var app = builder.Build();
 
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -54,6 +55,7 @@ using (var scope = app.Services.CreateScope())
     IDbContextFactory<CMContext> contextFactory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<CMContext>>();
     using(CMContext db = contextFactory.CreateDbContext())
     {
+        DatabaseSeeder.SeedDatabase(db);
         db.Database.Migrate();
     }
 }

@@ -24,7 +24,6 @@ namespace CharacterManagerAPI.Controllers
         {
             if(await _context.Races.AnyAsync() == false)
             {
-                Races.SeedRaces(_context);
                 
                 return Ok();
             }
