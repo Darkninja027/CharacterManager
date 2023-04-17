@@ -111,9 +111,9 @@ export default function AddCharacter() {
         { id: "other", name: "Other" },
     ]
     return (
-        <>
+        <div className="bg-[url('bg.jpg')] bg-no-repeat bg-cover">
             <PageHeader title="Add Character" backButton />
-            <div>
+            <div className="">
                 <Form methods={methods} onSubmit={OnSubmit}>
                     <div className="flex w-full grow items-center gap-3">
 
@@ -272,7 +272,7 @@ export default function AddCharacter() {
 
                 </Form>
             </div >
-        </>
+        </div>
     )
 }
 
