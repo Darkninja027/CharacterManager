@@ -161,7 +161,7 @@ export default function AddCharacter() {
                     </div>
 
                     <div className="flex gap-3 mt-3">
-                        <div className="w-1/12 flex flex-col justify-between items-center bg-gray-300 p-2 rounded-lg">
+                        <div className="w-1/12  flex flex-start flex-col justify-between items-center bg-gray-300 p-2 rounded-lg">
                             <section className="flex flex-col items-center w-min">
                                 <p>Strength</p>
                                 <Input className="w-16 h-16" methods={methods} name="strength" label="" type="number" min={1} max={30} onChange={(e) => {
@@ -207,7 +207,7 @@ export default function AddCharacter() {
                                 <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="charismaModifier" label="" type="number" min={-5} max={10} />
                             </section>
                         </div>
-                        <div className="flex flex-col w-2/12 gap-3 ">
+                        <div className="flex flex-start flex-col w-2/12 gap-3 ">
                             <div className="bg-gray-300  rounded-lg p-2">
                                 <p>Saving Throw</p>
                                 {savingThrows.map((skill, index) => {
@@ -225,8 +225,8 @@ export default function AddCharacter() {
                                 })}
                             </div>
                         </div>
-                        <div className="bg-gray-300 p-2 rounded-lg flex flex-col gap-2">
-                            <div className="flex gap-2">
+                        <div className="bg-gray-300 w-3/12 p-2 rounded-lg flex flex-start flex-col gap-2">
+                            <div className="flex w-full gap-2 justify-between">
                                 <Input methods={methods} name="armorClass" label="Armor Class" type="number" min={0} />
                                 <Input methods={methods} name="health" label="Health" type="number" min={0} max={maxHealth} />
                                 <Input methods={methods} name="maxHealth" label="Max Health" type="number" min={0} />
@@ -237,34 +237,35 @@ export default function AddCharacter() {
                                 <p>Fly Speed</p>
                                 <p>Swim Speed</p>
                             </div>
+                            <TextArea methods={methods} name="personalityTraits" label="Personality Traits" />
+                            <TextArea methods={methods} name="ideals" label="Ideals" />
+                            <TextArea methods={methods} name="bonds" label="Bonds" />
+                            <TextArea methods={methods} name="flaws" label="Flaws" />
+                            <Accordian heading={<section className="flex items-center gap-3 w-full">
+                                <header>Languages</header>
+                                <span onClick={(e) => {
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    addLanguage({ id: 1 })
+                                }} className="w-6 h-6 rounded-full border border-black"><AddIcon /></span>
+                            </section>}>
+                                <section className="flex flex-wrap w-full justify-between">
+                                    {languages.map((field, index) => (
+                                        <label className="flex items-center gap-3">
+                                            <Select key={field.id} methods={methods} name={`languages.${index}.id`} options={lanaguageList} />
+                                            <span className="hover:cursor-pointer" onClick={() => {
+                                                removeLanguage(index)
+                                            }}><DeleteIcon /></span>
+                                        </label>
+                                    ))}
+                                </section>
+                            </Accordian>
                         </div>
                     </div>
 
 
 
-                    <Accordian heading={<section className="flex items-center gap-3">
-                        <header>Languages</header>
-                        <span onClick={(e) => {
-                            e.preventDefault()
-                            e.stopPropagation()
-                            addLanguage({ id: 0 })
-                        }} className="w-6 h-6 rounded-full border border-black"><AddIcon /></span>
-                    </section>}>
-                        <section className="flex flex-col gap-5">
-                            {languages.map((field, index) => (
-                                <label className="flex items-center gap-3">
-                                    <Select key={field.id} methods={methods} name={`languages.${index}.id`} options={lanaguageList} />
-                                    <span className="hover:cursor-pointer" onClick={() => {
-                                        removeLanguage(index)
-                                    }}><DeleteIcon /></span>
-                                </label>
-                            ))}
-                        </section>
-                    </Accordian>
-                    <TextArea methods={methods} name="personalityTraits" label="Personality Traits" />
-                    <TextArea methods={methods} name="ideals" label="Ideals" />
-                    <TextArea methods={methods} name="bonds" label="Bonds" />
-                    <TextArea methods={methods} name="flaws" label="Flaws" />
+
 
 
                     <Button label="Submit" />
