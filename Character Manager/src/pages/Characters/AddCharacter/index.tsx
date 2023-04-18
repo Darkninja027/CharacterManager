@@ -160,87 +160,25 @@ export default function AddCharacter() {
                             </div>
                         </div>
                     </div>
+                    <div className="flex mt-2 gap-2">
 
-                    <div className="flex gap-3 mt-3">
-                        <div className="flex flex-col gap-5 w-2/12">
+                        <div className="flex w-2.5/12">
+                            <div className="flex flex-col w-full gap-5  ">
 
-                            <Attribute attributes="strength" methods={methods} />
-                            <Attribute attributes="dexterity" methods={methods} />
-                            <Attribute attributes="constitution" methods={methods} />
-                            <Attribute attributes="intelligence" methods={methods} />
-                            <Attribute attributes="wisdom" methods={methods} />
-                            <Attribute attributes="charisma" methods={methods} />
+                                <Attribute attributes="strength" methods={methods} />
+                                <Attribute attributes="dexterity" methods={methods} />
+                                <Attribute attributes="constitution" methods={methods} />
+                                <Attribute attributes="intelligence" methods={methods} />
+                                <Attribute attributes="wisdom" methods={methods} />
+                                <Attribute attributes="charisma" methods={methods} />
+                            </div>
                         </div>
 
-                        {/* <div className="w-1/12  flex flex-start flex-col justify-between items-center bg-gray-300 p-2 rounded-lg">
-                            <section className="flex flex-col items-center w-min">
-                                <p>Strength</p>
-                                <Input className="w-16 h-16" methods={methods} name="strength" label="" type="number" min={1} max={30} onChange={(e) => {
-                                    setValue("strengthModifier", getSkillModifier(parseInt(e.target.value)))
-                                }} />
-                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="strengthModifier" label="" type="number" min={-5} max={10} />
-
-                            </section>
-                            <section className="flex flex-col items-center w-min">
-                                <p>Dexterity</p>
-                                <Input className="w-16 h-16" methods={methods} name="dexterity" label="" type="number" min={1} max={30} onChange={(e) => {
-                                    setValue("dexterityModifier", getSkillModifier(parseInt(e.target.value)))
-                                }} />
-                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="dexterityModifier" label="" type="number" min={-5} max={10} />
-                            </section>
-                            <section className="flex flex-col items-center w-min">
-                                <p>Constitution</p>
-                                <Input className="w-16 h-16" methods={methods} name="constitution" label="" type="number" min={1} max={30} onChange={(e) => {
-                                    setValue("constitutionModifier", getSkillModifier(parseInt(e.target.value)))
-                                }} />
-                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="constitutionModifier" label="" type="number" min={-5} max={10} />
-                            </section>
-                            <section className="flex flex-col items-center w-min">
-                                <p>Intelligence</p>
-                                <Input className="w-16 h-16" methods={methods} name="intelligence" label="" type="number" min={1} max={30} onChange={(e) => {
-                                    setValue("intelligenceModifier", getSkillModifier(parseInt(e.target.value)))
-                                }} />
-                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="intelligenceModifier" label="" type="number" min={-5} max={10} />
-                            </section>
-                            <section className="flex flex-col items-center w-min">
-                                <p>Wisdom</p>
-                                <Input className="w-16 h-16" methods={methods} name="wisdom" label="" type="number" min={1} max={30} onChange={(e) => {
-                                    setValue("wisdomModifier", getSkillModifier(parseInt(e.target.value)))
-                                }} />
-                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="wisdomModifier" label="" type="number" min={-5} max={10} />
-
-                            </section>
-                            <section className="flex flex-col items-center w-min">
-                                <p>Charisma</p>
-                                <Input className="w-16 h-16" methods={methods} name="charisma" label="" type="number" min={1} max={30} onChange={(e) => {
-                                    setValue("charismaModifier", getSkillModifier(parseInt(e.target.value)))
-                                }} />
-                                <Input className="w-10 h-10 mt-[-10px] rounded-full" methods={methods} name="charismaModifier" label="" type="number" min={-5} max={10} />
-                            </section>
-                        </div> */}
-                        {/* <div className="flex flex-start flex-col w-2/12 gap-3 ">
-                            <div className="bg-gray-300  rounded-lg p-2">
-                                <p>Saving Throw</p>
-                                {savingThrows.map((skill, index) => {
-                                    return (
-                                        <SavingThrows methods={methods} index={index} />
-                                    )
-                                })}
-                            </div>
-                            <div className="bg-gray-300 rounded-lg p-2">
-                                <p>Skills</p>
-                                {skills.map((skill, index) => {
-                                    return (
-                                        <Skills methods={methods} index={index} />
-                                    )
-                                })}
-                            </div>
-                        </div> */}
-                        {/* <div className="bg-gray-300 w-3/12 p-2 rounded-lg flex flex-start flex-col gap-2">
-                            <div className="flex w-full gap-2 justify-between">
-                                <Input methods={methods} name="armorClass" label="Armor Class" type="number" min={0} />
-                                <Input methods={methods} name="health" label="Health" type="number" min={0} max={maxHealth} />
-                                <Input methods={methods} name="maxHealth" label="Max Health" type="number" min={0} />
+                        <div className="bg-gray-300 w-3/12 p-2">
+                            <div className="flex w-full gap-2">
+                                <Input methods={methods} className="w-1/3" name="armorClass" label="Armor Class" type="number" min={0} />
+                                <Input methods={methods} className="w-1/3" name="health" label="Health" type="number" min={0} max={maxHealth} />
+                                <Input methods={methods} className="w-1/3" name="maxHealth" label="Max Health" type="number" min={0} />
                             </div>
                             <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" />
                             <div className="flex justify-between">
@@ -271,7 +209,7 @@ export default function AddCharacter() {
                                     ))}
                                 </section>
                             </Accordian>
-                        </div> */}
+                        </div>
                     </div>
 
 

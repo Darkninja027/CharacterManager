@@ -4,6 +4,7 @@ import { Tooltip } from "react-tooltip"
 import { displayAttribute, getSkillModifier } from "../../../common/util/characterUtil"
 import Checkbox from "../Checkbox"
 import Input from "../Input"
+import { formatString, pascalCamelSplit } from "../../../common/util/stringFormatting"
 
 type AttributeProps = {
     methods: UseFormReturn<PlayerCharacterInput>
@@ -40,23 +41,23 @@ export default function Attribute({ methods, attributes }: AttributeProps) {
                 <label className="flex items-center justify-between gap-3 w-full">
                     <div className="flex items-center gap-2">
                         <Input methods={methods as UseFormReturn<PlayerCharacterInput>} name={`savingThrows.${save?.index}.modifier`} styling="SKILL" type="number" />
-                        <p className="text-sm">{save?.data.name}</p>
+                        <p className="text-sm">{formatSavingThrow(save?.data.name, attributes)}</p>
                     </div>
                     <div className="flex">
-                        <Checkbox id={`save${save?.index}`} methods={methods as UseFormReturn<PlayerCharacterInput>} name={`skills.${save?.index}.proficient`} />
+                        <Checkbox id={`save${save?.index}`} methods={methods as UseFormReturn<PlayerCharacterInput>} name={`savingThrows.${save?.index}.proficient`} />
                         <Tooltip anchorSelect={`#save${save?.index}`} content="Proficiency" />
                     </div>
                 </label>
-                {skills.map(skill => {
+                {skills.map((skill, index) => {
                     return (
-                        <label className="flex items-center justify-between gap-3 w-full">
+                        <label key={`${skill.data.name}.${index}`} className="flex items-center justify-between gap-3 w-full">
                             <div className="flex items-center gap-2">
                                 <Input methods={methods as UseFormReturn<PlayerCharacterInput>} name={`skills.${skill?.index}.modifier`} styling="SKILL" type="number" />
-                                <p className="text-sm">{skill.data.name}</p>
+                                <p className="text-sm">{pascalCamelSplit(skill.data.name)}</p>
                             </div>
                             <div className="flex">
-                                <Checkbox id={`expertise${skill?.index}`} methods={methods as UseFormReturn<PlayerCharacterInput>} name={`skills.${skill?.index}.proficient`} />
-                                <Checkbox id={`proficient${skill?.index}`} methods={methods as UseFormReturn<PlayerCharacterInput>} name={`skills.${skill?.index}.expertise`} />
+                                <Checkbox id={`proficient${skill?.index}`} methods={methods as UseFormReturn<PlayerCharacterInput>} name={`skills.${skill?.index}.proficient`} />
+                                <Checkbox id={`expertise${skill?.index}`} methods={methods as UseFormReturn<PlayerCharacterInput>} name={`skills.${skill?.index}.expertise`} />
                                 <Tooltip anchorSelect={`#expertise${skill?.index}`} content="Expertise" />
                                 <Tooltip anchorSelect={`#proficient${skill?.index}`} content="Proficiency" />
                             </div>
@@ -85,4 +86,8 @@ function getSavingThrowForAttribute(saves: PcSkillsInput[], attribute: string) {
         }
     })
     return listToReturn[0]
+}
+
+function formatSavingThrow(value: string, attribute: string) {
+    return pascalCamelSplit(value.replace(attribute, ''))
 }

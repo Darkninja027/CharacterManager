@@ -8,5 +8,5 @@ export function formatString(value: string) {
 }
 
 export function pascalCamelSplit(value: string) {
-    return value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    return formatString(value.replace(/([a-z0-9])([A-Z])/g, '$1 $2'))
 }

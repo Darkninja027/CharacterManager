@@ -195,8 +195,8 @@ export function updateModifiers(methods: UseFormReturn<PlayerCharacterInput>) {
     const { getValues, setValue } = methods
     const [skills, saves] = getValues(["skills", "savingThrows"])
     const proficiencyBonus = getValues("proficiencyBonus")
-    skills.map((skill, index) => {
-        var modifier = 0
+    skills.forEach((skill, index) => {
+        let modifier = 0
         modifier += Number(getAttributeModifier(methods, skill.attribute))
         if (skill.proficient) {
             modifier += Number(proficiencyBonus)
@@ -204,20 +204,18 @@ export function updateModifiers(methods: UseFormReturn<PlayerCharacterInput>) {
         if (skill.expertise) {
             modifier += Number(proficiencyBonus)
         }
-        var oldValue = getValues(`skills.${index}.modifier`);
-        console.log('old penis', oldValue, modifier);
+        let oldValue = getValues(`skills.${index}.modifier`);
         if (oldValue !== modifier) {
-            console.log('new penis', modifier);
             setValue(`skills.${index}.modifier`, modifier)
         }
     })
-    saves.map((save, index) => {
-        var modifier = 0
+    saves.forEach((save, index) => {
+        let modifier = 0
         modifier += Number(getAttributeModifier(methods, save.attribute))
         if (save.proficient) {
             modifier += Number(proficiencyBonus)
         }
-        var oldValue = getValues(`savingThrows.${index}.modifier`);
+        let oldValue = getValues(`savingThrows.${index}.modifier`);
         if (oldValue !== modifier) {
             setValue(`savingThrows.${index}.modifier`, modifier)
         }
