@@ -205,7 +205,9 @@ export function updateModifiers(methods: UseFormReturn<PlayerCharacterInput>) {
             modifier += Number(proficiencyBonus)
         }
         var oldValue = getValues(`skills.${index}.modifier`);
+        console.log('old penis', oldValue, modifier);
         if (oldValue !== modifier) {
+            console.log('new penis', modifier);
             setValue(`skills.${index}.modifier`, modifier)
         }
     })

@@ -14,9 +14,9 @@ export function CharactersPage() {
         }
     })
     // console.log(allCharacters)
-    if (isLoading) {
-        return <p>Loading...</p>
-    }
+    // if (isLoading) {
+    //     return <p>Loading...</p>
+    // }
     return (
         <>
             <PageHeader title="Characters" label="Add Character" onClick={(e) => {

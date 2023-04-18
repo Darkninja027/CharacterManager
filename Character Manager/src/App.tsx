@@ -10,6 +10,7 @@ import LanguagesPage from './pages/Languages'
 import SyncPage from './pages/Sync'
 import Navigation from './common/util/Navigation'
 import AddCharacter from './pages/Characters/AddCharacter'
+import { Kitchensink } from './pages/Kitchensink'
 
 
 
@@ -34,6 +35,9 @@ export default function App() {
 		</Route>,
 		<Route path="languages">
 			<Route path="/" element={<LanguagesPage />} />
+		</Route>,
+		<Route path="sink">
+			<Route path="/" element={<Kitchensink />} />
 		</Route>,
 		<Route path='*' element={<Navigate to="/home" />} />
 	]
