@@ -3,8 +3,11 @@ import NavigationLink from "../../../components/NavigationLink";
 
 export default function Navigation() {
     return (
-        <aside className="w-[250px] bg-slate-400 min-h-screen p-3 grow-1">
-            <header className="">D&D Character manager</header>
+        <aside className="w-[250px] bg-cadet-300 min-h-screen grow-1">
+            <header className="flex flex-col items-center mb-5">
+                <img src="src\common\assets\logo.png" alt="logo" />
+                <p className="text-2xl font-bold text-eerie-300">Character Manager</p>
+            </header>
             <nav className="flex flex-col gap-1">
                 <NavigationLink to="/home" label="Home" />
                 <NavigationLink to="/characters" label="Characters" />

@@ -12,7 +12,7 @@ export default function NavigationLink({ to, classNames, onClick, label }: Navig
     const resolvePath = useResolvePath();
     const path = resolvePath(to)
     return (
-        <Link to={path} className={classNames ? classNames : "border-2 border-solid border-black rounded-lg px-5 py-2 hover:bg-black hover:text-white"} onClick={onClick} >
+        <Link to={path} className="w-full p-1 pl-5 hover: cursor-pointer font-bold text-eerie-100 hover:bg-eerie-100 hover:text-flash-300" onClick={onClick} >
             {label}
         </Link>
     )
