@@ -264,6 +264,7 @@ export type PlayerCharacterInput = {
   height?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   ideals?: InputMaybe<Scalars['String']>;
+  initiative: Scalars['Int'];
   intelligence: Scalars['Int'];
   intelligenceModifier: Scalars['Int'];
   languages: Array<PcLanguagesInput>;

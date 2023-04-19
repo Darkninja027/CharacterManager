@@ -17,6 +17,7 @@ import TextArea from "../../../components/formInputs/TextArea";
 import PageHeader from "../../../components/PageHeader";
 import { useGetAllLanguagesQuery } from "../../Languages/languages.generated";
 import { useCreateCharacterMutation } from "../characters.generated";
+import { ArmorClass } from "../../../components/ArmorClass";
 
 
 
@@ -174,11 +175,14 @@ export default function AddCharacter() {
                             </div>
                         </div>
 
-                        <div className="bg-gray-300 w-3/12 p-2">
-                            <div className="flex w-full gap-2">
-                                <Input methods={methods} className="w-1/3" name="armorClass" label="Armor Class" type="number" min={0} />
+                        <div className="bg-gray-300 w-2/12 p-2">
+                            <div className="flex w-full gap-2 justify-evenly">
+                                <ArmorClass methods={methods} />
+                                {/* <ArmorClass methods={methods} /> */}
+                                {/* <ArmorClass methods={methods} /> */}
+                                {/* 
                                 <Input methods={methods} className="w-1/3" name="health" label="Health" type="number" min={0} max={maxHealth} />
-                                <Input methods={methods} className="w-1/3" name="maxHealth" label="Max Health" type="number" min={0} />
+                                <Input methods={methods} className="w-1/3" name="maxHealth" label="Max Health" type="number" min={0} /> */}
                             </div>
                             <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" />
                             <div className="flex justify-between">

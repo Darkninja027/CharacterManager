@@ -33,6 +33,7 @@ export const characterDefaultValues: PlayerCharacterInput = {
     maxHealth: 10,
     health: 10,
     armorClass: 10,
+    initiative: 0,
     experience: getLevelExperience(1),
     milestone: false,
     languages: [

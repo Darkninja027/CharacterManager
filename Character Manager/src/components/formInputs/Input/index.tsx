@@ -24,7 +24,8 @@ const INPUT_STYLE = {
     ATTRIBUTE: "bg-transparent outline-0 text-5xl font-bold text-center w-full h-full",
     MODIFIER: "w-12 bg-gray-400 border-4 border-double rounded-lg mt-[-10px] border-black outline-0 text-center",
     NORMAL: "px-2 py-1 rounded-lg border border-black",
-    SKILL: "outline-0 w-6 rounded-lg text-center text-sm border-b-2 border-black bg-transparent"
+    SKILL: "outline-0 w-6 rounded-lg text-center text-sm border-b-2 border-black bg-transparent",
+    AC: "outline-0 bg-transparent text-center w-full text-3xl font-bold"
 }
 
 export default function Input<T extends FieldValues>({ name, label, className, type, methods, value, onChange, required, disabled, defaultValue, min, max, styling }: InputProps<T>) {
