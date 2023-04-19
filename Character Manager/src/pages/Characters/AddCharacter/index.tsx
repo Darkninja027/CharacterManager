@@ -185,6 +185,7 @@ export default function AddCharacter() {
                                 <Input methods={methods} className="w-1/3" name="maxHealth" label="Max Health" type="number" min={0} /> */}
                             </div>
                             <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" />
+                            <Input methods={methods} name="initiative" label="init" type="number" />
                             <div className="flex justify-between">
                                 <p>Walk Speed</p>
                                 <p>Fly Speed</p>

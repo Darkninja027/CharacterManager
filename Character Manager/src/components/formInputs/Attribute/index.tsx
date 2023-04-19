@@ -28,23 +28,23 @@ export default function Attribute({ methods, attributes }: AttributeProps) {
 
                     <label className="h-full flex flex-col">
                         <p className="w-full text-center text-sm">{displayAttribute(attributes).toUpperCase()}</p>
-                        <Input methods={methods as UseFormReturn<PlayerCharacterInput>} name={attributes as Path<PlayerCharacterInput>} styling={"ATTRIBUTE"} type="number" min={1} max={30} onChange={(e) => {
+                        <Input methods={methods} name={attributes as Path<PlayerCharacterInput>} styling={"ATTRIBUTE"} type="number" min={1} max={30} onChange={(e) => {
                             methods.setValue(modifierPath as Path<PlayerCharacterInput>, getSkillModifier(parseInt(e.target.value)))
                         }} />
                     </label>
 
                 </div>
-                <Input methods={methods as UseFormReturn<PlayerCharacterInput>} name={modifierPath as Path<PlayerCharacterInput>} styling="MODIFIER" type="number" defaultValue={0} />
+                <Input methods={methods} name={modifierPath as Path<PlayerCharacterInput>} styling="MODIFIER" type="number" defaultValue={0} />
             </div>
 
             <div className="border-4 border-black border-double p-2 rounded-r-lg rounded-bl-lg w-full bg-gray-400 min-h-[150px] min-w-52">
                 <label className="flex items-center justify-between gap-3 w-full">
                     <div className="flex items-center gap-2">
-                        <Input methods={methods as UseFormReturn<PlayerCharacterInput>} name={`savingThrows.${save?.index}.modifier`} styling="SKILL" type="number" />
+                        <Input methods={methods} name={`savingThrows.${save?.index}.modifier`} styling="SKILL" type="number" />
                         <p className="text-sm">{formatSavingThrow(save?.data.name, attributes)}</p>
                     </div>
                     <div className="flex">
-                        <Checkbox id={`save${save?.index}`} methods={methods as UseFormReturn<PlayerCharacterInput>} name={`savingThrows.${save?.index}.proficient`} />
+                        <Checkbox id={`save${save?.index}`} methods={methods} name={`savingThrows.${save?.index}.proficient`} />
                         <Tooltip anchorSelect={`#save${save?.index}`} content="Proficiency" />
                     </div>
                 </label>

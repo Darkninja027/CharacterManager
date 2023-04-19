@@ -194,11 +194,12 @@ export function setSkillModifier<T extends FieldValues>(setValue: UseFormSetValu
 
 export function updateModifiers(methods: UseFormReturn<PlayerCharacterInput>) {
     const { getValues, setValue } = methods
-    const [skills, saves] = getValues(["skills", "savingThrows"])
+    const [skills, saves, initiative, dexterityModifier] = getValues(["skills", "savingThrows", "initiative", "dexterityModifier"])
     const proficiencyBonus = getValues("proficiencyBonus")
     skills.forEach((skill, index) => {
         let modifier = 0
         modifier += Number(getAttributeModifier(methods, skill.attribute))
+
         if (skill.proficient) {
             modifier += Number(proficiencyBonus)
         }
@@ -221,6 +222,10 @@ export function updateModifiers(methods: UseFormReturn<PlayerCharacterInput>) {
             setValue(`savingThrows.${index}.modifier`, modifier)
         }
     })
+    if (initiative != dexterityModifier) {
+        setValue("initiative", dexterityModifier)
+    }
+
 }
 
 export function getAttributeModifier(methods: UseFormReturn<PlayerCharacterInput>, attribute: string) {
