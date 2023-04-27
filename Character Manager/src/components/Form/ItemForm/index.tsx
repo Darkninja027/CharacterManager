@@ -80,7 +80,7 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
                     {<TextArea methods={methods} name="property3" label="Property 3" />}
                 </div>
             </div>
-            <Button className="mt-3" label="Add Magic Item" />
+            <Button className="mt-3" content="Add Magic Item" />
         </Form>
     )
 }

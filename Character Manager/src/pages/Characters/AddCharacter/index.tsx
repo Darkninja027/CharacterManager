@@ -2,22 +2,20 @@ import { AlignmentEnum, PlayerCharacterInput, SizeEnum } from "@types";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { AddIcon, DeleteIcon } from "../../../common/icons/SvgList";
-import { characterDefaultValues, getSkillModifier, updateModifiers, getLevelExperience } from "../../../common/util/characterUtil";
+import { characterDefaultValues, getLevelExperience, updateModifiers } from "../../../common/util/characterUtil";
 import { formatString } from "../../../common/util/stringFormatting";
 import Accordian from "../../../components/Accordian";
+import { ArmorClass } from "../../../components/ArmorClass";
 import Form from "../../../components/Form";
+import PageHeader from "../../../components/PageHeader";
 import Attribute from "../../../components/formInputs/Attribute";
 import Button from "../../../components/formInputs/Button";
 import Input from "../../../components/formInputs/Input";
 import Radio from "../../../components/formInputs/Radio";
-import SavingThrows from "../../../components/formInputs/SavingThrow";
 import Select from "../../../components/formInputs/Select";
-import Skills from "../../../components/formInputs/Skill";
 import TextArea from "../../../components/formInputs/TextArea";
-import PageHeader from "../../../components/PageHeader";
 import { useGetAllLanguagesQuery } from "../../Languages/languages.generated";
 import { useCreateCharacterMutation } from "../characters.generated";
-import { ArmorClass } from "../../../components/ArmorClass";
 
 
 
@@ -39,11 +37,10 @@ export default function AddCharacter() {
     })
 
     const createCharacterMutation = useCreateCharacterMutation()
-    const { isLoading, data: { allLanguages } = {} } = useGetAllLanguagesQuery()
+    const { data: { allLanguages } = {} } = useGetAllLanguagesQuery()
 
-    const { control, watch, setValue, getValues } = methods
-    const [milestone, level, experience, maxHealth] = watch(['milestone', 'level', 'experience', 'maxHealth'])
-    const modifierWatch = watch(["strength"])
+    const { control, watch, setValue } = methods
+    const [milestone] = watch(['milestone'])
 
     useEffect(() => {
         setValue("milestone", 'false' as any)
@@ -54,7 +51,7 @@ export default function AddCharacter() {
             updateModifiers(methods)
         });
         return () => subscription.unsubscribe();
-    }, [modifierWatch]);
+    }, []);
 
     const { fields: languages, append: addLanguage, remove: removeLanguage } = useFieldArray({
         control,
@@ -62,16 +59,7 @@ export default function AddCharacter() {
         name: "languages"
 
     })
-    const { fields: skills } = useFieldArray({
-        control,
-        keyName: "skillId",
-        name: "skills"
-    })
-    const { fields: savingThrows } = useFieldArray({
-        control,
-        keyName: "savingThrowId",
-        name: "savingThrows"
-    })
+
     const lanaguageList = allLanguages?.map((lang) => {
         return { id: lang.id, name: lang.name }
     })
@@ -113,7 +101,7 @@ export default function AddCharacter() {
         { id: "other", name: "Other" },
     ]
     return (
-        <div className="bg-[url('bg.jpg')] bg-no-repeat bg-cover">
+        <div>
             <PageHeader title="Add Character" backButton />
             <div className="">
                 <Form methods={methods} onSubmit={OnSubmit}>
@@ -205,7 +193,7 @@ export default function AddCharacter() {
                             </section>}>
                                 <section className="flex flex-wrap w-full justify-between">
                                     {languages.map((field, index) => (
-                                        <label className="flex items-center gap-3">
+                                        <label key={`languages-${field.languagesId}`} className="flex items-center gap-3">
                                             <Select key={field.id} methods={methods} name={`languages.${index}.id`} options={lanaguageList} />
                                             <span className="hover:cursor-pointer" onClick={() => {
                                                 removeLanguage(index)
@@ -215,15 +203,11 @@ export default function AddCharacter() {
                                 </section>
                             </Accordian>
                         </div>
+                        <div className="bg-gray-300 w-5/12 p-2 rounded-lg">
+
+                        </div>
                     </div>
-
-
-
-
-
-
-                    <Button label="Submit" />
-
+                    <Button content="Submit" />
                 </Form>
             </div >
         </div>

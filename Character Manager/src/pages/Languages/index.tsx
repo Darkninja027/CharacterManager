@@ -43,7 +43,7 @@ export default function LanguagesPage() {
                 <Form methods={methods} onSubmit={onSubmit} className="mb-3">
                     <div className="flex gap-1 items-end">
                         <Input methods={methods} label="Language name" name="name" />
-                        <Button label="Add" />
+                        <Button content="Add" />
                     </div>
                 </Form>
             )}
