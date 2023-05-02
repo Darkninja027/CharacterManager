@@ -14,7 +14,9 @@ export default function Navigation() {
                 <NavigationLink to="/classes" label="Classes" />
                 <NavigationLink to="/items" label="Magic Items" />
                 <NavigationLink to="/languages" label="Languages" />
-                <NavigationLink to="/sink" label="Kitchen Sink" />
+                <NavigationLink to="/sink" label="Kitchen Sink" menu={{
+                    "Test 1": "/test1"
+                }} />
             </nav>
         </aside>
 
