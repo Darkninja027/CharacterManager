@@ -10,7 +10,10 @@ export default function Navigation() {
             </header>
             <nav className="flex flex-col gap-1">
                 <NavigationLink to="/home" label="Home" />
-                <NavigationLink to="/characters" label="Characters" />
+                <NavigationLink to="/characters" label="Characters" menu={{
+                    "Players": "playerCharacters",
+                    "NPCS": "npcs"
+                }} />
                 <NavigationLink to="/classes" label="Classes" />
                 <NavigationLink to="/items" label="Magic Items" />
                 <NavigationLink to="/languages" label="Languages" />
