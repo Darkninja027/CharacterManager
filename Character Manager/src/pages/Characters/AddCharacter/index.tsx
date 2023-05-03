@@ -5,17 +5,18 @@ import { AddIcon, DeleteIcon } from "../../../common/icons/SvgList";
 import { characterDefaultValues, getLevelExperience, updateModifiers } from "../../../common/util/characterUtil";
 import { formatString } from "../../../common/util/stringFormatting";
 import Accordian from "../../../components/Accordian";
-import { ArmorClass } from "../../../components/ArmorClass";
 import Form from "../../../components/Form";
-import PageHeader from "../../../components/PageHeader";
 import Attribute from "../../../components/formInputs/Attribute";
 import Button from "../../../components/formInputs/Button";
 import Input from "../../../components/formInputs/Input";
 import Radio from "../../../components/formInputs/Radio";
 import Select from "../../../components/formInputs/Select";
 import TextArea from "../../../components/formInputs/TextArea";
+import PageHeader from "../../../components/PageHeader";
+import SquareInput from "../../../components/SquareInput";
 import { useGetAllLanguagesQuery } from "../../Languages/languages.generated";
 import { useCreateCharacterMutation } from "../characters.generated";
+import { ArmorClass } from "../../../components/ArmorClass";
 
 
 
@@ -163,14 +164,16 @@ export default function AddCharacter() {
                             </div>
                         </div>
 
-                        <div className="bg-gray-300 w-2/12 p-2">
+                        <div className="bg-gray-300 w-2/12 p-2 flex flex-col gap-2">
+                            <div className="flex w-full gap-2 justify-evenly">
+                                <SquareInput methods={methods} name="maxHealth" title="Max HP" />
+                                <SquareInput methods={methods} name="health" title="HP" />
+                                <SquareInput methods={methods} name="temporaryHealth" title="Temp HP" />
+
+                            </div>
                             <div className="flex w-full gap-2 justify-evenly">
                                 <ArmorClass methods={methods} />
-                                {/* <ArmorClass methods={methods} /> */}
-                                {/* <ArmorClass methods={methods} /> */}
-                                {/* 
-                                <Input methods={methods} className="w-1/3" name="health" label="Health" type="number" min={0} max={maxHealth} />
-                                <Input methods={methods} className="w-1/3" name="maxHealth" label="Max Health" type="number" min={0} /> */}
+                                <SquareInput methods={methods} name="initiative" title="Initiative" />
                             </div>
                             <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" />
                             <Input methods={methods} name="initiative" label="init" type="number" />

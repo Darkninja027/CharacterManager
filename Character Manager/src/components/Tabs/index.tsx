@@ -4,6 +4,8 @@ import Button from "../formInputs/Button"
 
 type TabsProps = {
     tabs: TabDefinition
+    tabStyles?: string
+    containerStyles?: string
 }
 
 export type TabDefinition = {
@@ -20,21 +22,26 @@ export function Tabs({ tabs }: TabsProps) {
     const [focusedTab, setFocusecdTab] = useState<keyof typeof tabs>(tabPath)
 
     const Tab = ({ title }: { title: string }) => {
-        const className = classNames("hover:cursor-pointer")
+        const className = classNames(
+            "hover:cursor-pointer text-flash-300 px-2 rounded-t-lg",
+            {
+                "bg-payne-500 text-flash-300 underline font-semibold": focusedTab === title
+            }
+        )
         return (
-            <Button content={title} onClick={() => setFocusecdTab(title)} />
+            <Button className={className} content={title} onClick={() => setFocusecdTab(title)} />
         )
     }
 
     const tab = isValidElement(tabs[focusedTab]) && tabs[focusedTab] as ReactElement
     return (
-        <div>
-            <div className="flex gap-2">
+        <div className="bg-eerie-300 pt-2">
+            <div className="flex gap-2 px-1">
                 {Object.keys(tabs).map(title => (
-                    <p>{<Tab title={title} />}</p>
+                    <Tab title={title} />
                 ))}
             </div>
-            <div>
+            <div className="bg-payne-500 px-2 py-1 text-flash-300">
                 {tab}
             </div>
         </div>

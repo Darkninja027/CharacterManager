@@ -74,6 +74,15 @@ export function Kitchensink() {
                         <input className="w-full h-full outline-0 bg-transparent text-3xl font-bold text-center" defaultValue={0} />
                     </div>
                 </div>
+
+                <div className="">
+                    <header>Health container</header>
+                    <div className="bg-gray-400 w-48 h-24 rounded-full border-4 border-black border-double">
+                        <div className="w-24 h-full border-r-4 border-black border-double">
+
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div className="w-5/12 bg-gray-200 p-2 rounded-lg mt-5">
