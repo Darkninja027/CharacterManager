@@ -12,6 +12,62 @@ export function Kitchensink() {
     }
     return (
         <>
+
+            <div className="flex mt-1">
+                <p className="bg-dnd-brown-100 w-24 h-12" />
+                <p className="bg-dnd-brown-200 w-24 h-12" />
+                <p className="bg-dnd-brown-300 w-24 h-12" />
+                <p className="bg-dnd-brown-400 w-24 h-12" />
+                <p className="bg-dnd-brown-500 w-24 h-12" />
+                <p className="bg-dnd-brown-600 w-24 h-12" />
+                <p className="bg-dnd-brown-700 w-24 h-12" />
+                <p className="bg-dnd-brown-800 w-24 h-12" />
+                <p className="bg-dnd-brown-900 w-24 h-12" />
+            </div>
+            <div className="flex mt-1">
+                <p className="bg-dnd-red-100 w-24 h-12" />
+                <p className="bg-dnd-red-200 w-24 h-12" />
+                <p className="bg-dnd-red-300 w-24 h-12" />
+                <p className="bg-dnd-red-400 w-24 h-12" />
+                <p className="bg-dnd-red-500 w-24 h-12" />
+                <p className="bg-dnd-red-600 w-24 h-12" />
+                <p className="bg-dnd-red-700 w-24 h-12" />
+                <p className="bg-dnd-red-800 w-24 h-12" />
+                <p className="bg-dnd-red-900 w-24 h-12" />
+            </div>
+            <div className="flex mt-1">
+                <p className="bg-dnd-orange-100 w-24 h-12" />
+                <p className="bg-dnd-orange-200 w-24 h-12" />
+                <p className="bg-dnd-orange-300 w-24 h-12" />
+                <p className="bg-dnd-orange-400 w-24 h-12" />
+                <p className="bg-dnd-orange-500 w-24 h-12" />
+                <p className="bg-dnd-orange-600 w-24 h-12" />
+                <p className="bg-dnd-orange-700 w-24 h-12" />
+                <p className="bg-dnd-orange-800 w-24 h-12" />
+                <p className="bg-dnd-orange-900 w-24 h-12" />
+            </div>
+            <div className="flex mt-1">
+                <p className="bg-dnd-green-100 w-24 h-12" />
+                <p className="bg-dnd-green-200 w-24 h-12" />
+                <p className="bg-dnd-green-300 w-24 h-12" />
+                <p className="bg-dnd-green-400 w-24 h-12" />
+                <p className="bg-dnd-green-500 w-24 h-12" />
+                <p className="bg-dnd-green-600 w-24 h-12" />
+                <p className="bg-dnd-green-700 w-24 h-12" />
+                <p className="bg-dnd-green-800 w-24 h-12" />
+                <p className="bg-dnd-green-900 w-24 h-12" />
+            </div>
+            <div className="flex mt-1">
+                <p className="bg-dnd-lime-100 w-24 h-12" />
+                <p className="bg-dnd-lime-200 w-24 h-12" />
+                <p className="bg-dnd-lime-300 w-24 h-12" />
+                <p className="bg-dnd-lime-400 w-24 h-12" />
+                <p className="bg-dnd-lime-500 w-24 h-12" />
+                <p className="bg-dnd-lime-600 w-24 h-12" />
+                <p className="bg-dnd-lime-700 w-24 h-12" />
+                <p className="bg-dnd-lime-800 w-24 h-12" />
+                <p className="bg-dnd-lime-900 w-24 h-12" />
+            </div>
             <p>Skill Cards</p>
             <div className="flex gap-10">
                 <section className="flex flex-col gap-10 w-max">
