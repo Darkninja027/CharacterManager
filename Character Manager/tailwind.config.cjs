@@ -3,6 +3,9 @@ module.exports = {
 	content: ["./src/**/*.{js,ts,jsx,tsx}",],
 	theme: {
 		extend: {
+			dropShadow: {
+				menu: "-4px 0px 4px rgba(0, 0, 0, 0.1)"
+			},
 			colors: {
 				eerie: {
 					100: "#2d3935",
