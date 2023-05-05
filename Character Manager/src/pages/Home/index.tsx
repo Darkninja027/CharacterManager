@@ -1,10 +1,9 @@
+import PageHeader from "../../components/PageHeader";
 
 export default function HomePage() {
 
 
     return (
-        <div>
-            Home
-        </div>
+        <PageHeader title="HOME" />
     )
 }

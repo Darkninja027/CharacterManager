@@ -104,7 +104,7 @@ export default function AddCharacter() {
     return (
         <div>
             <PageHeader title="Add Character" backButton />
-            <div className="">
+            <div className="mx-5 overflow-auto pt-32">
                 <Form methods={methods} onSubmit={OnSubmit}>
                     <div className="flex w-full grow items-center gap-3">
 

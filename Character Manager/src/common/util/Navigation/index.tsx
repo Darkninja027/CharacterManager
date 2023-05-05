@@ -3,7 +3,7 @@ import NavigationLink from "../../../components/NavigationLink";
 
 export default function Navigation() {
     return (
-        <aside className="w-[300px] bg-dnd-red-700 min-h-screen grow-1 flex">
+        <aside className="w-[300px] bg-dnd-red-700 min-h-screen grow-1 flex z-10">
             <div className="w-24 h-full bg-dnd-red-900 grow-0 drop-shadow-2xl" />
             <div className="w-full">
                 <div className="mt-10 pl-5 mb-20">

@@ -39,7 +39,7 @@ export default function App() {
 		<Route path="sink">
 			<Route path="/" element={<Kitchensink />} />
 		</Route>,
-		<Route path='*' element={<Navigate to="/home" />} />
+		<Route path='*' element={<Navigate to="home" />} />
 	]
 
 
@@ -47,8 +47,10 @@ export default function App() {
 	return (
 		<Router location={location} routes={routes}>
 			<div className='flex bg-dnd-brown-100'>
-				<Navigation />
-				<main className="grow m-5">
+				<div className='flex fixed'>
+					<Navigation />
+				</div>
+				<main className="grow ml-[300px] min-h-screen">
 					<Alert />
 					<Outlet />
 				</main>
