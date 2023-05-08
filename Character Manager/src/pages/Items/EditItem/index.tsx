@@ -2,6 +2,7 @@ import { useMatch, useNavigate } from "@tanstack/react-location";
 import ItemForm from "../../../components/Form/ItemForm";
 import PageHeader from "../../../components/PageHeader";
 import { useGetMagicItemsQuery } from "../items.generated";
+import { Page } from "../../../components/Page";
 
 export default function EditItem() {
     const params = useMatch()
@@ -13,10 +14,8 @@ export default function EditItem() {
         )
     }
     return (
-        <>
-
-            <PageHeader title={`Edit ${magicItem?.name}`} backButton />
+        <Page title={`Edit ${magicItem?.name}`} backButton>
             <ItemForm magicItem={magicItem} />
-        </>
+        </Page>
     )
 }

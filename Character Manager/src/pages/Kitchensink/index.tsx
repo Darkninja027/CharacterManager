@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { TabDefinition, Tabs } from "../../components/Tabs"
+import { Page } from "../../components/Page"
 
 export function Kitchensink() {
 
@@ -11,7 +12,7 @@ export function Kitchensink() {
         "john": <p>Johnno</p>
     }
     return (
-        <div className="mx-5">
+        <Page title="Sink">
 
             <div className="flex mt-1">
                 <p className="bg-dnd-brown-100 w-24 h-12" />
@@ -145,7 +146,7 @@ export function Kitchensink() {
                 <Tabs tabs={tabs} />
             </div>
 
-        </div>
+        </Page>
 
     )
 }
