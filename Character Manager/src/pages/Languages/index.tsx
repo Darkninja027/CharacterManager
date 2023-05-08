@@ -1,6 +1,7 @@
 import { LanguageInput, Languages } from "@types"
 import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
+import { AddIcon } from "../../common/icons/SvgList"
 import { useAlert } from "../../common/util/Alerts"
 import Form from "../../components/Form"
 import Button from "../../components/formInputs/Button"
@@ -35,26 +36,28 @@ export default function LanguagesPage() {
     }
     return (
         <>
-            <PageHeader title="Languages" label={form ? "Cancel" : "Add Language"} onClick={(e) => {
+            <PageHeader title="Languages" action={true} icon={<AddIcon />} onClick={(e) => {
                 e.preventDefault()
                 setForm(!form)
             }} />
-            {form && (
-                <Form methods={methods} onSubmit={onSubmit} className="mb-3">
-                    <div className="flex gap-1 items-end">
-                        <Input methods={methods} label="Language name" name="name" />
-                        <Button content="Add" />
-                    </div>
-                </Form>
-            )}
-            <div className="grid grid-cols-12 grid-flow-row justify-items-center gap-2">
-                {allLanguages && allLanguages.map(lang => {
+            <div className="mx-5 pt-32">
+                {form && (
+                    <Form methods={methods} onSubmit={onSubmit} className="mb-3">
+                        <div className="flex gap-1 items-end">
+                            <Input methods={methods} label="Language name" name="name" />
+                            <Button content="Add" />
+                        </div>
+                    </Form>
+                )}
+                <div className="grid grid-cols-12 grid-flow-row justify-items-center gap-2">
+                    {allLanguages && allLanguages.map(lang => {
 
-                    return (
-                        <LanguageCard language={lang} />
-                    )
-                })}
+                        return (
+                            <LanguageCard language={lang} />
+                        )
+                    })}
 
+                </div>
             </div>
 
         </>

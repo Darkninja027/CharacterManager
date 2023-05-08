@@ -24,9 +24,9 @@ export default function NavigationLink({ to, classNames, onClick, label, menu }:
                 <p className="pr-3">{label}</p>
             </Link>
             {menu && showMenu && (
-                <div className="absolute top-[18px] z-10 -right-5 w-5 h-full">
-                    <div className="absolute left-3 bg-black rotate-45 w-5 h-5 rounded" />
-                    <div className="bg-black absolute left-5 min-h-[44px] min-w-[100px] -top-2.5 text-white p-2 whitespace-nowrap text-start">
+                <div className="absolute top-0 z-10 -right-5 w-5 h-full">
+                    <div className="absolute left-3 bg-black top-2.5 rotate-45 w-5 h-5 rounded" />
+                    <div className="bg-black absolute left-5 min-h-[44px] min-w-[100px] text-white p-2 whitespace-nowrap text-start">
                         <div className="flex flex-col text-sm leading-none gap-1">
                             {Object.keys(menu).map(subRoute => (
                                 <Link key={subRoute} to={resolvePath(`${to}/${menu[subRoute]}`)} getActiveProps={() => ({ className: "underline" })}>{subRoute}</Link>

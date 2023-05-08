@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-location"
-import { DeleteIcon } from "../../common/icons/SvgList"
+import { AddIcon, DeleteIcon } from "../../common/icons/SvgList"
 import { useAlert } from "../../common/util/Alerts"
 import PageHeader from "../../components/PageHeader"
 import { useDeleteCharacterMutation, useGetAllCHaractersQuery } from "./characters.generated"
@@ -19,7 +19,7 @@ export function CharactersPage() {
     // }
     return (
         <>
-            <PageHeader title="Characters" label="Add Character" onClick={(e) => {
+            <PageHeader title="Characters" action={true} icon={<AddIcon />} onClick={(e) => {
                 e.preventDefault()
                 navigate({ to: "new" })
             }} />

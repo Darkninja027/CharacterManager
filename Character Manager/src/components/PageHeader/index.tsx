@@ -1,25 +1,28 @@
 import { useNavigate } from "@tanstack/react-location"
-import { MouseEventHandler } from "react"
+import { MouseEventHandler, ReactNode } from "react"
 import { Tooltip } from "react-tooltip"
-import { BackButtonIcon } from "../../common/icons/SvgList"
+import { AddIcon, BackButtonIcon } from "../../common/icons/SvgList"
+import Button from "../formInputs/Button"
 
 type HeaderProps = {
     title: string
     backButton?: boolean
 } & ({
     onClick: MouseEventHandler<HTMLButtonElement>
-    label: string
+    action: boolean
+    icon: ReactNode
 } | {
     onClick?: never
-    label?: never
+    action?: never
+    icon?: never
 })
 
 
-export default function PageHeader({ title, onClick, label, backButton }: HeaderProps) {
+export default function PageHeader({ title, onClick, action, backButton, icon }: HeaderProps) {
     const navigate = useNavigate()
     return (
         <div className="mb-5 fixed top-0 w-full z-20">
-            <div className="w-full flex flex-col leading-none gap-1 bg-dnd-brown-300 px-5 h-24 justify-center">
+            <div className="w-full flex items-center  leading-none gap-3 bg-dnd-brown-300 px-5 h-24">
                 <div className="flex items-center gap-3">
                     {backButton && (
                         <>
@@ -30,8 +33,9 @@ export default function PageHeader({ title, onClick, label, backButton }: Header
                     )}
                     <p className="text-2xl font-bold text-dnd-brown-900">{title}</p>
                 </div>
-                {label && (
-                    <button className="w-min border-2 rounded-full px-3 py-1 text-sm bg-white border-black hover:bg-black hover:text-white whitespace-nowrap" onClick={onClick}>{label}</button>
+                {action && (
+                    // <button className="w-min border-2 rounded-full px-3 py-1 text-sm bg-white border-black hover:bg-black hover:text-white whitespace-nowrap" onClick={onClick}>{label}</button>
+                    <span onClick={onClick} className="bg-dnd-lime-500 hover:cursor-pointer w-8 h-8 text-xs whitespace-nowrap rounded-full p-2 text-dnd-lime-100 shadow-md">{icon}</span>
                 )}
             </div>
             <div className="h-1.5 w-full bg-dnd-brown-500" />

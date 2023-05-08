@@ -1,5 +1,9 @@
+import PageHeader from "../../components/PageHeader";
+
 export default function ClassesPage() {
     return (
-        <div>Classes</div>
+        <>
+            <PageHeader title="Classes" />
+        </>
     )
 }

@@ -11,6 +11,7 @@ import SyncPage from './pages/Sync'
 import Navigation from './common/util/Navigation'
 import AddCharacter from './pages/Characters/AddCharacter'
 import { Kitchensink } from './pages/Kitchensink'
+import { AddItem } from './pages/Items/AddItem'
 
 
 
@@ -31,6 +32,7 @@ export default function App() {
 		</Route>,
 		<Route path='items'>
 			<Route path='/' element={<ItemsPage />} />
+			<Route path="new" element={<AddItem />} />
 			<Route path=':id' element={<EditItem />} />
 		</Route>,
 		<Route path="languages">
