@@ -16,10 +16,24 @@ export default function Navigation() {
                         "NPCS": "npcs"
                     }} />
                     <NavigationLink to="/classes" label="CLASSES" />
-                    <NavigationLink to="/items" label="MAGIC ITEMS" />
+                    <NavigationLink to="/items" label="MAGIC ITEMS" menu={{
+                        "Armor": "/armor",
+                        "Potion": "/potion",
+                        "Ring": "/ring",
+                        "Rod": "/rod",
+                        "Scroll": "/scroll",
+                        "Staff": "/staff",
+                        "Wand": "/wand",
+                        "Weapon": "/weapon",
+                        "Wonderous": "/wonderous",
+                    }} />
                     <NavigationLink to="/languages" label="LANGUAGES" />
                     <NavigationLink to="/sink" label="SINK" menu={{
-                        "Test 1": "/test1"
+                        "Test 1": "/test1",
+                        "Test 2": "/test2",
+                        "Test 3": "/test3",
+                        "Test 4": "/test4",
+                        "Test 5": "/test5",
                     }} />
                 </nav>
             </div>

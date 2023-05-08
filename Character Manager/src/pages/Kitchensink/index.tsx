@@ -11,7 +11,7 @@ export function Kitchensink() {
         "john": <p>Johnno</p>
     }
     return (
-        <>
+        <div className="mx-5">
 
             <div className="flex mt-1">
                 <p className="bg-dnd-brown-100 w-24 h-12" />
@@ -112,7 +112,7 @@ export function Kitchensink() {
                     <p>Armor icon</p>
                     <div className="w-24 h-24 flex flex-col items-center">
                         <div className="absolute flex leading-none flex-col items-center w-12 mt-4">
-                            <p className="whitespace-nowrap text-sm">Armor Class</p>
+                            <p className="whitespace-nowrap text-sm z-10">Armor Class</p>
                             <input className="outline-0 bg-transparent text-center w-full text-3xl font-bold" />
                         </div>
                         <svg viewBox="0 0 466.000000 512.000000" preserveAspectRatio="xMidYMid meet">
@@ -145,7 +145,7 @@ export function Kitchensink() {
                 <Tabs tabs={tabs} />
             </div>
 
-        </>
+        </div>
 
     )
 }

@@ -8,7 +8,7 @@ export function ArmorClass({ methods }: ArmorClassProps) {
     return (
         <div className="w-24 h-24 flex flex-col items-center">
             <div className="absolute flex leading-none flex-col items-center w-12 mt-4">
-                <p className="whitespace-nowrap text-sm">Armor Class</p>
+                <p className="whitespace-nowrap text-sm z-10">Armor Clas</p>
                 <Input methods={methods} styling="AC" name="armorClass" type="number" min={0} />
             </div>
             <svg viewBox="0 0 466.000000 512.000000" preserveAspectRatio="xMidYMid meet">
