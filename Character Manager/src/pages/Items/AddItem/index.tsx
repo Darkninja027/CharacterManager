@@ -4,6 +4,7 @@ import { Page } from "../../../components/Page";
 export function AddItem() {
     return (
         <Page title="Add Magic Item" backButton>
+            <ItemForm />
         </Page>
     )
 }
