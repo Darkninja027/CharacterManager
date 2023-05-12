@@ -17,49 +17,50 @@ import AddWorld from './pages/World/AddWorld'
 import Npc from './pages/Characters/Npc'
 import PlayerCharacters from './pages/Characters/PlayerCharacters'
 
+const routes = elementsToRoutes([
+	<Route path='/' element={<Navigate to={"home"} replace={true} />} />,
+	<Route path="sync" element={<SyncPage />} />,
+	<Route path='home'>
+		<Route path='/' element={<HomePage />} />
+	</Route>,
+	<Route path='characters'>
+		<Route path='/' element={<CharactersPage />} />
+		<Route path="npc" element={<Npc />}>
+			<Route path='new' element={<AddCharacter />} />
+		</Route>
+		<Route path="playerCharacters">
+			<Route path="/" element={<PlayerCharacters />} />
+			<Route path="new" element={<AddCharacter />} />
+		</Route>
+	</Route>,
+	<Route path='worlds'>
+		<Route path='/' element={<WorldsPage />} />
+		<Route path="new" element={<AddWorld />} />
+	</Route>,
+	<Route path='classes'>
+		<Route path='/' element={<ClassesPage />} />
+	</Route>,
+	<Route path='items'>
+		<Route path='/' element={<ItemsPage />} />
+		<Route path="new" element={<AddItem />} />
+		<Route path=':id' element={<EditItem />} />
+	</Route>,
+	<Route path="languages">
+		<Route path="/" element={<LanguagesPage />} />
+	</Route>,
+	<Route path="sink">
+		<Route path="/" element={<Kitchensink />} />
+	</Route>,
+	<Route path='*' element={<Navigate to="home" />} />
+]
+
+
+) as QRoute[]
+const location = new ReactLocation()
 
 
 export default function App() {
-	const location = new ReactLocation()
-	const routes = elementsToRoutes([
-		<Route path='/' element={<Navigate to={"home"} replace={true} />} />,
-		<Route path="sync" element={<SyncPage />} />,
-		<Route path='home'>
-			<Route path='/' element={<HomePage />} />
-		</Route>,
-		<Route path='characters'>
-			<Route path='/' element={<CharactersPage />} />
-			<Route path="npc" element={<Npc />}>
-				<Route path='new' element={<AddCharacter />} />
-			</Route>
-			<Route path="playerCharacters">
-				<Route path="/" element={<PlayerCharacters />} />
-				<Route path="new" element={<AddCharacter />} />
-			</Route>
-		</Route>,
-		<Route path='worlds'>
-			<Route path='/' element={<WorldsPage />} />
-			<Route path="new" element={<AddWorld />} />
-		</Route>,
-		<Route path='classes'>
-			<Route path='/' element={<ClassesPage />} />
-		</Route>,
-		<Route path='items'>
-			<Route path='/' element={<ItemsPage />} />
-			<Route path="new" element={<AddItem />} />
-			<Route path=':id' element={<EditItem />} />
-		</Route>,
-		<Route path="languages">
-			<Route path="/" element={<LanguagesPage />} />
-		</Route>,
-		<Route path="sink">
-			<Route path="/" element={<Kitchensink />} />
-		</Route>,
-		<Route path='*' element={<Navigate to="home" />} />
-	]
 
-
-	) as QRoute[]
 	return (
 		<Router location={location} routes={routes}>
 			<div className='flex bg-dnd-brown-100'>
