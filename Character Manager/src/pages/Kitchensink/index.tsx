@@ -1,6 +1,8 @@
 import { ReactNode } from "react"
 import { TabDefinition, Tabs } from "../../components/Tabs"
 import { Page } from "../../components/Page"
+import Tilt from 'react-parallax-tilt';
+import MagicItemCard from "../../components/MagicItemCard";
 
 export function Kitchensink() {
 
@@ -145,6 +147,15 @@ export function Kitchensink() {
             <div className="w-5/12 bg-gray-200 p-2 rounded-lg mt-5">
                 <Tabs tabs={tabs} />
             </div>
+
+            <div className="flex gap-3">
+                <MagicItemCard />
+                <MagicItemCard />
+                <MagicItemCard />
+                <MagicItemCard />
+
+            </div>
+
 
         </Page>
 

@@ -6,11 +6,13 @@ import { useAlert } from "../../common/util/Alerts";
 import { formatString } from "../../common/util/stringFormatting";
 import { useDeleteMagicItemMutation } from "../../pages/Items/items.generated";
 import Accordian from "../Accordian";
+import Tilt from 'react-parallax-tilt';
 
 
 import RarityBadge from "../Badges/RarityBadge";
+import { useState } from "react";
 interface MagicItemCardProps {
-    item: MagicItem
+    item?: MagicItem
 }
 
 type IconProps = { category: MagicItemCategory, id: number }
@@ -39,41 +41,58 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
             alert.show('success', "Magic item Deleted")
         }
     })
+    const [flipCard, setFlipCard] = useState<boolean>(false)
     const navigate = useNavigate()
     return (
-        <Accordian heading={
-            <div className="flex justify-between gap-2 items-center">
-                <div className="flex items-center gap-2">
-                    <p>{item.name}</p>
-                    <RarityBadge rarity={item.rarity} />
-                    <GetIcon category={item.category} id={item.id} />
-                </div>
+        // <Accordian heading={
+        //     <div className="flex justify-between gap-2 items-center">
+        //         <div className="flex items-center gap-2">
+        //             <p>{item.name}</p>
+        //             <RarityBadge rarity={item.rarity} />
+        //             <GetIcon category={item.category} id={item.id} />
+        //         </div>
 
-                <div className=" flex gap-5">
-                    <button id={`editButton${item.id}`} className="h-92" onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        navigate({ to: `${item.id}` })
-                    }}>
-                        <EditIcon />
-                    </button>
-                    <button id="deleteButton" className="h-92" onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        deleteMagicItem.mutate({ id: item.id })
-                    }}>
-                        <DeleteIcon />
-                    </button>
+        //         <div className=" flex gap-5">
+        //             <button id={`editButton${item.id}`} className="h-92" onClick={(e) => {
+        //                 e.preventDefault();
+        //                 e.stopPropagation();
+        //                 navigate({ to: `${item.id}` })
+        //             }}>
+        //                 <EditIcon />
+        //             </button>
+        //             <button id="deleteButton" className="h-92" onClick={(e) => {
+        //                 e.preventDefault();
+        //                 e.stopPropagation();
+        //                 deleteMagicItem.mutate({ id: item.id })
+        //             }}>
+        //                 <DeleteIcon />
+        //             </button>
+        //         </div>
+        //         <Tooltip anchorSelect="#deleteButton" content="Delete Magic Item" place="bottom" noArrow />
+        //         <Tooltip anchorSelect={`#editButton${item.id}`} content={`Edit ${item.name}`} place="bottom" noArrow />
+        //         <Tooltip anchorSelect={`#categoryIcon${item.id}`} content={formatString(item.category)} place="bottom" noArrow />
+        //     </div>}>
+        //     <p>Description: {item.description}</p>
+        //     {item.property1 && <p>Property 1: {item.property1}</p>}
+        //     {item.property2 && <p>Property 2: {item.property2}</p>}
+        //     {item.property3 && <p>Property 3: {item.property3}</p>}
+        // </Accordian>
+        <Tilt>
+            <div className="w-[300px] h-[420px] bg-transparent group perspective">
+                <div className={`relative preserve-3d ${flipCard && "my-rotate-y-180"} duration-1000 w-full h-full`}>
+                    <div className="absolute border-2 w-full h-full bg-white backface-hidden">
+                        <span className="hover:cursor-pointer" onClick={() => {
+                            setFlipCard(true)
+                        }}>click</span>
+                    </div>
+                    <div className="absolute border-2 my-rotate-y-180 w-full h-full bg-black text-white backface-hidden">
+                        <span className="hover:cursor-pointer" onClick={() => {
+                            setFlipCard(false)
+                        }}>click</span>
+                    </div>
                 </div>
-                <Tooltip anchorSelect="#deleteButton" content="Delete Magic Item" place="bottom" noArrow />
-                <Tooltip anchorSelect={`#editButton${item.id}`} content={`Edit ${item.name}`} place="bottom" noArrow />
-                <Tooltip anchorSelect={`#categoryIcon${item.id}`} content={formatString(item.category)} place="bottom" noArrow />
-            </div>}>
-            <p>Description: {item.description}</p>
-            {item.property1 && <p>Property 1: {item.property1}</p>}
-            {item.property2 && <p>Property 2: {item.property2}</p>}
-            {item.property3 && <p>Property 3: {item.property3}</p>}
-        </Accordian>
+            </div>
+        </Tilt>
 
     )
 }
