@@ -4,7 +4,7 @@ import PageHeader from "../PageHeader"
 type PageProps = {
     children: ReactNode
     title: string
-    backButton?: boolean
+    backButton?: string
 } & ({
     onClick: MouseEventHandler<HTMLButtonElement>
     action: boolean

@@ -9,9 +9,13 @@ import EditItem from './pages/Items/EditItem'
 import LanguagesPage from './pages/Languages'
 import SyncPage from './pages/Sync'
 import Navigation from './common/util/Navigation'
-import AddCharacter from './pages/Characters/AddCharacter'
+import AddCharacter from './pages/Characters/PlayerCharacters/AddCharacter'
 import { Kitchensink } from './pages/Kitchensink'
 import { AddItem } from './pages/Items/AddItem'
+import WorldsPage from './pages/World'
+import AddWorld from './pages/World/AddWorld'
+import Npc from './pages/Characters/Npc'
+import PlayerCharacters from './pages/Characters/PlayerCharacters'
 
 
 
@@ -25,7 +29,17 @@ export default function App() {
 		</Route>,
 		<Route path='characters'>
 			<Route path='/' element={<CharactersPage />} />
-			<Route path="new" element={<AddCharacter />} />
+			<Route path="npc" element={<Npc />}>
+				<Route path='new' element={<AddCharacter />} />
+			</Route>
+			<Route path="playerCharacters">
+				<Route path="/" element={<PlayerCharacters />} />
+				<Route path="new" element={<AddCharacter />} />
+			</Route>
+		</Route>,
+		<Route path='worlds'>
+			<Route path='/' element={<WorldsPage />} />
+			<Route path="new" element={<AddWorld />} />
 		</Route>,
 		<Route path='classes'>
 			<Route path='/' element={<ClassesPage />} />

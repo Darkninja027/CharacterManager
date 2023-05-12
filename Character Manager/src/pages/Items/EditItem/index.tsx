@@ -14,7 +14,7 @@ export default function EditItem() {
         )
     }
     return (
-        <Page title={`Edit ${magicItem?.name}`} backButton>
+        <Page title={`Edit ${magicItem?.name}`} backButton={".."}>
             <ItemForm magicItem={magicItem} />
         </Page>
     )

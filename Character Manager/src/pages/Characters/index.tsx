@@ -19,10 +19,7 @@ export function CharactersPage() {
     // }
     return (
         <>
-            <PageHeader title="Characters" action={true} icon={<AddIcon />} onClick={(e) => {
-                e.preventDefault()
-                navigate({ to: "new" })
-            }} />
+            <PageHeader title="Characters" />
             <div className="grid grid-cols-3 gap-5">
                 {allCharacters?.map(char => {
                     return (

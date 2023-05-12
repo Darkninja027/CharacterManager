@@ -6,7 +6,7 @@ import Button from "../formInputs/Button"
 
 type HeaderProps = {
     title: string
-    backButton?: boolean
+    backButton?: string
 } & ({
     onClick: MouseEventHandler<HTMLButtonElement>
     action: boolean
@@ -27,14 +27,13 @@ export default function PageHeader({ title, onClick, action, backButton, icon }:
                     {backButton && (
                         <>
 
-                            <span id="backButton" className="bg-dnd-lime-500 hover:cursor-pointer w-8 h-8 rounded-full p-2 text-dnd-lime-100 shadow-md" onClick={() => { navigate({ to: ".." }) }}><BackButtonIcon /></span>
+                            <span id="backButton" className="bg-dnd-lime-500 hover:cursor-pointer w-8 h-8 rounded-full p-2 text-dnd-lime-100 shadow-md" onClick={() => { navigate({ to: backButton }) }}><BackButtonIcon /></span>
                             <Tooltip anchorSelect="#backButton" content="Back" noArrow />
                         </>
                     )}
                     <p className="text-2xl font-bold text-dnd-brown-900">{title}</p>
                 </div>
                 {action && (
-                    // <button className="w-min border-2 rounded-full px-3 py-1 text-sm bg-white border-black hover:bg-black hover:text-white whitespace-nowrap" onClick={onClick}>{label}</button>
                     <span onClick={onClick} className="bg-dnd-lime-500 hover:cursor-pointer w-8 h-8 text-xs whitespace-nowrap rounded-full p-2 text-dnd-lime-100 shadow-md">{icon}</span>
                 )}
             </div>

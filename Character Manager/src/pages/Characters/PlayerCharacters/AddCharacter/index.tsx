@@ -1,22 +1,22 @@
 import { AlignmentEnum, PlayerCharacterInput, SizeEnum } from "@types";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { AddIcon, DeleteIcon } from "../../../common/icons/SvgList";
-import { characterDefaultValues, getLevelExperience, updateModifiers } from "../../../common/util/characterUtil";
-import { formatString } from "../../../common/util/stringFormatting";
-import Accordian from "../../../components/Accordian";
-import Form from "../../../components/Form";
-import Attribute from "../../../components/formInputs/Attribute";
-import Button from "../../../components/formInputs/Button";
-import Input from "../../../components/formInputs/Input";
-import Radio from "../../../components/formInputs/Radio";
-import Select from "../../../components/formInputs/Select";
-import TextArea from "../../../components/formInputs/TextArea";
-import PageHeader from "../../../components/PageHeader";
-import SquareInput from "../../../components/SquareInput";
-import { useGetAllLanguagesQuery } from "../../Languages/languages.generated";
-import { useCreateCharacterMutation } from "../characters.generated";
-import { ArmorClass } from "../../../components/ArmorClass";
+import { AddIcon, DeleteIcon } from "../../../../common/icons/SvgList";
+import { characterDefaultValues, getLevelExperience, updateModifiers } from "../../../../common/util/characterUtil";
+import { formatString } from "../../../../common/util/stringFormatting";
+import Accordian from "../../../../components/Accordian";
+import Form from "../../../../components/Form";
+import Attribute from "../../../../components/formInputs/Attribute";
+import Button from "../../../../components/formInputs/Button";
+import Input from "../../../../components/formInputs/Input";
+import Radio from "../../../../components/formInputs/Radio";
+import Select from "../../../../components/formInputs/Select";
+import TextArea from "../../../../components/formInputs/TextArea";
+import PageHeader from "../../../../components/PageHeader";
+import SquareInput from "../../../../components/SquareInput";
+import { useGetAllLanguagesQuery } from "../../../Languages/languages.generated";
+import { useCreateCharacterMutation } from "../../characters.generated";
+import { ArmorClass } from "../../../../components/ArmorClass";
 
 
 
@@ -103,7 +103,7 @@ export default function AddCharacter() {
     ]
     return (
         <div>
-            <PageHeader title="Add Character" backButton />
+            <PageHeader title="Add Character" backButton=".." />
             <div className="mx-5 overflow-auto pt-32">
                 <Form methods={methods} onSubmit={OnSubmit}>
                     <div className="flex w-full grow items-center gap-3">

@@ -13,7 +13,10 @@ export default function Navigation() {
                     <NavigationLink to="/home" label="HOME" />
                     <NavigationLink to="/characters" label="CHARACTERS" menu={{
                         "Players": "playerCharacters",
-                        "NPCS": "npcs"
+                        "NPCS": "npc"
+                    }} />
+                    <NavigationLink to="/worlds" label="WORLDS" menu={{
+                        "Locations": "locations"
                     }} />
                     <NavigationLink to="/classes" label="CLASSES" />
                     <NavigationLink to="/items" label="MAGIC ITEMS" menu={{
