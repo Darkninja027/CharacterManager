@@ -7,6 +7,7 @@ import PageHeader from "../../components/PageHeader";
 
 
 import { useGetItemsQuery } from "./items.generated";
+import { Page } from "../../components/Page";
 
 export default function ItemsPage() {
 
@@ -18,25 +19,22 @@ export default function ItemsPage() {
     }
 
     return (
-        <>
-            <PageHeader title="Magic Items" action={true} icon={<AddIcon />} onClick={(e) => {
-                e.preventDefault()
-                navigate({ to: "new" })
-            }} />
+        <Page title="Magic Items" action={true} icon={<AddIcon />} onClick={(e) => {
+            e.preventDefault()
+            navigate({ to: "new" })
+        }}>
 
-            <div className="mx-5 pt-32">
-                <div className="grid grid-cols-4 gap-3 items-start flex-wrap">
-                    {magicItems && magicItems?.length < 1 && (
-                        <div className="bg-dnd-red-300 w-full col-span-12 rounded-full px-5 py-3 text-dnd-red-700">
-                            'No magic items found'
-                        </div>
-                    )}
-                    {magicItems?.map((magicItem) => (
-                        <MagicItemCard key={magicItem.id} item={magicItem} />
-                    ))}
-                </div>
+            <div className="flex flex-wrap gap-5">
+                {magicItems && magicItems?.length < 1 && (
+                    <div className="bg-dnd-red-300 w-full col-span-12 rounded-full px-5 py-3 text-dnd-red-700">
+                        'No magic items found'
+                    </div>
+                )}
+                {magicItems?.map((magicItem) => (
+                    <MagicItemCard key={magicItem.id} item={magicItem} />
+                ))}
             </div>
 
-        </>
+        </Page>
     )
 }

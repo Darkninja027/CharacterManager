@@ -22,7 +22,7 @@ export default function PageHeader({ title, onClick, action, backButton, icon }:
     const navigate = useNavigate()
     return (
         <div className="mb-5 fixed top-0 w-full z-20">
-            <div className="w-full flex items-center  leading-none gap-3 bg-dnd-brown-300 px-5 h-24">
+            <div className="w-full flex items-center  leading-none gap-3 bg-dnd-brown-300 px-5 h-16">
                 <div className="flex items-center gap-3">
                     {backButton && (
                         <>

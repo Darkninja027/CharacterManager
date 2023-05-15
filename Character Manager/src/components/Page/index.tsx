@@ -19,7 +19,7 @@ export function Page({ children, title, backButton, onClick, action, icon }: Pag
     return (
         <>
             <PageHeader title={title} backButton={backButton} onClick={onClick as MouseEventHandler<HTMLButtonElement>} action={action as boolean} icon={icon} />
-            <div className="pt-32 mx-5">
+            <div className="pt-24 mx-5">
                 {children}
             </div>
         </>

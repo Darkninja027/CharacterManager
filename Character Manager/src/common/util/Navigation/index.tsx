@@ -30,13 +30,7 @@ export default function Navigation() {
                         "Wonderous": "/wonderous",
                     }} />
                     <NavigationLink to="/languages" label="LANGUAGES" />
-                    <NavigationLink to="/sink" label="SINK" menu={{
-                        "Test 1": "/test1",
-                        "Test 2": "/test2",
-                        "Test 3": "/test3",
-                        "Test 4": "/test4",
-                        "Test 5": "/test5",
-                    }} />
+                    <NavigationLink to="/sink" label="SINK" />
                 </nav>
             </div>
 

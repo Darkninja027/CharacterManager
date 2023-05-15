@@ -3,6 +3,7 @@ import { TabDefinition, Tabs } from "../../components/Tabs"
 import { Page } from "../../components/Page"
 import Tilt from 'react-parallax-tilt';
 import MagicItemCard from "../../components/MagicItemCard";
+import { MagicItemCategory, MagicItemRarity } from "@types";
 
 export function Kitchensink() {
 
@@ -149,10 +150,13 @@ export function Kitchensink() {
             </div>
 
             <div className="flex gap-3">
-                <MagicItemCard />
-                <MagicItemCard />
-                <MagicItemCard />
-                <MagicItemCard />
+                <MagicItemCard item={{
+                    id: 1,
+                    name: "nya",
+                    description: "test",
+                    category: MagicItemCategory.Armor,
+                    rarity: MagicItemRarity.Common
+                }} />
 
             </div>
 

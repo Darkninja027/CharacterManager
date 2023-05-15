@@ -16,6 +16,7 @@ import WorldsPage from './pages/World'
 import AddWorld from './pages/World/AddWorld'
 import Npc from './pages/Characters/Npc'
 import PlayerCharacters from './pages/Characters/PlayerCharacters'
+import Locations from './pages/World/Locations'
 
 const routes = elementsToRoutes([
 	<Route path='/' element={<Navigate to={"home"} replace={true} />} />,
@@ -36,6 +37,9 @@ const routes = elementsToRoutes([
 	<Route path='worlds'>
 		<Route path='/' element={<WorldsPage />} />
 		<Route path="new" element={<AddWorld />} />
+		<Route path='locations'>
+			<Route path="/" element={<Locations />} />
+		</Route>
 	</Route>,
 	<Route path='classes'>
 		<Route path='/' element={<ClassesPage />} />
@@ -64,7 +68,7 @@ export default function App() {
 	return (
 		<Router location={location} routes={routes}>
 			<div className='flex bg-dnd-brown-100'>
-				<div className='flex fixed'>
+				<div className='flex fixed z-50'>
 					<Navigation />
 				</div>
 				<main className="grow ml-[300px] min-h-screen">

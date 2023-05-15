@@ -1,7 +1,7 @@
 import { useNavigate } from "@tanstack/react-location";
-import { MagicItem, MagicItemCategory } from "@types";
+import { MagicItem, MagicItemCategory, MagicItemRarity } from "@types";
 import { Tooltip } from "react-tooltip";
-import { ArmorIcon, DeleteIcon, EditIcon, PotionIcon, RingIcon, RodIcon, ScrollIcon, StaffIcon, WandIcon, WeaponIcon, WonderousItemIcon } from "../../common/icons/SvgList";
+import { ArmorIcon, BackButtonIcon, DeleteIcon, EditIcon, MoreIcon, PotionIcon, RingIcon, RodIcon, ScrollIcon, StaffIcon, WandIcon, WeaponIcon, WonderousItemIcon } from "../../common/icons/SvgList";
 import { useAlert } from "../../common/util/Alerts";
 import { formatString } from "../../common/util/stringFormatting";
 import { useDeleteMagicItemMutation } from "../../pages/Items/items.generated";
@@ -11,8 +11,9 @@ import Tilt from 'react-parallax-tilt';
 
 import RarityBadge from "../Badges/RarityBadge";
 import { useState } from "react";
+import classNames from "classnames";
 interface MagicItemCardProps {
-    item?: MagicItem
+    item: MagicItem
 }
 
 type IconProps = { category: MagicItemCategory, id: number }
@@ -43,52 +44,58 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
     })
     const [flipCard, setFlipCard] = useState<boolean>(false)
     const navigate = useNavigate()
-    return (
-        // <Accordian heading={
-        //     <div className="flex justify-between gap-2 items-center">
-        //         <div className="flex items-center gap-2">
-        //             <p>{item.name}</p>
-        //             <RarityBadge rarity={item.rarity} />
-        //             <GetIcon category={item.category} id={item.id} />
-        //         </div>
 
-        //         <div className=" flex gap-5">
-        //             <button id={`editButton${item.id}`} className="h-92" onClick={(e) => {
-        //                 e.preventDefault();
-        //                 e.stopPropagation();
-        //                 navigate({ to: `${item.id}` })
-        //             }}>
-        //                 <EditIcon />
-        //             </button>
-        //             <button id="deleteButton" className="h-92" onClick={(e) => {
-        //                 e.preventDefault();
-        //                 e.stopPropagation();
-        //                 deleteMagicItem.mutate({ id: item.id })
-        //             }}>
-        //                 <DeleteIcon />
-        //             </button>
-        //         </div>
-        //         <Tooltip anchorSelect="#deleteButton" content="Delete Magic Item" place="bottom" noArrow />
-        //         <Tooltip anchorSelect={`#editButton${item.id}`} content={`Edit ${item.name}`} place="bottom" noArrow />
-        //         <Tooltip anchorSelect={`#categoryIcon${item.id}`} content={formatString(item.category)} place="bottom" noArrow />
-        //     </div>}>
-        //     <p>Description: {item.description}</p>
-        //     {item.property1 && <p>Property 1: {item.property1}</p>}
-        //     {item.property2 && <p>Property 2: {item.property2}</p>}
-        //     {item.property3 && <p>Property 3: {item.property3}</p>}
-        // </Accordian>
-        <Tilt>
-            <div className="w-[300px] h-[420px] bg-transparent group perspective">
-                <div className={`relative preserve-3d ${flipCard && "my-rotate-y-180"} duration-1000 w-full h-full`}>
-                    <div className="absolute border-2 w-full h-full bg-white backface-hidden">
-                        <span className="hover:cursor-pointer" onClick={() => {
-                            setFlipCard(true)
-                        }}>click</span>
+    const cardStyles = classNames(
+        "absolute w-full h-full bg-gray-200 backface-hidden rounded-lg p-5 shadow-xl",
+        {
+            "border-4 border-white": item.rarity == MagicItemRarity.Common,
+            "border-4 border-[#1eff00]": item.rarity == MagicItemRarity.Uncommon,
+            "border-4 border-[#0070dd]": item.rarity == MagicItemRarity.Rare,
+            "border-4 border-[#a335ee]": item.rarity == MagicItemRarity.VeryRare,
+            "border-4 border-[#ff8000]": item.rarity == MagicItemRarity.Legendary,
+        }
+    )
+    return (
+        <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5}>
+            <div className="w-[300px] h-[420px] bg-transparent group perspective ">
+                <div className={`relative preserve-3d ${flipCard && "my-rotate-y-180"} duration-1000 w-full h-full `}>
+                    <div className={`${cardStyles}`}>
+                        <header className="border-b-2 pb-3 border-black relative">
+                            <p className="w-full text-center">{item?.name}</p>
+                            <span className="absolute top-0">
+                                <GetIcon category={item.category} id={item.id} />
+                                <Tooltip anchorSelect={`#categoryIcon${item.id}`} content={formatString(item.category)} place="bottom" noArrow />
+                            </span>
+                            <span id={`more${item?.id}`} className="p-1.5 w-8 h-8 rounded-full absolute top-0 right-0 hover:cursor-pointer" onClick={() => {
+                                setFlipCard(true)
+                            }}>
+                                <MoreIcon />
+                                <Tooltip anchorSelect={`#more${item?.id}`} content={formatString("More")} place="bottom" noArrow />
+                            </span>
+                        </header>
+                        <article>
+                            <section>{item?.description}</section>
+                            <section>{item?.property1}</section>
+                            <section>{item?.property2}</section>
+                            <section>{item?.property3}</section>
+                        </article>
+
+
                     </div>
-                    <div className="absolute border-2 my-rotate-y-180 w-full h-full bg-black text-white backface-hidden">
-                        <span className="hover:cursor-pointer" onClick={() => {
-                            setFlipCard(false)
-                        }}>click</span>
+                    <div className={`my-rotate-y-180 ${cardStyles}`}>
+                        <header className="border-b-2 pb-3 border-black relative">
+                            <p className="w-full text-center">{item?.name}</p>
+                            <span className="absolute top-0">
+                                <GetIcon category={item.category} id={item.id} />
+                                <Tooltip anchorSelect={`#categoryIcon${item.id}`} content={formatString(item.category)} place="bottom" noArrow />
+                            </span>
+                            <span id={`back${item?.id}`} className="p-1.5 w-8 h-8 rounded-full absolute top-0 right-0 hover:cursor-pointer" onClick={() => {
+                                setFlipCard(false)
+                            }}>
+                                <BackButtonIcon />
+                                <Tooltip anchorSelect={`#back${item?.id}`} content={formatString("Back")} place="bottom" noArrow />
+                            </span>
+                        </header>
                     </div>
                 </div>
             </div>
