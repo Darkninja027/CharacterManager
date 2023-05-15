@@ -115,7 +115,12 @@ module.exports = {
 						800: "#335803",
 						900: "#294504",
 					},
-				}
+				},
+				common: "#1eff00",
+				uncommon: "#0070dd",
+				rare: "#a335ee",
+				veryRare: "",
+				legendary: ""
 			}
 		},
 	},
