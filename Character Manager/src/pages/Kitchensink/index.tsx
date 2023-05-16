@@ -4,6 +4,7 @@ import { Page } from "../../components/Page"
 import Tilt from 'react-parallax-tilt';
 import MagicItemCard from "../../components/MagicItemCard";
 import { MagicItemCategory, MagicItemRarity } from "@types";
+import ItemForm from "../../components/Form/ItemForm";
 
 export function Kitchensink() {
 
@@ -163,6 +164,10 @@ export function Kitchensink() {
 
             </div>
 
+            <div className="shadow-lg bg-dnd-brown-200/80 w-min rounded-lg mt-10 p-5">
+                <header className="font-black text-2xl mb-5">Card</header>
+                <ItemForm />
+            </div>
 
         </Page>
 

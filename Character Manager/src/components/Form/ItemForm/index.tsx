@@ -13,6 +13,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { formatString } from "../../../common/util/stringFormatting";
 import { GetIcon } from "../../MagicItemCard";
+import Select from "../../formInputs/Select";
 
 type ItemFormProps = {
     magicItem?: MagicItem
@@ -51,14 +52,20 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
             itemMutation.mutate({ magicItem: data });
         }
     }
-    const categories = Object.values(MagicItemCategory)
-    const rarities = [
+    const categories = Object.values(MagicItemCategory).map((category, index) => {
+        return { id: category, name: formatString(category) }
+    })
+    const raritiesList = [
         MagicItemRarity.Common,
         MagicItemRarity.Uncommon,
         MagicItemRarity.Rare,
         MagicItemRarity.VeryRare,
         MagicItemRarity.Legendary,
     ]
+
+    const rarities = raritiesList.map((rarity, index) => {
+        return { id: rarity, name: formatString(rarity) }
+    })
 
     const cardStyles = classNames(
         "absolute w-full h-full bg-dnd-red-200 backface-hidden p-2 shadow-xl border-4 border-dnd-red-900 hover:cursor-pointer"
@@ -110,38 +117,22 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
         return dots
     }
 
+
+
     return (
         <div className="flex gap-10">
             <Form methods={methods} onSubmit={onSubmit}>
                 <div className="flex gap-3">
-                    <div className="flex flex-col gap-3">
-                        <div className="flex gap-3">
-                            <Input methods={methods} name="name" label="Name" required placeholder="Name here" maxLength={22} />
-                            <Input methods={methods} name="description" label="Description" required />
-                        </div>
-
-                        <div className="flex gap-3">
-                            <span>
-                                <label>Item Category</label>
-                                {categories.map(category => (
-                                    <Radio key={category} methods={methods} name="category" value={category} />
-                                ))}
-                            </span>
-                            <span>
-                                <label>Item Rarity</label>
-                                {rarities.map(rarity => {
-                                    return (
-                                        <Radio key={rarity} methods={methods} name="rarity" value={rarity} />
-                                    );
-                                })}
-                            </span>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3 w-96">
+                        <Input methods={methods} name="name" label="Name" required placeholder="Name here" maxLength={22} />
+                        <Select methods={methods} name="rarity" options={rarities} label="Rarity" />
+                        <Select methods={methods} name="category" options={categories} label="Category" />
+                        <TextArea methods={methods} name="description" label="Description" required />
                         <TextArea methods={methods} name="property1" label="Property 1" />
                         <TextArea methods={methods} name="property2" label="Property 2" />
-                        {<TextArea methods={methods} name="property3" label="Property 3" />}
+                        <TextArea methods={methods} name="property3" label="Property 3" />
                     </div>
+
                 </div>
                 <Button className="mt-3" content="Add Magic Item" />
             </Form>
