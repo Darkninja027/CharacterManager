@@ -29,7 +29,7 @@ const INPUT_STYLE = {
     AC: "outline-0 bg-transparent text-center w-full text-3xl font-bold"
 }
 
-export default function Input<T extends FieldValues>({ name, label, className, type, methods, value, onChange, required, disabled, defaultValue, min, max, styling }: InputProps<T>) {
+export default function Input<T extends FieldValues>({ name, label, className, type, methods, value, onChange, required, disabled, defaultValue, styling, ...props }: InputProps<T>) {
     const fieldState = methods ? methods.getFieldState(name) : null
     const fieldValue = methods ? methods.watch(name) : value
     const classes = classNames(
@@ -38,7 +38,7 @@ export default function Input<T extends FieldValues>({ name, label, className, t
     return (
         <label className={classNames("flex flex-col", className)}>
             {label && <span>{label} {required && <span>*</span>}</span>}
-            <input type={type} className={classes} {...(methods ? methods.register(name, { onChange, required }) : { value: fieldValue, onChange })} disabled={disabled} defaultValue={defaultValue} min={min} max={max} />
+            <input type={type} className={classes} {...(methods ? methods.register(name, { onChange, required }) : { value: fieldValue, onChange })} disabled={disabled} defaultValue={defaultValue} {...props} />
             {fieldState?.error && (
                 <p>Field is required</p>
             )}

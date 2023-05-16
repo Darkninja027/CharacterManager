@@ -153,52 +153,12 @@ export function Kitchensink() {
                 <MagicItemCard item={{
                     id: 1,
                     name: "nya",
-                    description: "test",
-                    category: MagicItemCategory.Armor,
-                    rarity: MagicItemRarity.Common,
-                    property1: "This is a property",
-                    property2: "This is a property",
-                    property3: "This is a property",
-                }} />
-                <MagicItemCard item={{
-                    id: 1,
-                    name: "nya",
-                    description: "test",
-                    category: MagicItemCategory.Armor,
-                    rarity: MagicItemRarity.Uncommon,
-                    property1: "This is a property",
-                    property2: "This is a property",
-                    property3: "This is a property",
-                }} />
-                <MagicItemCard item={{
-                    id: 1,
-                    name: "nya",
-                    description: "test",
-                    category: MagicItemCategory.Armor,
-                    rarity: MagicItemRarity.Rare,
-                    property1: "This is a property",
-                    property2: "This is a property",
-                    property3: "This is a property",
-                }} />
-                <MagicItemCard item={{
-                    id: 1,
-                    name: "nya",
-                    description: "test",
-                    category: MagicItemCategory.Armor,
-                    rarity: MagicItemRarity.VeryRare,
-                    property1: "This is a property",
-                    property2: "This is a property",
-                    property3: "This is a property",
-                }} />
-                <MagicItemCard item={{
-                    id: 1,
-                    name: "nya",
-                    description: "test",
-                    category: MagicItemCategory.Armor,
+                    description: "This weapon is of celestial origin, and very few exist. It is a one handed longsword with an otherworldly, silver colored blade. The edges glow a light blue when swung. The cross guard is relatively wide with colorless, blue, red and yellow diamonds decorating it.",
+                    category: MagicItemCategory.Weapon,
                     rarity: MagicItemRarity.Legendary,
-                    property1: "This is a property",
-                    property2: "This is a property",
-                    property3: "This is a property",
+                    property1: "This sword deals additional magical force damage equal to 2d6 + your Dexterity modifier.",
+                    property2: "On a successful critical hit, this weapon deals an additional 2d8 force damage.",
+                    property3: "If the wielder of this sword is not using a shield, and has proficiency in Persuasion; they receive a +1 bonus to their AC.",
                 }} />
 
             </div>

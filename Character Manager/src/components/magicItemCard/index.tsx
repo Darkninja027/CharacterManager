@@ -17,11 +17,10 @@ interface MagicItemCardProps {
     item: MagicItem
 }
 
-type IconProps = { category: MagicItemCategory, id: number }
-function GetIcon({ category, id }: IconProps) {
-    const styles = "p-1.5 w-8 h-8 bg-[#d9bda5] rounded-full"
+type IconProps = { category: MagicItemCategory }
+export function GetIcon({ category }: IconProps) {
     return (
-        <div id={`categoryIcon${id}`} className="w-full p-2">
+        <div className="w-full p-2">
             {category == MagicItemCategory.Armor && <ArmorIcon />}
             {category == MagicItemCategory.Potion && <PotionIcon />}
             {category == MagicItemCategory.Ring && <RingIcon />}
@@ -112,7 +111,7 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
                                 {item.name.toLocaleUpperCase()}
                             </header>
                             <div className="flex flex-col items-center justify-between h-[85%]">
-                                <GetIcon category={item.category} id={item.id} />
+                                <GetIcon category={item.category} />
                                 <div className="w-full text-center flex flex-col items-center gap-1">
                                     <span className={categoryStyle}>{formatString(item.category)}</span>
                                     <span className={rareityStyles}>{formatString(item.rarity)}</span>
@@ -134,7 +133,7 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
                                 {item.name.toLocaleUpperCase()}
                             </header>
                             <div className="flex flex-col items-center justify-between h-[85%]">
-                                <div className="flex flex-col w-full">
+                                <div className="flex flex-col w-full text-[12px] leading-none p-2 gap-3 overflow-hidden">
                                     <p>{item.description}</p>
                                     <p>{item.property1}</p>
                                     <p>{item.property2}</p>
@@ -155,25 +154,4 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
         </Tilt>
 
     )
-}
-
-
-
-
-function getColour(rarity: MagicItemRarity) {
-    let background = "#F5F5F5"
-    if (rarity == MagicItemRarity.Uncommon) {
-        background = "#6AB30C"
-    }
-    if (rarity == MagicItemRarity.Rare) {
-        background = "#137BE0"
-    }
-    if (rarity == MagicItemRarity.VeryRare) {
-        background = "#9333D4"
-    }
-    if (rarity == MagicItemRarity.Legendary) {
-        background = "#D27516"
-    }
-
-    return background
 }
