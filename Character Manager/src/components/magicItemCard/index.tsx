@@ -12,6 +12,7 @@ import Tilt from 'react-parallax-tilt';
 import RarityBadge from "../Badges/RarityBadge";
 import { useState } from "react";
 import classNames from "classnames";
+import ItemForm from "../Form/ItemForm";
 interface MagicItemCardProps {
     item: MagicItem
 }
@@ -20,7 +21,7 @@ type IconProps = { category: MagicItemCategory, id: number }
 function GetIcon({ category, id }: IconProps) {
     const styles = "p-1.5 w-8 h-8 bg-[#d9bda5] rounded-full"
     return (
-        <div id={`categoryIcon${id}`} className={styles}>
+        <div id={`categoryIcon${id}`} className="w-full p-2">
             {category == MagicItemCategory.Armor && <ArmorIcon />}
             {category == MagicItemCategory.Potion && <PotionIcon />}
             {category == MagicItemCategory.Ring && <RingIcon />}
@@ -46,60 +47,133 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
     const navigate = useNavigate()
 
     const cardStyles = classNames(
-        "absolute w-full h-full bg-gray-200 backface-hidden rounded-lg p-5 shadow-xl",
-        {
-            "border-4 border-white": item.rarity == MagicItemRarity.Common,
-            "border-4 border-[#1eff00]": item.rarity == MagicItemRarity.Uncommon,
-            "border-4 border-[#0070dd]": item.rarity == MagicItemRarity.Rare,
-            "border-4 border-[#a335ee]": item.rarity == MagicItemRarity.VeryRare,
-            "border-4 border-[#ff8000]": item.rarity == MagicItemRarity.Legendary,
-        }
+        "absolute w-full h-full bg-dnd-red-200 backface-hidden p-2 shadow-xl border-4 border-dnd-red-900 hover:cursor-pointer"
     )
+
+    const dotStyles = classNames("w-2.5 h-2.5 rounded-full", {
+        "bg-common": item.rarity == MagicItemRarity.Common,
+        "bg-uncommon": item.rarity == MagicItemRarity.Uncommon,
+        "bg-rare": item.rarity == MagicItemRarity.Rare,
+        "bg-veryrare": item.rarity == MagicItemRarity.VeryRare,
+        "bg-legendary": item.rarity == MagicItemRarity.Legendary,
+    })
+
+    const categoryStyle = classNames("font-bold italic text-xs", {
+        "text-common": item.rarity == MagicItemRarity.Common,
+        "text-uncommon": item.rarity == MagicItemRarity.Uncommon,
+        "text-rare": item.rarity == MagicItemRarity.Rare,
+        "text-veryrare": item.rarity == MagicItemRarity.VeryRare,
+        "text-legendary": item.rarity == MagicItemRarity.Legendary,
+    })
+
+    const rareityStyles = classNames("border-t-[1px] text-${getColour(item.rarity)} border-t-${getColour(item.rarity)} w-[60%] text-center font-bold italic text-xs", {
+        "text-common border-t-common": item.rarity == MagicItemRarity.Common,
+        "text-uncommon border-t-uncommon": item.rarity == MagicItemRarity.Uncommon,
+        "text-rare border-t-rare": item.rarity == MagicItemRarity.Rare,
+        "text-veryrare border-t-veryrare": item.rarity == MagicItemRarity.VeryRare,
+        "text-legendary border-t-legendary": item.rarity == MagicItemRarity.Legendary,
+    })
+
+    function getRarityDots(rarity: MagicItemRarity) {
+        let count = ['']
+
+        if (rarity == MagicItemRarity.Uncommon) {
+            count.push('')
+        }
+        if (rarity == MagicItemRarity.Rare) {
+            count.push('', '');
+        }
+        if (rarity == MagicItemRarity.VeryRare) {
+            count.push('', '', '');
+        }
+        if (rarity == MagicItemRarity.Legendary) {
+            count.push('', '', '', '');
+        }
+
+        let dots = count.map(() => (
+            <div className={dotStyles} />
+        ))
+        return dots
+    }
+
+
     return (
         <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5}>
             <div className="w-[300px] h-[420px] bg-transparent group perspective ">
                 <div className={`relative preserve-3d ${flipCard && "my-rotate-y-180"} duration-1000 w-full h-full `}>
-                    <div className={`${cardStyles}`}>
-                        <header className="border-b-2 pb-3 border-black relative">
-                            <p className="w-full text-center">{item?.name}</p>
-                            <span className="absolute top-0">
+                    <div className={`${cardStyles}`} onClick={(e) => {
+                        e.preventDefault()
+                        setFlipCard(true)
+                    }}>
+                        <div className={`${dotStyles} absolute top-0.5 left-0.5`} />
+                        <div className={`${dotStyles} absolute top-0.5 right-0.5`} />
+                        <div className="border-2 border-black h-[95%] w-[275px] rounded-2xl">
+                            <header className="border-2 border-black flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 font-black">
+                                {item.name.toLocaleUpperCase()}
+                            </header>
+                            <div className="flex flex-col items-center justify-between h-[85%]">
                                 <GetIcon category={item.category} id={item.id} />
-                                <Tooltip anchorSelect={`#categoryIcon${item.id}`} content={formatString(item.category)} place="bottom" noArrow />
-                            </span>
-                            <span id={`more${item?.id}`} className="p-1.5 w-8 h-8 rounded-full absolute top-0 right-0 hover:cursor-pointer" onClick={() => {
-                                setFlipCard(true)
-                            }}>
-                                <MoreIcon />
-                                <Tooltip anchorSelect={`#more${item?.id}`} content={formatString("More")} place="bottom" noArrow />
-                            </span>
-                        </header>
-                        <article>
-                            <section>{item?.description}</section>
-                            <section>{item?.property1}</section>
-                            <section>{item?.property2}</section>
-                            <section>{item?.property3}</section>
-                        </article>
-
-
+                                <div className="w-full text-center flex flex-col items-center gap-1">
+                                    <span className={categoryStyle}>{formatString(item.category)}</span>
+                                    <span className={rareityStyles}>{formatString(item.rarity)}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex justify-center gap-1 h-[5%] items-center">
+                            {getRarityDots(item.rarity)}
+                        </div>
                     </div>
-                    <div className={`my-rotate-y-180 ${cardStyles}`}>
-                        <header className="border-b-2 pb-3 border-black relative">
-                            <p className="w-full text-center">{item?.name}</p>
-                            <span className="absolute top-0">
-                                <GetIcon category={item.category} id={item.id} />
-                                <Tooltip anchorSelect={`#categoryIcon${item.id}`} content={formatString(item.category)} place="bottom" noArrow />
-                            </span>
-                            <span id={`back${item?.id}`} className="p-1.5 w-8 h-8 rounded-full absolute top-0 right-0 hover:cursor-pointer" onClick={() => {
-                                setFlipCard(false)
-                            }}>
-                                <BackButtonIcon />
-                                <Tooltip anchorSelect={`#back${item?.id}`} content={formatString("Back")} place="bottom" noArrow />
-                            </span>
-                        </header>
+                    <div className={`my-rotate-y-180 ${cardStyles}`} onClick={(e) => {
+                        e.preventDefault()
+                        setFlipCard(false)
+                    }}>
+                        <div className={`${dotStyles} absolute top-0.5 left-0.5`} />
+                        <div className={`${dotStyles} absolute top-0.5 right-0.5`} />
+                        <div className="border-2 border-black h-[95%] w-[275px] rounded-2xl">
+                            <header className="border-2 border-black flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 font-black">
+                                {item.name.toLocaleUpperCase()}
+                            </header>
+                            <div className="flex flex-col items-center justify-between h-[85%]">
+                                <div className="flex flex-col w-full">
+                                    <p>{item.description}</p>
+                                    <p>{item.property1}</p>
+                                    <p>{item.property2}</p>
+                                    <p>{item.property3}</p>
+                                </div>
+                                <div className="w-full text-center flex flex-col items-center gap-1">
+                                    <span className={categoryStyle}>{formatString(item.category)}</span>
+                                    <span className={rareityStyles}>{formatString(item.rarity)}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex justify-center gap-1 h-[5%] items-center">
+                            {getRarityDots(item.rarity)}
+                        </div>
                     </div>
                 </div>
             </div>
         </Tilt>
 
     )
+}
+
+
+
+
+function getColour(rarity: MagicItemRarity) {
+    let background = "#F5F5F5"
+    if (rarity == MagicItemRarity.Uncommon) {
+        background = "#6AB30C"
+    }
+    if (rarity == MagicItemRarity.Rare) {
+        background = "#137BE0"
+    }
+    if (rarity == MagicItemRarity.VeryRare) {
+        background = "#9333D4"
+    }
+    if (rarity == MagicItemRarity.Legendary) {
+        background = "#D27516"
+    }
+
+    return background
 }

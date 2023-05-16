@@ -116,11 +116,11 @@ module.exports = {
 						900: "#294504",
 					},
 				},
-				common: "#1eff00",
-				uncommon: "#0070dd",
-				rare: "#a335ee",
-				veryRare: "",
-				legendary: ""
+				common: "#F5F5F5",
+				uncommon: "#559307",
+				rare: "#074F93",
+				veryrare: "#660793",
+				legendary: "#D27516"
 			}
 		},
 	},

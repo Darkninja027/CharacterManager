@@ -149,13 +149,56 @@ export function Kitchensink() {
                 <Tabs tabs={tabs} />
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-3 flex-wrap mt-10">
                 <MagicItemCard item={{
                     id: 1,
                     name: "nya",
                     description: "test",
                     category: MagicItemCategory.Armor,
-                    rarity: MagicItemRarity.Common
+                    rarity: MagicItemRarity.Common,
+                    property1: "This is a property",
+                    property2: "This is a property",
+                    property3: "This is a property",
+                }} />
+                <MagicItemCard item={{
+                    id: 1,
+                    name: "nya",
+                    description: "test",
+                    category: MagicItemCategory.Armor,
+                    rarity: MagicItemRarity.Uncommon,
+                    property1: "This is a property",
+                    property2: "This is a property",
+                    property3: "This is a property",
+                }} />
+                <MagicItemCard item={{
+                    id: 1,
+                    name: "nya",
+                    description: "test",
+                    category: MagicItemCategory.Armor,
+                    rarity: MagicItemRarity.Rare,
+                    property1: "This is a property",
+                    property2: "This is a property",
+                    property3: "This is a property",
+                }} />
+                <MagicItemCard item={{
+                    id: 1,
+                    name: "nya",
+                    description: "test",
+                    category: MagicItemCategory.Armor,
+                    rarity: MagicItemRarity.VeryRare,
+                    property1: "This is a property",
+                    property2: "This is a property",
+                    property3: "This is a property",
+                }} />
+                <MagicItemCard item={{
+                    id: 1,
+                    name: "nya",
+                    description: "test",
+                    category: MagicItemCategory.Armor,
+                    rarity: MagicItemRarity.Legendary,
+                    property1: "This is a property",
+                    property2: "This is a property",
+                    property3: "This is a property",
                 }} />
 
             </div>
