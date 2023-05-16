@@ -68,7 +68,7 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
     })
 
     const cardStyles = classNames(
-        "absolute w-full h-full bg-dnd-red-200 backface-hidden p-2 shadow-xl border-4 border-dnd-red-900 hover:cursor-pointer"
+        "absolute w-full h-full bg-[#ede4ce] backface-hidden p-2 shadow-xl border-4 border-dnd-red-900 hover:cursor-pointer"
     )
 
     const dotStyles = classNames("w-2.5 h-2.5 rounded-full", {

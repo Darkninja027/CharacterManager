@@ -1,18 +1,14 @@
 import { useNavigate } from "@tanstack/react-location";
 import { MagicItem, MagicItemCategory, MagicItemRarity } from "@types";
-import { Tooltip } from "react-tooltip";
-import { ArmorIcon, BackButtonIcon, DeleteIcon, EditIcon, MoreIcon, PotionIcon, RingIcon, RodIcon, ScrollIcon, StaffIcon, WandIcon, WeaponIcon, WonderousItemIcon } from "../../common/icons/SvgList";
+import Tilt from 'react-parallax-tilt';
+import { ArmorIcon, PotionIcon, RingIcon, RodIcon, ScrollIcon, StaffIcon, WandIcon, WeaponIcon, WonderousItemIcon } from "../../common/icons/SvgList";
 import { useAlert } from "../../common/util/Alerts";
 import { formatString } from "../../common/util/stringFormatting";
 import { useDeleteMagicItemMutation } from "../../pages/Items/items.generated";
-import Accordian from "../Accordian";
-import Tilt from 'react-parallax-tilt';
 
 
-import RarityBadge from "../Badges/RarityBadge";
-import { useState } from "react";
 import classNames from "classnames";
-import ItemForm from "../Form/ItemForm";
+import { useState } from "react";
 interface MagicItemCardProps {
     item: MagicItem
 }
@@ -46,7 +42,7 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
     const navigate = useNavigate()
 
     const cardStyles = classNames(
-        "absolute w-full h-full bg-dnd-red-200 backface-hidden p-2 shadow-xl border-4 border-dnd-red-900 hover:cursor-pointer"
+        "absolute w-full h-full bg-[#ede4ce] backface-hidden p-2 shadow-xl border-4 border-dnd-red-900 hover:cursor-pointer"
     )
 
     const dotStyles = classNames("w-2.5 h-2.5 rounded-full", {

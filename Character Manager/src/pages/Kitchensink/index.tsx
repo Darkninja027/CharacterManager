@@ -164,7 +164,7 @@ export function Kitchensink() {
 
             </div>
 
-            <div className="shadow-lg bg-dnd-brown-200/80 w-min rounded-lg mt-10 p-5">
+            <div className="shadow-2xl shadow-black/25 bg-dnd-brown-200/80 w-min rounded-lg mt-10 p-5">
                 <header className="font-black text-2xl mb-5">Card</header>
                 <ItemForm />
             </div>
