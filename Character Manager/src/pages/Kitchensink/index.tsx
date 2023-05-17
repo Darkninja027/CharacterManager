@@ -96,7 +96,7 @@ export function Kitchensink() {
                 </Card>
 
                 <Card className="w-full" heading="Tabs">
-                    <div className=" bg-gray-200 p-2 rounded-lg mt-5">
+                    <div className="p-2 rounded-lg mt-5">
                         <Tabs tabs={tabs} />
                     </div>
                 </Card>
