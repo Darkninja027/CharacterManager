@@ -31,8 +31,12 @@ const routes = elementsToRoutes([
 		</Route>
 		<Route path="playerCharacters">
 			<Route path="/" element={<PlayerCharacters />} />
-			<Route path="new" element={<AddCharacter />} />
+			<Route path="new" element={<AddCharacter />} />,
+
 		</Route>
+		<Route path='classes'>
+			<Route path='/' element={<ClassesPage />} />
+		</Route>,
 	</Route>,
 	<Route path='worlds'>
 		<Route path='/' element={<WorldsPage />} />
@@ -40,9 +44,6 @@ const routes = elementsToRoutes([
 		<Route path='locations'>
 			<Route path="/" element={<Locations />} />
 		</Route>
-	</Route>,
-	<Route path='classes'>
-		<Route path='/' element={<ClassesPage />} />
 	</Route>,
 	<Route path='items'>
 		<Route path='/' element={<ItemsPage />} />
@@ -67,7 +68,7 @@ export default function App() {
 
 	return (
 		<Router location={location} routes={routes}>
-			<div className='flex bg-dnd-brown-100'>
+			<div className='flex bg-dnd-background-100'>
 				<div className='flex fixed z-50'>
 					<Navigation />
 				</div>

@@ -68,7 +68,14 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
     })
 
     const cardStyles = classNames(
-        "absolute w-full h-full bg-[#ede4ce] backface-hidden p-2 shadow-xl border-4 border-dnd-red-900 hover:cursor-pointer"
+        "absolute w-full h-full bg-dnd-accent-100 backface-hidden p-2 shadow-xl shadow-black/50 rounded-lg border-4 hover:cursor-pointer",
+        {
+            "border-common": rarity == MagicItemRarity.Common,
+            "border-uncommon": rarity == MagicItemRarity.Uncommon,
+            "border-rare": rarity == MagicItemRarity.Rare,
+            "border-veryrare": rarity == MagicItemRarity.VeryRare,
+            "border-legendary": rarity == MagicItemRarity.Legendary,
+        }
     )
 
     const dotStyles = classNames("w-2.5 h-2.5 rounded-full", {
@@ -87,7 +94,7 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
         "text-legendary": rarity == MagicItemRarity.Legendary,
     })
 
-    const rareityStyles = classNames("border-t-[1px] text-${getColour(item.rarity)} border-t-${getColour(item.rarity)} w-[60%] text-center font-bold italic text-xs", {
+    const rareityStyles = classNames("border-t-[1px] w-[60%] text-center font-bold italic text-xs", {
         "text-common border-t-common": rarity == MagicItemRarity.Common,
         "text-uncommon border-t-uncommon": rarity == MagicItemRarity.Uncommon,
         "text-rare border-t-rare": rarity == MagicItemRarity.Rare,
@@ -145,8 +152,8 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
                                 <div className={`${cardStyles}`}>
                                     <div className={`${dotStyles} absolute top-0.5 left-0.5`} />
                                     <div className={`${dotStyles} absolute top-0.5 right-0.5`} />
-                                    <div className="border-2 border-black h-[95%] w-[275px] rounded-2xl">
-                                        <header className="border-2 border-black flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 font-black">
+                                    <div className="border-2 border-dnd-secondary-100 h-[95%] w-[275px] rounded-2xl">
+                                        <header className="border-2 border-dnd-secondary-100 flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 text-dnd-secondary-100 font-black">
                                             {name ? name.toUpperCase() : "NAME HERE"}
                                         </header>
                                         <div className="flex flex-col items-center justify-between h-[85%]">
@@ -173,12 +180,12 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
                                 <div className={` ${cardStyles}`}>
                                     <div className={`${dotStyles} absolute top-0.5 left-0.5`} />
                                     <div className={`${dotStyles} absolute top-0.5 right-0.5`} />
-                                    <div className="border-2 border-black h-[95%] w-[275px] rounded-2xl">
-                                        <header className="border-2 border-black flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 font-black">
+                                    <div className="border-2 border-dnd-secondary-100 h-[95%] w-[275px] rounded-2xl">
+                                        <header className="border-2 border-dnd-secondary-100 flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 font-black text-dnd-secondary-100">
                                             {name ? name.toUpperCase() : "NAME HERE"}
                                         </header>
                                         <div className="flex flex-col items-center justify-between h-[85%]">
-                                            <div className="flex flex-col w-full text-[12px] leading-none p-2 gap-3 overflow-hidden">
+                                            <div className="flex flex-col w-full text-[12px] leading-none p-2 gap-3 overflow-hidden text-dnd-secondary-100">
                                                 <p>{description ? description : "Description Here"}</p>
                                                 <p>{property1 ? property1 : "Property 1 here"}</p>
                                                 <p>{property2 ? property2 : "Property 2 here"}</p>

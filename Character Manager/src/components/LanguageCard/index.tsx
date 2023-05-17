@@ -30,7 +30,7 @@ export default function LanguageCard({ language }: CardProps) {
             onMouseLeave={() => setShowElement(false)}
             onMouseOver={() => { setShowElement(true) }}
             key={`Language_${language.id}`}
-            className="w-full flex col-span-2 bg-slate-200 font-bold justify-center items-centerpx-2 py-1 border rounded-full"
+            className="w-full flex col-span-2 bg-dnd-background-200 shadow-sm shadow-black/50 font-bold justify-center items-centerpx-2 text-dnd-text py-1 border rounded-full"
         >
             {showElemaent ? <span className="hover:cursor-pointer" onClick={(e) => {
                 e.preventDefault();

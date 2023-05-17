@@ -16,7 +16,7 @@ interface MagicItemCardProps {
 type IconProps = { category: MagicItemCategory }
 export function GetIcon({ category }: IconProps) {
     return (
-        <div className="w-full p-2">
+        <div className="w-full p-2 text-red">
             {category == MagicItemCategory.Armor && <ArmorIcon />}
             {category == MagicItemCategory.Potion && <PotionIcon />}
             {category == MagicItemCategory.Ring && <RingIcon />}
@@ -42,7 +42,14 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
     const navigate = useNavigate()
 
     const cardStyles = classNames(
-        "absolute w-full h-full bg-[#ede4ce] backface-hidden p-2 shadow-xl border-4 border-dnd-red-900 hover:cursor-pointer"
+        "absolute w-full h-full bg-dnd-accent-100 backface-hidden p-2 shadow-xl shadow-black/50 rounded-lg border-4 hover:cursor-pointer",
+        {
+            "border-common": item.rarity == MagicItemRarity.Common,
+            "border-uncommon": item.rarity == MagicItemRarity.Uncommon,
+            "border-rare": item.rarity == MagicItemRarity.Rare,
+            "border-veryrare": item.rarity == MagicItemRarity.VeryRare,
+            "border-legendary": item.rarity == MagicItemRarity.Legendary,
+        }
     )
 
     const dotStyles = classNames("w-2.5 h-2.5 rounded-full", {
@@ -61,7 +68,7 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
         "text-legendary": item.rarity == MagicItemRarity.Legendary,
     })
 
-    const rareityStyles = classNames("border-t-[1px] text-${getColour(item.rarity)} border-t-${getColour(item.rarity)} w-[60%] text-center font-bold italic text-xs", {
+    const rareityStyles = classNames("border-t-[1px] w-[60%] text-center font-bold italic text-xs", {
         "text-common border-t-common": item.rarity == MagicItemRarity.Common,
         "text-uncommon border-t-uncommon": item.rarity == MagicItemRarity.Uncommon,
         "text-rare border-t-rare": item.rarity == MagicItemRarity.Rare,
@@ -102,8 +109,8 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
                     }}>
                         <div className={`${dotStyles} absolute top-0.5 left-0.5`} />
                         <div className={`${dotStyles} absolute top-0.5 right-0.5`} />
-                        <div className="border-2 border-black h-[95%] w-[275px] rounded-2xl">
-                            <header className="border-2 border-black flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 font-black">
+                        <div className="border-2 borde-dnd-secondary-100 h-[95%] w-[275px] rounded-2xl">
+                            <header className="border-2 border-dnd-secondary-100 flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 font-black text-dnd-secondary-100">
                                 {item.name.toLocaleUpperCase()}
                             </header>
                             <div className="flex flex-col items-center justify-between h-[85%]">
@@ -124,12 +131,12 @@ export default function MagicItemCard({ item }: MagicItemCardProps) {
                     }}>
                         <div className={`${dotStyles} absolute top-0.5 left-0.5`} />
                         <div className={`${dotStyles} absolute top-0.5 right-0.5`} />
-                        <div className="border-2 border-black h-[95%] w-[275px] rounded-2xl">
-                            <header className="border-2 border-black flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 font-black">
+                        <div className="border-2 border-dnd-secondary-100 h-[95%] w-[275px] rounded-2xl">
+                            <header className="border-2 border-dnd-secondary-100 flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 font-black text-dnd-secondary-100">
                                 {item.name.toLocaleUpperCase()}
                             </header>
                             <div className="flex flex-col items-center justify-between h-[85%]">
-                                <div className="flex flex-col w-full text-[12px] leading-none p-2 gap-3 overflow-hidden">
+                                <div className="flex flex-col w-full text-[12px] leading-none p-2 gap-3 overflow-hidden text-dnd-secondary-100">
                                     <p>{item.description}</p>
                                     <p>{item.property1}</p>
                                     <p>{item.property2}</p>

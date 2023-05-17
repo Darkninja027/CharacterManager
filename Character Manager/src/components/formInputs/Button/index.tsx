@@ -13,7 +13,7 @@ type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HT
 const BUTTON_SIZE_MAP = {
     SMALL: 'px-1 py-2 text-sm',
     MEDIUM: 'px-1.5 py-2.5',
-    LARGE: ''
+    LARGE: 'px-3.5 py-3'
 }
 const BUTTON_TYPE_MAP = {
     PRIMARY: '',
