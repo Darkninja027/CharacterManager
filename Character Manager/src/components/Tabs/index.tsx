@@ -23,26 +23,29 @@ export function Tabs({ tabs }: TabsProps) {
 
     const Tab = ({ title }: { title: string }) => {
         const className = classNames(
-            "hover:cursor-pointer text-flash-300 px-2 rounded-t-lg",
+            "px-8 rounded-t-lg",
             {
-                "bg-payne-500 text-flash-300 underline font-semibold": focusedTab === title
+                "hover:cursor-pointer bg-dnd-secondary-100 ": focusedTab !== title,
+                "bg-dnd-accent-100 text-dnd-secondary-100 font-bold": focusedTab === title
             }
         )
         return (
-            <Button className={className} content={title} onClick={() => setFocusecdTab(title)} />
+            <div className={className} onClick={() => setFocusecdTab(title)} >{title}</div>
         )
     }
 
     const tab = isValidElement(tabs[focusedTab]) && tabs[focusedTab] as ReactElement
     return (
-        <div className="bg-eerie-300 pt-2">
-            <div className="flex gap-2 px-1">
+        <div className="bg-dnd-primary-100 pt-5 h-max rounded-lg shadow-lg shadow-black/25">
+            <div className="flex gap-2 px-2">
                 {Object.keys(tabs).map(title => (
                     <Tab title={title} />
                 ))}
             </div>
-            <div className="bg-payne-500 px-2 py-1 text-flash-300">
-                {tab}
+            <div className="bg-dnd-accent-100 rounded-b-lg h-full p-2 text-dnd-text rounded-lg">
+                <div className="bg-dnd-secondary-100 p-2 h-full rounded shadow shadow-black/50">
+                    {tab}
+                </div>
             </div>
         </div>
     )

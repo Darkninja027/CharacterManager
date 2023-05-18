@@ -1,22 +1,21 @@
 import { AlignmentEnum, PlayerCharacterInput, SizeEnum } from "@types";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { AddIcon, DeleteIcon } from "../../../../common/icons/SvgList";
-import { characterDefaultValues, getLevelExperience, updateModifiers } from "../../../../common/util/characterUtil";
+import { characterDefaultValues, updateModifiers, getLevelExperience } from "../../../../common/util/characterUtil";
 import { formatString } from "../../../../common/util/stringFormatting";
-import Accordian from "../../../../components/Accordian";
+import { ArmorClass } from "../../../../components/ArmorClass";
+import Card from "../../../../components/Card";
 import Form from "../../../../components/Form";
 import Attribute from "../../../../components/formInputs/Attribute";
 import Button from "../../../../components/formInputs/Button";
+import CharactersTab from "../../../../components/formInputs/FormTabs/CharactersTab";
 import Input from "../../../../components/formInputs/Input";
-import Radio from "../../../../components/formInputs/Radio";
-import Select from "../../../../components/formInputs/Select";
 import TextArea from "../../../../components/formInputs/TextArea";
-import PageHeader from "../../../../components/PageHeader";
+import { Page } from "../../../../components/Page";
 import SquareInput from "../../../../components/SquareInput";
+import { Tabs } from "../../../../components/Tabs";
 import { useGetAllLanguagesQuery } from "../../../Languages/languages.generated";
 import { useCreateCharacterMutation } from "../../characters.generated";
-import { ArmorClass } from "../../../../components/ArmorClass";
 
 
 
@@ -25,16 +24,6 @@ export default function AddCharacter() {
 
     const methods = useForm<PlayerCharacterInput>({
         defaultValues: characterDefaultValues
-    })
-
-    const [showInfo, setInfo] = useState<boolean>(true)
-    const [showBio, setBio] = useState<boolean>(false)
-    const alignments = Object.values(AlignmentEnum).map((align, index) => {
-        return { id: align, name: formatString(align) }
-    })
-
-    const sizes = Object.values(SizeEnum).reverse().map((size, index) => {
-        return { id: size, name: formatString(size) }
     })
 
     const createCharacterMutation = useCreateCharacterMutation()
@@ -96,20 +85,20 @@ export default function AddCharacter() {
         createCharacterMutation.mutate({ character: data })
     }
 
-    const genders = [
-        { id: "male", name: "Male" },
-        { id: "female", name: "Female" },
-        { id: "other", name: "Other" },
-    ]
-    return (
-        <div>
-            <PageHeader title="Add Character" backButton=".." />
-            <div className="mx-5 overflow-auto pt-32">
-                <Form methods={methods} onSubmit={OnSubmit}>
-                    <div className="flex w-full grow items-center gap-3">
 
-                        <Input className="h-12 grow" methods={methods} name="name" label="Character Name" />
-                        <div className="w-9/12 bg-gray-300 p-2 rounded-lg">
+
+    const tabs = {
+        "Actions": <p>Actions</p>,
+        "Character": <CharactersTab />,
+        "Notes": <p>notes</p>,
+    }
+    return (
+        <Page title="Add Character" backButton="..">
+            <Form methods={methods} onSubmit={OnSubmit}>
+                <div className="flex w-full grow items-center gap-3">
+
+                    {/* <Input className="h-12 grow" methods={methods} name="name" label="Character Name" /> */}
+                    {/* <div className="w-9/12 bg-gray-300 p-2 rounded-lg">
                             {showInfo && <div className="grid grid-cols-3 grid-rows-2 gap-3">
                                 <Input methods={methods} name="level" label="Level" type="number" max={20} min={1} onChange={(e) => {
                                     setValue("experience", getLevelExperience(parseInt(e.target.value)))
@@ -148,13 +137,14 @@ export default function AddCharacter() {
                                     setBio(!showBio)
                                 }}>Bio</span>
                             </div>
-                        </div>
-                    </div>
-                    <div className="flex mt-2 gap-2">
+                        </div> */}
+                </div>
+                <div className="flex mt-2 gap-2">
 
-                        <div className="flex w-2.5/12">
-                            <div className="flex flex-col w-full gap-5  ">
+                    <div className="flex w-2.5/12">
+                        <div className="flex flex-col w-full justify-between gap-5">
 
+                            <div className="flex flex-col gap-5">
                                 <Attribute attributes="strength" methods={methods} />
                                 <Attribute attributes="dexterity" methods={methods} />
                                 <Attribute attributes="constitution" methods={methods} />
@@ -162,58 +152,68 @@ export default function AddCharacter() {
                                 <Attribute attributes="wisdom" methods={methods} />
                                 <Attribute attributes="charisma" methods={methods} />
                             </div>
-                        </div>
-
-                        <div className="bg-gray-300 w-2/12 p-2 flex flex-col gap-2">
-                            <div className="flex w-full gap-2 justify-evenly">
-                                <SquareInput methods={methods} name="maxHealth" title="Max HP" />
-                                <SquareInput methods={methods} name="health" title="HP" />
-                                <SquareInput methods={methods} name="temporaryHealth" title="Temp HP" />
-
-                            </div>
-                            <div className="flex w-full gap-2 justify-evenly">
-                                <ArmorClass methods={methods} />
-                                <SquareInput methods={methods} name="initiative" title="Initiative" />
-                            </div>
-                            <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" />
-                            <Input methods={methods} name="initiative" label="init" type="number" />
-                            <div className="flex justify-between">
-                                <p>Walk Speed</p>
-                                <p>Fly Speed</p>
-                                <p>Swim Speed</p>
-                            </div>
-                            <TextArea methods={methods} name="personalityTraits" label="Personality Traits" />
-                            <TextArea methods={methods} name="ideals" label="Ideals" />
-                            <TextArea methods={methods} name="bonds" label="Bonds" />
-                            <TextArea methods={methods} name="flaws" label="Flaws" />
-                            <Accordian heading={<section className="flex items-center gap-3 w-full">
-                                <header>Languages</header>
-                                <span onClick={(e) => {
-                                    e.preventDefault()
-                                    e.stopPropagation()
-                                    addLanguage({ id: 1 })
-                                }} className="w-6 h-6 rounded-full border border-black"><AddIcon /></span>
-                            </section>}>
-                                <section className="flex flex-wrap w-full justify-between">
-                                    {languages.map((field, index) => (
-                                        <label key={`languages-${field.languagesId}`} className="flex items-center gap-3">
-                                            <Select key={field.id} methods={methods} name={`languages.${index}.id`} options={lanaguageList} />
-                                            <span className="hover:cursor-pointer" onClick={() => {
-                                                removeLanguage(index)
-                                            }}><DeleteIcon /></span>
-                                        </label>
-                                    ))}
-                                </section>
-                            </Accordian>
-                        </div>
-                        <div className="bg-gray-300 w-5/12 p-2 rounded-lg">
+                            <Button content="Submit" />
 
                         </div>
                     </div>
-                    <Button content="Submit" />
-                </Form>
-            </div >
-        </div>
+                    <Card className="w-2/12 p-2 flex flex-col gap-2">
+                        <div className="flex w-full gap-2 justify-evenly">
+                            <SquareInput methods={methods} name="maxHealth" title="Max HP" />
+                            <SquareInput methods={methods} name="health" title="HP" />
+                            <SquareInput methods={methods} name="temporaryHealth" title="Temp HP" />
+
+                        </div>
+                        <div className="flex w-full gap-2 justify-evenly">
+                            <ArmorClass methods={methods} />
+                            <SquareInput methods={methods} name="initiative" title="Initiative" />
+                        </div>
+                        <Input methods={methods} name="proficiencyBonus" label="Proficiency Bonus" type="number" />
+                        <Input methods={methods} name="initiative" label="init" type="number" />
+                        <div className="flex justify-between">
+                            <p>Walk Speed</p>
+                            <p>Fly Speed</p>
+                            <p>Swim Speed</p>
+                        </div>
+                        <TextArea methods={methods} name="personalityTraits" label="Personality Traits" />
+                        <TextArea methods={methods} name="ideals" label="Ideals" />
+                        <TextArea methods={methods} name="bonds" label="Bonds" />
+                        <TextArea methods={methods} name="flaws" label="Flaws" />
+                        {/* <Accordian heading={<section className="flex items-center gap-3 w-full">
+                            <header>Languages</header>
+                            <span onClick={(e) => {
+                                e.preventDefault()
+                                e.stopPropagation()
+                                addLanguage({ id: 1 })
+                            }} className="w-6 h-6 rounded-full border border-black"><AddIcon /></span>
+                        </section>}>
+                            <section className="flex flex-wrap w-full justify-between">
+                                {languages.map((field, index) => (
+                                    <label key={`languages-${field.languagesId}`} className="flex items-center gap-3">
+                                        <Select key={field.id} methods={methods} name={`languages.${index}.id`} options={lanaguageList} />
+                                        <span className="hover:cursor-pointer" onClick={() => {
+                                            removeLanguage(index)
+                                        }}><DeleteIcon /></span>
+                                    </label>
+                                ))}
+                            </section>
+                        </Accordian> */}
+                    </Card>
+                    <Card className="w-5/12 p-2 grow-0 h-min flex flex-col gap-2">
+                        <div className="grid grid-cols-3 grid-rows-2 gap-x-10">
+                            <Input methods={methods} name="name" label="Character Name" />
+                            <Input methods={methods} name="level" label="Level" type="number" max={20} min={1} onChange={(e) => {
+                                setValue("experience", getLevelExperience(parseInt(e.target.value)))
+                            }} />
+                            <Input methods={methods} name="experience" label="Experience" type="number" disabled={isTruthy(milestone)} />
+                            <Input unattached name="" label="Race" />
+                            <Input unattached name="" label="Class" />
+                            <Input unattached name="" label="Subclass" />
+                        </div>
+                        <Tabs tabs={tabs} />
+                    </Card>
+                </div>
+            </Form>
+        </Page>
     )
 }
 
