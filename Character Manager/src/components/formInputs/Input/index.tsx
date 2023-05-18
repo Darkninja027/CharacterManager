@@ -23,7 +23,7 @@ type InputProps<T extends FieldValues> = DetailedHTMLProps<InputHTMLAttributes<H
 const INPUT_STYLE = {
     ATTRIBUTE: "bg-transparent outline-0 text-5xl font-bold text-center w-full h-full",
     MODIFIER: "w-12 bg-gray-400 border-4 border-double rounded-lg mt-[-10px] border-black outline-0 text-center",
-    NORMAL: "px-2 py-1 rounded-lg border border-black",
+    NORMAL: "px-3 py-1 rounded-lg border-2 border-dnd-accent-100 outline-none bg-dnd-secondary-200 text-dnd-black",
     SKILL: "outline-0 w-6 rounded-lg text-center text-sm border-b-2 border-black bg-transparent",
     SQUARE: "w-full h-full outline-0 bg-transparent text-3xl font-bold text-center",
     AC: "outline-0 bg-transparent text-center w-full text-3xl font-bold"
@@ -37,7 +37,7 @@ export default function Input<T extends FieldValues>({ name, label, className, t
     )
     return (
         <label className={classNames("flex flex-col", className)}>
-            {label && <span>{label} {required && <span>*</span>}</span>}
+            {label && <span className="font-bold">{label} {required && <span className="text-dnd-primary-100">*</span>}</span>}
             <input type={type} className={classes} {...(methods ? methods.register(name, { onChange, required }) : { value: fieldValue, onChange })} disabled={disabled} defaultValue={defaultValue} {...props} />
             {fieldState?.error && (
                 <p>Field is required</p>

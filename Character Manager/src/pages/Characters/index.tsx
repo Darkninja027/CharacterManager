@@ -1,6 +1,7 @@
 import { useNavigate } from "@tanstack/react-location"
 import { AddIcon, DeleteIcon } from "../../common/icons/SvgList"
 import { useAlert } from "../../common/util/Alerts"
+import { Page } from "../../components/Page"
 import PageHeader from "../../components/PageHeader"
 import { useDeleteCharacterMutation, useGetAllCHaractersQuery } from "./characters.generated"
 
@@ -13,13 +14,8 @@ export function CharactersPage() {
             alert.show("success", "Character Deleted")
         }
     })
-    // console.log(allCharacters)
-    // if (isLoading) {
-    //     return <p>Loading...</p>
-    // }
     return (
-        <>
-            <PageHeader title="Characters" />
+        <Page title="Characters">
             <div className="grid grid-cols-3 gap-5">
                 {allCharacters?.map(char => {
                     return (
@@ -34,6 +30,6 @@ export function CharactersPage() {
                     )
                 })}
             </div>
-        </>
+        </Page>
     )
 }

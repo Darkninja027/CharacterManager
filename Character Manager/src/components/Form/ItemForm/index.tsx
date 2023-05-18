@@ -145,7 +145,7 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
             </Form>
             <div className="flex flex-col gap-10">
                 <div>
-                    <p>Front</p>
+                    <p className="font-bold text-center">Front</p>
                     <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5}>
                         <div className="w-[300px] h-[420px] bg-transparent group perspective ">
                             <div className={`relative preserve-3d duration-1000 w-full h-full `}>
@@ -173,7 +173,7 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
                     </Tilt>
                 </div>
                 <div>
-                    <p>Back</p>
+                    <p className="font-bold text-center">Back</p>
                     <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5}>
                         <div className="w-[300px] h-[420px] bg-transparent group perspective ">
                             <div className={`relative preserve-3d duration-1000 w-full h-full `}>

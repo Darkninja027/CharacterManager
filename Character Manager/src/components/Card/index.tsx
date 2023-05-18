@@ -8,7 +8,7 @@ type CardProps = {
 }
 
 export default function Card({ heading, className, children }: CardProps) {
-    const classes = classNames("shadow shadow-black/50 bg-dnd-background-200 rounded-lg p-5", {
+    const classes = classNames("shadow shadow-black/50 bg-dnd-secondary-100 rounded-lg p-5", {
         "w-max": !className
     }, className)
     return (

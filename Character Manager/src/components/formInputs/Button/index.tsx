@@ -5,28 +5,23 @@ import { FieldValues } from "react-hook-form"
 type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & {
     content: string | ReactNode
     className?: string
-    styling?: keyof typeof BUTTON_STYLE_MAP
     buttonType?: keyof typeof BUTTON_TYPE_MAP
     size?: keyof typeof BUTTON_SIZE_MAP
 }
 
 const BUTTON_SIZE_MAP = {
-    SMALL: 'px-1 py-2 text-sm',
-    MEDIUM: 'px-1.5 py-2.5',
-    LARGE: 'px-3.5 py-3'
+    SMALL: 'px-5 py-2 text-sm ',
+    MEDIUM: 'px-6 py-2 text-normal',
+    LARGE: 'px-8 py-3 text-lg'
 }
 const BUTTON_TYPE_MAP = {
-    PRIMARY: '',
-    SECONDARY: '',
-    TERTIARY: ''
-}
-const BUTTON_STYLE_MAP = {
-    NONE: "",
-    DEFAULT: "px-2 py-1 rounded-lg border border-black",
+    PRIMARY: 'bg-dnd-primary-100 text-dnd-secondary-100 h-min shadow shadow-black/50 rounded-full font-bold hover:bg-dnd-primary-200 hover:shadow-lg hover:shadow-dnd-accent-100/25',
+    SECONDARY: 'bg-dnd-secondary-100 text-dnd-text h-min shadow shadow-black/50 rounded-full font-bold hover:bg-dnd-secondary-200 hover:shadow-lg hover:shadow-dnd-accent-100/25',
+    TERTIARY: 'text-dnd-accent-100 h-min font-bold hover:drop-shadow-xl'
 }
 
-export default function Button({ content, className, type, onClick, styling, size }: ButtonProps) {
-    const classes = classNames(className, BUTTON_STYLE_MAP[styling ?? "NONE"], BUTTON_SIZE_MAP[size ?? "SMALL"])
+export default function Button({ content, className, type, onClick, size, buttonType }: ButtonProps) {
+    const classes = classNames(className, BUTTON_SIZE_MAP[size ?? "SMALL"], BUTTON_TYPE_MAP[buttonType ?? "PRIMARY"])
     return (
         <button onClick={onClick} type={type ?? 'submit'} className={classes}>
             {content}

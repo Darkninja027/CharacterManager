@@ -119,10 +119,22 @@ export function Kitchensink() {
                     <ItemForm />
                 </Card>
                 <Card heading="Buttons">
-                    <div className="flex items-center">
-                        <Button content={"Primary"} />
-                        <Button content={"Secondary"} />
-                        <Button content={"Tertiary"} />
+                    <div className="flex flex-col gap-5">
+                        <div className="flex gap-5">
+                            <Button content="Button" size="SMALL" buttonType="PRIMARY" />
+                            <Button content="Button" size="MEDIUM" buttonType="PRIMARY" />
+                            <Button content="Button" size="LARGE" buttonType="PRIMARY" />
+                        </div>
+                        <div className="flex gap-5 flex-start">
+                            <Button content="Button" size="SMALL" buttonType="SECONDARY" />
+                            <Button content="Button" size="MEDIUM" buttonType="SECONDARY" />
+                            <Button content="Button" size="LARGE" buttonType="SECONDARY" />
+                        </div>
+                        <div className="flex gap-5">
+                            <Button content="Button" size="SMALL" buttonType="TERTIARY" />
+                            <Button content="Button" size="MEDIUM" buttonType="TERTIARY" />
+                            <Button content="Button" size="LARGE" buttonType="TERTIARY" />
+                        </div>
                     </div>
                 </Card>
             </div>
