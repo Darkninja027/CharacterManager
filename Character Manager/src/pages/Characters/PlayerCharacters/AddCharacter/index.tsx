@@ -198,7 +198,7 @@ export default function AddCharacter() {
                             </section>
                         </Accordian> */}
                     </Card>
-                    <Card className="w-5/12 p-2 grow-0 h-min flex flex-col gap-2">
+                    <Card className="w-5/12 p-2 grow-0 flex flex-col gap-2">
                         <div className="grid grid-cols-3 grid-rows-2 gap-x-10">
                             <Input methods={methods} name="name" label="Character Name" />
                             <Input methods={methods} name="level" label="Level" type="number" max={20} min={1} onChange={(e) => {

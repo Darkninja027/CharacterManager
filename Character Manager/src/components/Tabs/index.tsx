@@ -36,13 +36,13 @@ export function Tabs({ tabs }: TabsProps) {
 
     const tab = isValidElement(tabs[focusedTab]) && tabs[focusedTab] as ReactElement
     return (
-        <div className="bg-dnd-primary-100 pt-5 h-max rounded-lg shadow-lg shadow-black/25">
+        <div className="bg-dnd-primary-100 pt-5 h-full rounded-lg shadow-lg shadow-black/25">
             <div className="flex gap-2 px-2">
                 {Object.keys(tabs).map(title => (
                     <Tab title={title} />
                 ))}
             </div>
-            <div className="bg-dnd-accent-100 rounded-b-lg h-full p-2 text-dnd-text rounded-lg">
+            <div className="bg-dnd-accent-100 rounded-b-lg h-[97.5%] p-2 text-dnd-text rounded-lg">
                 <div className="bg-dnd-secondary-100 p-2 h-full rounded shadow shadow-black/50">
                     {tab}
                 </div>
