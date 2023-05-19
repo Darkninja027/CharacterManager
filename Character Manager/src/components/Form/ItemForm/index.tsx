@@ -14,6 +14,7 @@ import classNames from "classnames";
 import { formatString } from "../../../common/util/stringFormatting";
 import { GetIcon } from "../../MagicItemCard";
 import Select from "../../formInputs/Select";
+import Card from "../../Card";
 
 type ItemFormProps = {
     magicItem?: MagicItem
@@ -141,7 +142,7 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
                     </div>
 
                 </div>
-                <Button className="mt-3" content="Add Magic Item" />
+                <Button className="mt-3" content={magicItem ? `Edit ${name}` : "Add Magic Item"} />
             </Form>
             <div className="flex flex-col gap-10">
                 <div>
@@ -184,12 +185,12 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
                                         <header className="border-2 border-dnd-secondary-100 flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 font-black text-dnd-secondary-100">
                                             {name ? name.toUpperCase() : "NAME HERE"}
                                         </header>
-                                        <div className="flex flex-col items-center justify-between h-[85%]">
-                                            <div className="flex flex-col w-full text-[12px] leading-none p-2 gap-3 overflow-hidden text-dnd-secondary-100">
-                                                <p>{description ? description : "Description Here"}</p>
+                                        <div className="flex flex-col items-center justify-between h-[70%] mt-2 overflow-hidden">
+                                            <div className="card-details flex flex-col w-full text-[12px] leading-none p-2 mr-1 gap-3 overflow-y-auto overflow-x-hidden text-dnd-secondary-100">
+                                                <p className="">{description ? description : "Description Here"}</p>
                                                 <p>{property1 ? property1 : "Property 1 here"}</p>
                                                 <p>{property2 ? property2 : "Property 2 here"}</p>
-                                                <p>{property3 ? property3 : "Property 3 here"}</p>
+                                                <div>{property3 ? property3 : "Property 3 here"}</div>
                                             </div>
                                             <div className="w-full text-center flex flex-col items-center gap-1">
                                                 <span className={categoryStyle}>{formatString(category)}</span>
