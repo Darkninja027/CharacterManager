@@ -52,6 +52,7 @@ export type Character = {
   maxHealth: Scalars['Int'];
   milestone: Scalars['Boolean'];
   name: Scalars['String'];
+  notes: Array<CharacterNotes>;
   personalityTraits?: Maybe<Scalars['String']>;
   proficiencyBonus: Scalars['Int'];
   race?: Maybe<Race>;
@@ -64,6 +65,14 @@ export type Character = {
   weight?: Maybe<Scalars['Int']>;
   wisdom: Scalars['Int'];
   wisdomModifier: Scalars['Int'];
+};
+
+export type CharacterNotes = {
+  __typename?: 'CharacterNotes';
+  character: Character;
+  content: Scalars['String'];
+  id: Scalars['Int'];
+  title: Scalars['String'];
 };
 
 export enum CreatureTypeEnum {
@@ -236,6 +245,12 @@ export type PcLanguagesInput = {
   id: Scalars['Int'];
 };
 
+export type PcNotesInput = {
+  content: Scalars['String'];
+  id: Scalars['Int'];
+  title: Scalars['String'];
+};
+
 export type PcSkillsInput = {
   attribute: Scalars['String'];
   expertise: Scalars['Boolean'];
@@ -272,6 +287,7 @@ export type PlayerCharacterInput = {
   maxHealth: Scalars['Int'];
   milestone: Scalars['Boolean'];
   name: Scalars['String'];
+  notes: Array<PcNotesInput>;
   personalityTraits?: InputMaybe<Scalars['String']>;
   proficiencyBonus: Scalars['Int'];
   savingThrows: Array<PcSkillsInput>;

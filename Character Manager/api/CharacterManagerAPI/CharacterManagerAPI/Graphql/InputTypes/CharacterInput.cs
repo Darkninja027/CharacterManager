@@ -41,7 +41,7 @@ namespace CharacterManagerAPI.Graphql.InputTypes
         public ICollection<PCSkills> SavingThrows { get; set; }
         //public Race Race { get; set; }
         public ICollection<PCLanguages> Languages { get; set; }
-
+        public ICollection<PCNotes> Notes { get; set; }
         public bool Milestone { get; set; }
         public int? Experience { get; set; }
         public string? Gender { get; set; }
@@ -71,6 +71,13 @@ namespace CharacterManagerAPI.Graphql.InputTypes
         public bool Proficient { get; set; }
         public int Modifier { get; set; }
         public bool Expertise { get; set; }
+    }
+
+    public class PCNotes
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
     }
 
 

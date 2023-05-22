@@ -82,6 +82,13 @@ export const characterDefaultValues: PlayerCharacterInput = {
     wisdomModifier: 0,
     charisma: 10,
     charismaModifier: 0,
+    notes: [
+        {
+            id: 1,
+            title: "test",
+            content: "text"
+        }
+    ]
 }
 
 export function getLevelExperience(level: number) {
