@@ -31,7 +31,7 @@ export default function LanguagesPage() {
     allLanguages?.sort((a: Languages, b: Languages) => a.name < b.name ? -1 : 1)
 
     return (
-        <Page title="Languages" action={true} icon={<AddIcon />} onClick={(e) => {
+        <Page title="Languages" buttonText="Add Language" icon={<AddIcon />} onClick={(e) => {
             e.preventDefault()
             setForm(!form)
         }}>

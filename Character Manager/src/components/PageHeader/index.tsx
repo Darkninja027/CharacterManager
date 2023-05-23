@@ -9,32 +9,35 @@ type HeaderProps = {
     backButton?: string
 } & ({
     onClick: MouseEventHandler<HTMLButtonElement>
-    action: boolean
     icon: ReactNode
+    buttonText?: string;
 } | {
     onClick?: never
-    action?: never
     icon?: never
+    buttonText?: never
 })
 
 
-export default function PageHeader({ title, onClick, action, backButton, icon }: HeaderProps) {
+export default function PageHeader({ title, onClick, buttonText, backButton, icon }: HeaderProps) {
     const navigate = useNavigate()
     return (
-        <div className="mb-5 fixed top-0 w-full z-20">
-            <div className="w-full flex items-center  leading-none bg-dnd-background-500 shadow-sm gap-3 px-5 h-16">
-                <div className="flex items-center gap-3">
+        <div className="fixed w-full z-20">
+            <div className="flex items-center bg-dnd-background-500 shadow-sm gap-4 px-8 h-[80px] mr-[300px]">
+                <div className="flex items-center gap-4 w-full">
                     {backButton && (
                         <>
-
-                            <span id="backButton" className="bg-dnd-accent-100 hover:cursor-pointer w-8 h-8 rounded-full p-2 text-dnd-secondary-100 shadow-md" onClick={() => { navigate({ to: backButton }) }}><BackButtonIcon /></span>
+                            <span id="backButton" className="bg-dnd-accent-100 text-dnd-secondary-200 shadow shadow-black/50 rounded-full font-bold hover:bg-dnd-accent-200 whitespace-nowrap w-12 h-12 p-3 hover:cursor-pointer" onClick={() => { navigate({ to: backButton }) }}><BackButtonIcon /></span>
                             <Tooltip anchorSelect="#backButton" content="Back" noArrow />
                         </>
                     )}
-                    <p className="text-2xl font-bold text-dnd-secondary-200">{title}</p>
+                    <p className="text-2xl font-semibold text-dnd-secondary-200 leading-none">{title}</p>
                 </div>
-                {action && (
-                    <span onClick={onClick} className="bg-dnd-accent-100 hover:cursor-pointer w-8 h-8 text-xs whitespace-nowrap rounded-full p-2 text-dnd-background-100 shadow-md">{icon}</span>
+                {icon && (
+                    // 
+                    <Button className="h-12" buttonType="HEADER" size="SMALL" onClick={onClick} content={<div className="flex items-center gap-2">
+                        <span onClick={onClick} className="hover:cursor-pointer w-6 h-6 text-xs whitespace-nowrap rounded-full text-dnd-background-100">{icon}</span>
+                        {buttonText && <p>{buttonText}</p>}
+                    </div>} />
                 )}
             </div>
         </div >

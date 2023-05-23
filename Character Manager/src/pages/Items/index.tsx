@@ -1,13 +1,10 @@
 import { useNavigate } from "@tanstack/react-location";
-import { useState } from "react";
 import { AddIcon } from "../../common/icons/SvgList";
-import ItemForm from "../../components/Form/ItemForm";
 import MagicItemCard from "../../components/MagicItemCard";
-import PageHeader from "../../components/PageHeader";
 
 
-import { useGetItemsQuery } from "./items.generated";
 import { Page } from "../../components/Page";
+import { useGetItemsQuery } from "./items.generated";
 
 export default function ItemsPage() {
 
@@ -19,7 +16,7 @@ export default function ItemsPage() {
     }
 
     return (
-        <Page title="Magic Items" action={true} icon={<AddIcon />} onClick={(e) => {
+        <Page title="Magic Items" buttonText="Add Magic Item" icon={<AddIcon />} onClick={(e) => {
             e.preventDefault()
             navigate({ to: "new" })
         }}>

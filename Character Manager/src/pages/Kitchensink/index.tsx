@@ -135,6 +135,11 @@ export function Kitchensink() {
                             <Button content="Button" size="MEDIUM" buttonType="TERTIARY" />
                             <Button content="Button" size="LARGE" buttonType="TERTIARY" />
                         </div>
+                        <div className="flex gap-5">
+                            <Button content="Button" size="SMALL" buttonType="HEADER" />
+                            <Button content="Button" size="MEDIUM" buttonType="HEADER" />
+                            <Button content="Button" size="LARGE" buttonType="HEADER" />
+                        </div>
                     </div>
                 </Card>
             </div>

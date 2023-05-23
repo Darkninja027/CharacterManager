@@ -7,19 +7,19 @@ type PageProps = {
     backButton?: string
 } & ({
     onClick: MouseEventHandler<HTMLButtonElement>
-    action: boolean
+    buttonText?: string
     icon: ReactNode | string
 } | {
     onClick?: never
-    action?: never
     icon?: never
+    buttonText?: never
 })
 
-export function Page({ children, title, backButton, onClick, action, icon }: PageProps) {
+export function Page({ children, title, backButton, onClick, buttonText, icon }: PageProps) {
     return (
         <>
-            <PageHeader title={title} backButton={backButton} onClick={onClick as MouseEventHandler<HTMLButtonElement>} action={action as boolean} icon={icon} />
-            <div className="pt-24 mx-5 mb-5">
+            <PageHeader title={title} backButton={backButton} onClick={onClick as MouseEventHandler<HTMLButtonElement>} icon={icon} buttonText={buttonText} />
+            <div className="pt-[72px] m-8">
                 {children}
             </div>
         </>

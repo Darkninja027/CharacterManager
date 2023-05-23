@@ -4,7 +4,7 @@ import PageHeader from "../../../components/PageHeader";
 
 export default function Locations() {
     return (
-        <Page title="Locations" backButton="../.." action icon={<AddIcon />} onClick={(e) => {
+        <Page title="Locations" backButton="../.." buttonText="Add Location" icon={<AddIcon />} onClick={(e) => {
             e.preventDefault()
         }} >
         </Page>

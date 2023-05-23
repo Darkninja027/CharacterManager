@@ -5,7 +5,7 @@ import PageHeader from "../../components/PageHeader";
 export default function WorldsPage() {
     const navigate = useNavigate();
     return (
-        <PageHeader title="Worlds" action={true} icon={<AddIcon />} onClick={(e) => {
+        <PageHeader title="Worlds" buttonText="Add World" icon={<AddIcon />} onClick={(e) => {
             e.preventDefault();
             navigate({ to: "new" })
         }} />

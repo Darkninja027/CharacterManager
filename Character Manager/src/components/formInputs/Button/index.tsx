@@ -10,7 +10,7 @@ type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HT
 }
 
 const BUTTON_SIZE_MAP = {
-    SMALL: 'px-5 py-2 text-sm ',
+    SMALL: 'px-4 py-1.5 text-sm ',
     MEDIUM: 'px-6 py-2 text-normal',
     LARGE: 'px-8 py-3 text-lg'
 }
@@ -18,6 +18,7 @@ const BUTTON_TYPE_MAP = {
     PRIMARY: 'bg-dnd-primary-100 text-dnd-secondary-100 h-min shadow shadow-black/50 rounded-full font-bold hover:bg-dnd-primary-200 hover:shadow-lg hover:shadow-dnd-accent-100/25 whitespace-nowrap',
     SECONDARY: 'bg-dnd-secondary-100 text-dnd-text h-min shadow shadow-black/50 rounded-full font-bold hover:bg-dnd-secondary-200 hover:shadow-lg hover:shadow-dnd-accent-100/25 whitespace-nowrap',
     TERTIARY: 'text-dnd-accent-100 h-min font-bold hover:drop-shadow-xl hover:text-dnd-text',
+    HEADER: "bg-dnd-accent-100 text-dnd-secondary-200 shadow shadow-black/50 rounded-full font-bold hover:bg-dnd-accent-200 whitespace-nowrap",
     DISABLED: "bg-dnd-accent-100 text-dnd-text h-min rounded-full font-bold whitespace-nowrap"
 }
 
