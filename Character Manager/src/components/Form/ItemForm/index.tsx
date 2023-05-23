@@ -181,7 +181,7 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
                                 <div className={` ${cardStyles}`}>
                                     <div className={`${dotStyles} absolute top-0.5 left-0.5`} />
                                     <div className={`${dotStyles} absolute top-0.5 right-0.5`} />
-                                    <div className="border-2 border-dnd-secondary-100 h-[95%] w-[275px] rounded-2xl">
+                                    <div className="border-2 border-dnd-secondary-100 h-[95%] w-[275px] rounded-2xl relative">
                                         <header className="border-2 border-dnd-secondary-100 flex justify-center items-center rounded-2xl w-[275px] py-3 -ml-0.5 -mt-0.5 font-black text-dnd-secondary-100">
                                             {name ? name.toUpperCase() : "NAME HERE"}
                                         </header>
@@ -192,7 +192,7 @@ export default function ItemForm({ magicItem }: ItemFormProps) {
                                                 <p>{property2 ? property2 : "Property 2 here"}</p>
                                                 <div>{property3 ? property3 : "Property 3 here"}</div>
                                             </div>
-                                            <div className="w-full text-center flex flex-col items-center gap-1">
+                                            <div className="w-full text-center flex flex-col items-center gap-1 absolute bottom-1.5">
                                                 <span className={categoryStyle}>{formatString(category)}</span>
                                                 <span className={rareityStyles}>{formatString(rarity)}</span>
                                             </div>
