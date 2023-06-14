@@ -7,6 +7,7 @@ import { MagicItemCategory, MagicItemRarity } from "@types";
 import ItemForm from "../../components/Form/ItemForm";
 import Button from "../../components/formInputs/Button";
 import Card from "../../components/Card";
+import { DiceType, RollDice } from "../../common/util/Dice/dice";
 
 export function Kitchensink() {
 
@@ -143,6 +144,8 @@ export function Kitchensink() {
                     </div>
                 </Card>
             </div>
+
+            <button onClick={() => RollDice(DiceType.D6, 6)}>roll</button>
         </Page>
 
     )
