@@ -5,6 +5,7 @@ import { displayAttribute, getSkillModifier } from "../../../common/util/charact
 import Checkbox from "../Checkbox"
 import Input from "../Input"
 import { formatString, pascalCamelSplit } from "../../../common/util/stringFormatting"
+import { DiceType, RollDice } from "../../../common/util/Dice/dice"
 
 type AttributeProps = {
     methods: UseFormReturn<PlayerCharacterInput>
@@ -41,7 +42,12 @@ export default function Attribute({ methods, attributes }: AttributeProps) {
                 <label className="flex items-center justify-between gap-3 w-full">
                     <div className="flex items-center gap-2">
                         <Input methods={methods} name={`savingThrows.${save?.index}.modifier`} styling="SKILL" type="number" />
-                        <p className="text-sm">{formatSavingThrow(save?.data.name, attributes)}</p>
+                        <p className="text-sm hover:text-dnd-primary-100 hover:underline hover:cursor-pointer" onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            let savingRoll = RollDice(DiceType.D20, 2)
+                            console.log(attributes, savingRoll.rolls)
+                        }}>{formatSavingThrow(save?.data.name, attributes)}</p>
                     </div>
                     <div className="flex">
                         <Checkbox id={`save${save?.index}`} methods={methods} name={`savingThrows.${save?.index}.proficient`} />
@@ -53,7 +59,13 @@ export default function Attribute({ methods, attributes }: AttributeProps) {
                         <label key={`${skill.data.name}.${index}`} className="flex items-center justify-between gap-3 w-full">
                             <div className="flex items-center gap-2">
                                 <Input methods={methods as UseFormReturn<PlayerCharacterInput>} name={`skills.${skill?.index}.modifier`} styling="SKILL" type="number" />
-                                <p className="text-sm">{pascalCamelSplit(skill.data.name)}</p>
+                                <p className="text-sm  hover:text-dnd-primary-100 hover:underline hover:cursor-pointer" onClick={(e) => {
+                                    let modifier = methods.getValues(`skills.${skill?.index}.modifier`)
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    let SkillCheck = RollDice(DiceType.D20, 2, modifier)
+                                    console.log(pascalCamelSplit(skill.data.name), SkillCheck.rolls, "modifier: " + modifier)
+                                }}>{pascalCamelSplit(skill.data.name)}</p>
                             </div>
                             <div className="flex">
                                 <Checkbox id={`proficient${skill?.index}`} methods={methods as UseFormReturn<PlayerCharacterInput>} name={`skills.${skill?.index}.proficient`} />
