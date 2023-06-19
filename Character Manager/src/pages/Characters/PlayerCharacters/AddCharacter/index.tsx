@@ -28,7 +28,7 @@ export default function AddCharacter() {
     })
 
     const createCharacterMutation = useCreateCharacterMutation()
-    const { data: { allLanguages } = {} } = useGetAllLanguagesQuery()
+    // const { data: { allLanguages } = {} } = useGetAllLanguagesQuery()
 
     const { control, watch, setValue } = methods
     const [milestone] = watch(['milestone'])

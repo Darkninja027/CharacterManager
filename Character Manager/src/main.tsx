@@ -5,6 +5,7 @@ import App from './App'
 import './index.css'
 import 'react-tooltip/dist/react-tooltip.css'
 import { AlertProvider, useAlert } from './common/util/Alerts'
+import { RollingProvider } from './common/util/RollingUi'
 
 function Main() {
 
@@ -47,8 +48,10 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
 	<React.StrictMode>
-		<AlertProvider>
-			<Main />
-		</AlertProvider>
+		<RollingProvider>
+			<AlertProvider>
+				<Main />
+			</AlertProvider>
+		</RollingProvider>
 	</React.StrictMode>,
 )

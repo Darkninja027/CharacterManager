@@ -7,7 +7,8 @@ import { MagicItemCategory, MagicItemRarity } from "@types";
 import ItemForm from "../../components/Form/ItemForm";
 import Button from "../../components/formInputs/Button";
 import Card from "../../components/Card";
-import { DiceType, RollDice } from "../../common/util/Dice/dice";
+import { DiceType, RollDice } from "../../common/util/Rolling";
+import { useRolling } from "../../common/util/RollingUi";
 
 export function Kitchensink() {
 
@@ -18,6 +19,7 @@ export function Kitchensink() {
         "Test": <p>yeet</p>,
         "john": <p>Johnno</p>
     }
+    const roling = useRolling();
     return (
         <Page title="Sink">
             <div className="flex flex-col gap-5">
@@ -146,6 +148,7 @@ export function Kitchensink() {
             </div>
 
             <button onClick={() => RollDice(DiceType.D6, 6)}>roll</button>
+            <button onClick={() => roling.show("roll", "normal", [0, 0])}>showRoll</button>
         </Page>
 
     )

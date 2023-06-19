@@ -17,6 +17,7 @@ import AddWorld from './pages/World/AddWorld'
 import Npc from './pages/Characters/Npc'
 import PlayerCharacters from './pages/Characters/PlayerCharacters'
 import Locations from './pages/World/Locations'
+import { Rolling } from './common/util/RollingUi'
 
 const routes = elementsToRoutes([
 	<Route path='/' element={<Navigate to={"home"} replace={true} />} />,
@@ -74,6 +75,7 @@ export default function App() {
 				</div>
 				<main className="grow ml-[300px] min-h-screen">
 					<Alert />
+					<Rolling />
 					<Outlet />
 				</main>
 			</div>

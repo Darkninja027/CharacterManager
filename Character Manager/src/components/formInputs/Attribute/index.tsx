@@ -2,10 +2,10 @@ import { PcSkillsInput, PlayerCharacterInput } from "@types"
 import { Path, UseFormReturn } from "react-hook-form"
 import { Tooltip } from "react-tooltip"
 import { displayAttribute, getSkillModifier } from "../../../common/util/characterUtil"
+import { DiceType, RollDice } from "../../../common/util/Rolling"
+import { pascalCamelSplit } from "../../../common/util/stringFormatting"
 import Checkbox from "../Checkbox"
 import Input from "../Input"
-import { formatString, pascalCamelSplit } from "../../../common/util/stringFormatting"
-import { DiceType, RollDice } from "../../../common/util/Dice/dice"
 
 type AttributeProps = {
     methods: UseFormReturn<PlayerCharacterInput>
