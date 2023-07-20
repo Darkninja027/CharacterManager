@@ -1,14 +1,9 @@
-import { ReactNode } from "react"
-import { TabDefinition, Tabs } from "../../components/Tabs"
-import { Page } from "../../components/Page"
-import Tilt from 'react-parallax-tilt';
-import MagicItemCard from "../../components/MagicItemCard";
-import { MagicItemCategory, MagicItemRarity } from "@types";
-import ItemForm from "../../components/Form/ItemForm";
-import Button from "../../components/formInputs/Button";
-import Card from "../../components/Card";
 import { DiceType, RollDice } from "../../common/util/Rolling";
 import { useRolling } from "../../common/util/RollingUi";
+import { Page } from "../../components/Page";
+import { TabDefinition } from "../../components/Tabs";
+
+import Editor from "../../components/Editor";
 
 export function Kitchensink() {
 
@@ -20,10 +15,13 @@ export function Kitchensink() {
         "john": <p>Johnno</p>
     }
     const roling = useRolling();
+
+
+
     return (
         <Page title="Sink">
             <div className="flex flex-col gap-5">
-                <Card heading="Containers" className="w-full">
+                {/* <Card heading="Containers" className="w-full">
                     <p>Skill Cards</p>
                     <div className="flex gap-10">
                         <section className="flex flex-col gap-10 w-max">
@@ -96,9 +94,9 @@ export function Kitchensink() {
                             </div>
                         </div>
                     </div>
-                </Card>
+                </Card> */}
 
-                <Card className="w-1/3" heading="Tabs">
+                {/* <Card className="w-1/3" heading="Tabs">
                     <div className="p-2 rounded-lg mt-5">
                         <Tabs tabs={tabs} />
                     </div>
@@ -144,11 +142,14 @@ export function Kitchensink() {
                             <Button content="Button" size="LARGE" buttonType="HEADER" />
                         </div>
                     </div>
-                </Card>
+                </Card> */}
             </div>
 
             <button onClick={() => RollDice(DiceType.D6, 6)}>roll</button>
             <button onClick={() => roling.show("roll", "normal", [0, 0])}>showRoll</button>
+
+
+            <Editor />
         </Page>
 
     )
